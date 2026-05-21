@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research — Jaden Cutinha</title>
+  <meta name="description" content="Research by Jaden Cutinha in NLP, AI search algorithms, and financial sentiment analysis." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Jaden <span>Cutinha</span></a>
+    <div class="nav-hamburger"><span></span><span></span><span></span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="honors.html">Honors</a>
+      <a href="mailto:jc3311@princeton.edu" class="nav-cta">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <p class="page-hero-eyebrow">// Research</p>
+    <h1>Research Work</h1>
+    <p>Academic and applied research in artificial intelligence, natural language processing, and quantitative finance — spanning course projects and independent lab work at Princeton University.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <!-- ── Paper 1: Tree of Thoughts ── -->
+    <div class="research-full-card reveal" id="tot">
+      <div class="card">
+        <div class="research-meta-row">
+          <span class="research-meta-pill highlight">COS 484 · Natural Language Processing</span>
+          <span class="research-meta-pill">Princeton University</span>
+          <span class="research-meta-pill">Spring 2025</span>
+          <span class="research-meta-pill">Co-authored · Equal Contribution</span>
+        </div>
+
+        <h2 style="color:var(--navy); margin-bottom:12px;">
+          Dissecting Tree of Thoughts: An Ablation Study of ToT Search Algorithms
+        </h2>
+        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
+          <strong>Jaden Cutinha</strong> &amp; Junze Xie · Princeton University
+        </p>
+
+        <img
+          src="assets/images/tot_research.png"
+          alt="Tree of Thoughts research poster"
+          class="research-poster"
+          title="Click to enlarge"
+        />
+
+        <p class="research-section-label">// Overview</p>
+        <p class="research-body">
+          Large language models (LLMs) have demonstrated remarkable capabilities across diverse reasoning tasks,
+          yet they often struggle with problems requiring planning, exploration, or backtracking. Tree of Thoughts (ToT),
+          introduced by Yao et al. (2023), addresses this limitation by framing problem-solving as a search over a tree
+          of intermediate reasoning steps. The original ToT method relies on Breadth-First Search (BFS) and Depth-First
+          Search (DFS) — relatively simple algorithms that do not fully exploit accumulated information about the search frontier.
+        </p>
+        <p class="research-body">
+          This paper asks: <em>if ToT's improvements over chain-of-thought prompting stem from deliberate search,
+          would more informed search strategies yield further gains?</em> We replace the original BFS/DFS with
+          <strong>k-beam A* search</strong> — treating ToT as a shortest-path problem using LLM value scores as a
+          heuristic — and <strong>Monte Carlo Tree Search (MCTS)</strong>, treating it as a sequential decision problem
+          with simulated rollouts and UCB-style exploration. All other variables (generation method, evaluation method,
+          proposal completions, value samples) are held fixed so that the search algorithm is the sole independent variable.
+        </p>
+
+        <p class="research-section-label">// Methods</p>
+        <p class="research-body">
+          Experiments were conducted on two standard benchmarks — the <strong>Game of 24</strong> and
+          <strong>5×5 mini-crosswords</strong> — using a GPT-4o-mini backbone. Puzzles were drawn from fixed index
+          ranges to ensure reproducibility. Each trial logged accuracy, API call count, and wall-clock time.
+          For A*, the max heap size was set to 7 and expansion was capped at 10 counted steps for mini-crosswords.
+          Beam width was k = 5 for A* and BFS. MCTS used n_evaluate_sample = 3 value rollouts.
+        </p>
+
+        <p class="research-section-label">// Key Results</p>
+        <div class="result-grid">
+          <div class="result-box">
+            <div class="val">19%</div>
+            <div class="lbl">A* accuracy on Game of 24</div>
+          </div>
+          <div class="result-box">
+            <div class="val">16%</div>
+            <div class="lbl">MCTS accuracy on Game of 24</div>
+          </div>
+          <div class="result-box">
+            <div class="val">8%</div>
+            <div class="lbl">BFS accuracy on Game of 24</div>
+          </div>
+        </div>
+        <p class="research-body" style="margin-top:16px;">
+          On the Game of 24, A* significantly outperformed BFS while using a nearly identical number of API calls
+          (89.66 vs 86.24 per trial), demonstrating that heuristic-guided global ordering delivers meaningful gains
+          at no extra cost. MCTS achieved 16% accuracy at only 64.9 API calls per trial — the most efficient configuration.
+          On mini-crosswords, all three methods converged to similar accuracy (~20–26%), because tight search budgets
+          prevent any method from escaping a weak early word choice.
+        </p>
+
+        <p class="research-section-label">// Takeaways</p>
+        <p class="research-body">
+          A*'s advantage on Game of 24 is attributable to its global best-first ordering combined with path-averaged
+          value scores, which systematically allocates search effort toward the most promising trajectories.
+          BFS's strict per-layer pruning loses recoverable paths that would be discovered by a globally ordered frontier.
+          MCTS, by running random rollouts to the horizon and backing up scores as prefix support, gives paths a second
+          chance — explaining why it exceeds BFS but falls short of A*'s systematic ordering.
+          These findings suggest that more informative search is a genuine lever for improving ToT reasoning performance.
+        </p>
+      </div>
+    </div>
+
+    <!-- ── Paper 2: Sentiment ── -->
+    <div class="research-full-card reveal" id="sentiment">
+      <div class="card">
+        <div class="research-meta-row">
+          <span class="research-meta-pill highlight">AI Fluency Lab · Independent Research</span>
+          <span class="research-meta-pill">Princeton University</span>
+          <span class="research-meta-pill">May 2026</span>
+          <span class="research-meta-pill">Solo Author</span>
+        </div>
+
+        <h2 style="color:var(--navy); margin-bottom:12px;">
+          Evaluating AI Sentiment Consistency and Market Relevance
+        </h2>
+        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
+          <strong>Jaden Cutinha</strong> · Computer Science, Princeton University, Class of 2028
+        </p>
+
+        <img
+          src="assets/images/sentiment_research.png"
+          alt="AI Sentiment Consistency research poster"
+          class="research-poster"
+          title="Click to enlarge"
+        />
+
+        <p class="research-section-label">// Research Question</p>
+        <p class="research-body">
+          Can AI reliably interpret ambiguous financial news, and does that interpretation help predict the stock market?
+          This project examines whether leading AI models agree on sentiment and whether their judgments correlate with
+          next-day market movements — addressing a gap between AI sentiment research and practical financial signal generation.
+        </p>
+
+        <p class="research-section-label">// Methods</p>
+        <p class="research-body">
+          Two LLMs — <strong>GPT-4o</strong> and <strong>Llama 3.3 70B Instruct</strong> — were tested on 45
+          ambiguous corporate financial headlines drawn from 2023–2024. Headlines were defined as ambiguous: corporate
+          events with no clearly positive or negative valence. Both models used identical deterministic prompts
+          (temperature = 0), and their sentiment labels (Positive / Neutral / Negative) were compared across the
+          full sample. Labels were then matched to next-day stock returns to evaluate whether AI sentiment aligns
+          with real market behavior. An OLS regression was run with GPT-4o sentiment score as predictor and
+          next-day percentage return as the dependent variable.
+        </p>
+
+        <p class="research-section-label">// Key Results</p>
+        <div class="result-grid">
+          <div class="result-box">
+            <div class="val">29%</div>
+            <div class="lbl">Inter-model disagreement rate</div>
+          </div>
+          <div class="result-box">
+            <div class="val">κ = 0.55</div>
+            <div class="lbl">Cohen's Kappa (moderate agreement)</div>
+          </div>
+          <div class="result-box">
+            <div class="val">R² = 0.17</div>
+            <div class="lbl">Sentiment → next-day return fit</div>
+          </div>
+        </div>
+        <p class="research-body" style="margin-top:16px;">
+          The models disagreed on approximately 30% of headlines, indicating that AI financial sentiment is not a
+          fully objective signal. Disagreements were most common for headlines involving strategic shifts and pricing
+          changes, where implication direction is inherently interpretable. GPT-4o sentiment showed a statistically
+          detectable but weak relationship with next-day returns (R² = 0.170, p = 0.206), suggesting the effect
+          size is insufficient for standalone predictive use.
+        </p>
+
+        <p class="research-section-label">// Conclusions &amp; Implications</p>
+        <p class="research-body">
+          LLMs exhibit meaningful inter-model disagreement when classifying ambiguous financial sentiment, indicating
+          that model outputs reflect model-specific interpretation rather than an objective signal. While there is a
+          detectable directional relationship between AI sentiment and next-day returns, it falls short of statistical
+          significance at standard thresholds. These findings suggest that AI sentiment classification should be treated
+          as one noisy input among many, rather than a reliable standalone directional indicator. Future work should
+          scale the dataset, incorporate intraday data, and test finance-specific models — and could explore combining
+          AI sentiment with traditional financial indicators for stronger predictive performance.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-name">Jaden Cutinha</span>
+    <div class="footer-links">
+      <a href="research.html">Research</a>
+      <a href="honors.html">Honors</a>
+      <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank">LinkedIn</a>
+      <a href="mailto:jc3311@princeton.edu">Email</a>
+    </div>
+    <span class="footer-copy">© 2026 Jaden Cutinha</span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox"><img id="lightbox-img" src="" alt="Research poster" /></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
