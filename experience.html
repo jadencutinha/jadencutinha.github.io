@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experience — Jaden Cutinha</title>
+  <meta name="description" content="Professional experience of Jaden Cutinha in AI research, software engineering, and machine learning." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ── Experience page tab system ── */
+    .exp-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+    .exp-tab {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 10px 22px;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      border: 1px solid transparent;
+      border-bottom: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      background: transparent;
+      transition: var(--transition);
+      position: relative;
+      bottom: -1px;
+    }
+    .exp-tab:hover {
+      color: var(--navy);
+      background: rgba(255,255,255,0.6);
+    }
+    .exp-tab.active {
+      background: var(--cream);
+      color: var(--navy);
+      border-color: var(--border);
+      border-bottom-color: var(--cream);
+      font-weight: 600;
+    }
+    .exp-panel { display: none; }
+    .exp-panel.active { display: block; }
+
+    /* ── Detail layout inside each panel ── */
+    .exp-detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .exp-detail-role {
+      font-size: 1.5rem;
+      color: var(--navy);
+      font-family: var(--font-display);
+      margin-bottom: 4px;
+    }
+    .exp-detail-company {
+      font-size: 1rem;
+      color: var(--sage);
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+    .exp-detail-right { text-align: right; }
+    .exp-detail-period {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .exp-detail-location {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+    .exp-detail-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 24px 0;
+    }
+    .exp-detail-label {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sage);
+      margin-bottom: 12px;
+      margin-top: 28px;
+    }
+    .exp-detail-label:first-of-type { margin-top: 0; }
+    .exp-detail-body {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.78;
+      margin-bottom: 0;
+    }
+    .exp-detail-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+    }
+    .exp-detail-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.93rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .exp-bullet-marker {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sage);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+    .exp-skill-tag {
+      display: inline-flex;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: var(--radius-xl);
+      background: rgba(26,39,68,0.06);
+      color: var(--navy-mid);
+      border: 1px solid var(--border);
+      margin: 4px 4px 0 0;
+    }
+
+    /* ── Side-by-side layout ── */
+    .exp-page-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 40px;
+      align-items: flex-start;
+    }
+    .exp-sidebar {
+      position: sticky;
+      top: 84px;
+    }
+    .exp-sidebar-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .exp-sidebar-item {
+      cursor: pointer;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+    .exp-sidebar-item:hover {
+      background: rgba(255,255,255,0.65);
+      border-color: var(--border);
+    }
+    .exp-sidebar-item.active {
+      background: var(--white);
+      border-color: var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .exp-sidebar-role {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+    .exp-sidebar-company {
+      font-size: 0.78rem;
+      color: var(--sage);
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+    .exp-sidebar-period {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    .exp-sidebar-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--sage-light);
+      display: inline-block;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .exp-sidebar-dot.current { background: var(--sage); }
+
+    @media (max-width: 768px) {
+      .exp-page-grid { grid-template-columns: 1fr; }
+      .exp-sidebar { position: static; }
+      .exp-sidebar-list { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+      .exp-sidebar-item { padding: 8px 14px; }
+      .exp-sidebar-period { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Jaden <span>Cutinha</span></a>
+    <div class="nav-hamburger"><span></span><span></span><span></span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="experience.html">Experience</a>
+      <a href="research.html">Research</a>
+      <a href="honors.html">Honors</a>
+      <a href="cv.html">CV</a>
+      <a href="mailto:jc3311@princeton.edu" class="nav-cta">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <p class="page-hero-eyebrow">Professional Experience</p>
+    <h1>Work &amp; Research</h1>
+    <p>A track record spanning AI research, software engineering, and machine learning across academia and industry — from Princeton labs to New York startups.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="exp-page-grid">
+
+      <!-- Sidebar navigation -->
+      <aside class="exp-sidebar reveal">
+        <ul class="exp-sidebar-list" id="exp-sidebar">
+          <li class="exp-sidebar-item active" data-target="panel-ailabs" onclick="switchExp(this)">
+            <span class="exp-sidebar-dot current"></span>
+            <div class="exp-sidebar-role">Econometric Research Analyst</div>
+            <div class="exp-sidebar-company">Princeton AI Lab</div>
+            <div class="exp-sidebar-period">Feb 2026 – Present</div>
+          </li>
+          <li class="exp-sidebar-item" data-target="panel-biostrive" onclick="switchExp(this)">
+            <span class="exp-sidebar-dot current"></span>
+            <div class="exp-sidebar-role">Software Engineer</div>
+            <div class="exp-sidebar-company">BioStrive</div>
+            <div class="exp-sidebar-period">Nov 2025 – Present</div>
+          </li>
+          <li class="exp-sidebar-item" data-target="panel-andromeda" onclick="switchExp(this)">
+            <span class="exp-sidebar-dot"></span>
+            <div class="exp-sidebar-role">ML Engineering Intern</div>
+            <div class="exp-sidebar-company">Andromeda Labs</div>
+            <div class="exp-sidebar-period">May – Aug 2025</div>
+          </li>
+          <li class="exp-sidebar-item" data-target="panel-cerebras" onclick="switchExp(this)">
+            <span class="exp-sidebar-dot"></span>
+            <div class="exp-sidebar-role">AI Fellow</div>
+            <div class="exp-sidebar-company">Cerebras AI</div>
+            <div class="exp-sidebar-period">Oct 2024 – Apr 2025</div>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Detail panels -->
+      <div class="exp-panels reveal">
+
+        <!-- Princeton AI Lab -->
+        <div class="exp-panel active card" id="panel-ailabs">
+          <div class="exp-detail-header">
+            <div>
+              <h2 class="exp-detail-role">Econometric Research Analyst</h2>
+              <p class="exp-detail-company">The Princeton Laboratory for Artificial Intelligence</p>
+            </div>
+            <div class="exp-detail-right">
+              <p class="exp-detail-period">Feb 2026 – Present</p>
+              <p class="exp-detail-location">Princeton, NJ</p>
+            </div>
+          </div>
+
+          <p class="exp-detail-label">About the Role</p>
+          <p class="exp-detail-body">
+            Conducting applied econometric research at the intersection of artificial intelligence and financial
+            markets within Princeton's Laboratory for Artificial Intelligence. This role sits at the boundary
+            of quantitative finance and machine learning, building and validating novel indicators that use
+            large-scale textual data to forecast asset price movements. The work directly informs ongoing
+            research into market microstructure and the predictability of returns.
+          </p>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Key Contributions</p>
+          <ul class="exp-detail-bullets">
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Constructed and empirically validated sentiment-based indicators as leading signals for asset price movements, demonstrating their incremental predictive power relative to traditional macroeconomic and fundamental factors.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Designed a systematic framework integrating textual sentiment with market and economic data to model investor behavior, generating statistically significant insights on return predictability and market inefficiencies.</span>
+            </li>
+          </ul>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Skills &amp; Tools</p>
+          <div>
+            <span class="exp-skill-tag">Python</span>
+            <span class="exp-skill-tag">Econometrics</span>
+            <span class="exp-skill-tag">NLP</span>
+            <span class="exp-skill-tag">LLM APIs</span>
+            <span class="exp-skill-tag">OLS Regression</span>
+            <span class="exp-skill-tag">Sentiment Analysis</span>
+            <span class="exp-skill-tag">Time Series</span>
+            <span class="exp-skill-tag">Financial Data</span>
+          </div>
+        </div>
+
+        <!-- BioStrive -->
+        <div class="exp-panel card" id="panel-biostrive">
+          <div class="exp-detail-header">
+            <div>
+              <h2 class="exp-detail-role">Software Engineer</h2>
+              <p class="exp-detail-company">BioStrive</p>
+            </div>
+            <div class="exp-detail-right">
+              <p class="exp-detail-period">Nov 2025 – Present</p>
+              <p class="exp-detail-location">Remote</p>
+            </div>
+          </div>
+
+          <p class="exp-detail-label">About the Role</p>
+          <p class="exp-detail-body">
+            Architecting backend infrastructure for a life-sciences intelligence platform focused on document
+            understanding, regulatory compliance, and evidence traceability. Work spans the full pipeline —
+            from ingesting multi-document clinical and economic literature to generating auditable, structured
+            claims linked directly to source evidence. The platform serves medical, legal, and regulatory
+            teams who need trustworthy, scalable analysis of life sciences data.
+          </p>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Key Contributions</p>
+          <ul class="exp-detail-bullets">
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Designed data pipelines to synthesize multi-document clinical and economic literature into structured insights, enabling efficient evaluation of product claims at scale.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Built traceability systems linking generated claims to source evidence, improving auditability and directly supporting medical, legal, and regulatory decision-making workflows.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Developed secure document-processing workflows and scalable APIs to standardize validation and analysis of life sciences data, ensuring compliant and isolated data handling across all environments.</span>
+            </li>
+          </ul>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Skills &amp; Tools</p>
+          <div>
+            <span class="exp-skill-tag">Python</span>
+            <span class="exp-skill-tag">REST APIs</span>
+            <span class="exp-skill-tag">Data Pipelines</span>
+            <span class="exp-skill-tag">Document AI</span>
+            <span class="exp-skill-tag">PostgreSQL</span>
+            <span class="exp-skill-tag">Docker</span>
+            <span class="exp-skill-tag">Regulatory Compliance</span>
+            <span class="exp-skill-tag">LLM APIs</span>
+          </div>
+        </div>
+
+        <!-- Andromeda Labs -->
+        <div class="exp-panel card" id="panel-andromeda">
+          <div class="exp-detail-header">
+            <div>
+              <h2 class="exp-detail-role">Machine Learning Engineering Intern</h2>
+              <p class="exp-detail-company">Andromeda Labs, LLC</p>
+            </div>
+            <div class="exp-detail-right">
+              <p class="exp-detail-period">May 2025 – Aug 2025</p>
+              <p class="exp-detail-location">New York, NY</p>
+            </div>
+          </div>
+
+          <p class="exp-detail-label">About the Role</p>
+          <p class="exp-detail-body">
+            Led full-stack development of a Web3-native event discovery and management platform during
+            a summer internship in New York. Responsible for architecting both frontend and backend systems
+            from the ground up, with a particular focus on blockchain integration — implementing wallet
+            authentication, transaction execution, and on-chain receipt generation for end users. The platform
+            was designed for production readiness with live smart contract and database integration.
+          </p>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Key Contributions</p>
+          <ul class="exp-detail-bullets">
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Led development of a multi-page web platform enabling dynamic event discovery and management, improving usability through structured filtering and robust administrative controls.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Implemented Web3 functionality to enable secure wallet authentication, transaction execution, and verifiable receipt generation for end users interacting with the platform.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Architected front-end and backend systems with clear separation of concerns, ensuring scalability and readiness for live smart contract and database integration.</span>
+            </li>
+          </ul>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Skills &amp; Tools</p>
+          <div>
+            <span class="exp-skill-tag">React</span>
+            <span class="exp-skill-tag">Node.js</span>
+            <span class="exp-skill-tag">Web3.js</span>
+            <span class="exp-skill-tag">Solidity</span>
+            <span class="exp-skill-tag">Smart Contracts</span>
+            <span class="exp-skill-tag">REST APIs</span>
+            <span class="exp-skill-tag">PostgreSQL</span>
+            <span class="exp-skill-tag">TypeScript</span>
+          </div>
+        </div>
+
+        <!-- Cerebras -->
+        <div class="exp-panel card" id="panel-cerebras">
+          <div class="exp-detail-header">
+            <div>
+              <h2 class="exp-detail-role">Cerebras AI Fellow</h2>
+              <p class="exp-detail-company">Cerebras AI</p>
+            </div>
+            <div class="exp-detail-right">
+              <p class="exp-detail-period">Oct 2024 – Apr 2025</p>
+              <p class="exp-detail-location">Remote / Princeton</p>
+            </div>
+          </div>
+
+          <p class="exp-detail-label">About the Role</p>
+          <p class="exp-detail-body">
+            Selected as a Cerebras AI Fellow — a competitive program placing high-potential students on
+            applied AI projects powered by Cerebras hardware infrastructure. Built real-time sports analytics
+            tooling designed to support data-driven decision-making for coaching and scouting teams,
+            combining predictive modeling with containerized data pipelines optimized for rapid inference.
+            This fellowship represented one of the first industry AI experiences of the undergraduate career.
+          </p>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Key Contributions</p>
+          <ul class="exp-detail-bullets">
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Developed real-time sports analytics tools to evaluate player performance and generate projections, enabling data-driven decision-making for coaches and scouts.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Built predictive models and a containerized data pipeline to streamline data processing, visualization, and rapid inference for actionable performance insights.</span>
+            </li>
+          </ul>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Skills &amp; Tools</p>
+          <div>
+            <span class="exp-skill-tag">Python</span>
+            <span class="exp-skill-tag">PyTorch</span>
+            <span class="exp-skill-tag">Predictive Modeling</span>
+            <span class="exp-skill-tag">Docker</span>
+            <span class="exp-skill-tag">Data Visualization</span>
+            <span class="exp-skill-tag">Sports Analytics</span>
+            <span class="exp-skill-tag">Cerebras SDK</span>
+          </div>
+        </div>
+
+      </div><!-- end panels -->
+    </div><!-- end grid -->
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-name">Jaden Cutinha</span>
+    <div class="footer-links">
+      <a href="experience.html">Experience</a>
+      <a href="research.html">Research</a>
+      <a href="honors.html">Honors</a>
+      <a href="cv.html">CV</a>
+      <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank">LinkedIn</a>
+      <a href="mailto:jc3311@princeton.edu">Email</a>
+    </div>
+    <span class="footer-copy">© 2026 Jaden Cutinha</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+  function switchExp(el) {
+    // Sidebar items
+    document.querySelectorAll('.exp-sidebar-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+    // Panels
+    document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(el.dataset.target).classList.add('active');
+  }
+</script>
+</body>
+</html>
