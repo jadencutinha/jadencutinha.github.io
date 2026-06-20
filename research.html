@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Research — Jaden Cutinha</title>
+  <title>Research | Jaden Cutinha</title>
   <meta name="description" content="Research by Jaden Cutinha in NLP, AI search algorithms, and financial sentiment analysis." />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
@@ -28,7 +28,7 @@
   <div class="container">
     <p class="page-hero-eyebrow">Research</p>
     <h1>Research Work</h1>
-    <p>Academic and applied research in artificial intelligence, natural language processing, and quantitative finance — spanning course projects and independent lab work at Princeton University.</p>
+    <p>Academic and applied research in artificial intelligence, natural language processing, and quantitative finance, spanning course projects and independent lab work at Princeton University.</p>
   </div>
 </div>
 
@@ -46,7 +46,7 @@
         </div>
 
         <h2 style="color:var(--navy); margin-bottom:12px;">
-          Dissecting Tree of Thoughts: An Ablation Study of ToT Search Algorithms
+          Dissecting Tree of Thoughts, an Ablation Study of ToT Search Algorithms
         </h2>
         <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
           <strong>Jaden Cutinha</strong> &amp; Junze Xie · Princeton University
@@ -65,21 +65,21 @@
           yet they often struggle with problems requiring planning, exploration, or backtracking. Tree of Thoughts (ToT),
           introduced by Yao et al. (2023), addresses this limitation by framing problem-solving as a search over a tree
           of intermediate reasoning steps. The original ToT method relies on Breadth-First Search (BFS) and Depth-First
-          Search (DFS) — relatively simple algorithms that do not fully exploit accumulated information about the search frontier.
+          Search (DFS), relatively simple algorithms that do not fully exploit accumulated information about the search frontier.
         </p>
         <p class="research-body">
-          This paper asks: <em>if ToT's improvements over chain-of-thought prompting stem from deliberate search,
+          This paper asks a focused question. <em>If ToT's improvements over chain-of-thought prompting stem from deliberate search,
           would more informed search strategies yield further gains?</em> We replace the original BFS/DFS with
-          <strong>k-beam A* search</strong> — treating ToT as a shortest-path problem using LLM value scores as a
-          heuristic — and <strong>Monte Carlo Tree Search (MCTS)</strong>, treating it as a sequential decision problem
+          <strong>k-beam A* search</strong>, which treats ToT as a shortest-path problem using LLM value scores as a
+          heuristic, and <strong>Monte Carlo Tree Search (MCTS)</strong>, which treats it as a sequential decision problem
           with simulated rollouts and UCB-style exploration. All other variables (generation method, evaluation method,
           proposal completions, value samples) are held fixed so that the search algorithm is the sole independent variable.
         </p>
 
         <p class="research-section-label">Methods</p>
         <p class="research-body">
-          Experiments were conducted on two standard benchmarks — the <strong>Game of 24</strong> and
-          <strong>5×5 mini-crosswords</strong> — using a GPT-4o-mini backbone. Puzzles were drawn from fixed index
+          Experiments were conducted on two standard benchmarks, the <strong>Game of 24</strong> and
+          <strong>5×5 mini-crosswords</strong>, using a GPT-4o-mini backbone. Puzzles were drawn from fixed index
           ranges to ensure reproducibility. Each trial logged accuracy, API call count, and wall-clock time.
           For A*, the max heap size was set to 7 and expansion was capped at 10 counted steps for mini-crosswords.
           Beam width was k = 5 for A* and BFS. MCTS used n_evaluate_sample = 3 value rollouts.
@@ -103,7 +103,7 @@
         <p class="research-body" style="margin-top:16px;">
           On the Game of 24, A* significantly outperformed BFS while using a nearly identical number of API calls
           (89.66 vs 86.24 per trial), demonstrating that heuristic-guided global ordering delivers meaningful gains
-          at no extra cost. MCTS achieved 16% accuracy at only 64.9 API calls per trial — the most efficient configuration.
+          at no extra cost. MCTS achieved 16% accuracy at only 64.9 API calls per trial, the most efficient configuration.
           On mini-crosswords, all three methods converged to similar accuracy (~20–26%), because tight search budgets
           prevent any method from escaping a weak early word choice.
         </p>
@@ -114,7 +114,7 @@
           value scores, which systematically allocates search effort toward the most promising trajectories.
           BFS's strict per-layer pruning loses recoverable paths that would be discovered by a globally ordered frontier.
           MCTS, by running random rollouts to the horizon and backing up scores as prefix support, gives paths a second
-          chance — explaining why it exceeds BFS but falls short of A*'s systematic ordering.
+          chance, explaining why it exceeds BFS but falls short of A*'s systematic ordering.
           These findings suggest that more informative search is a genuine lever for improving ToT reasoning performance.
         </p>
       </div>
@@ -148,13 +148,13 @@
         <p class="research-body">
           Can AI reliably interpret ambiguous financial news, and does that interpretation help predict the stock market?
           This project examines whether leading AI models agree on sentiment and whether their judgments correlate with
-          next-day market movements — addressing a gap between AI sentiment research and practical financial signal generation.
+          next-day market movements, addressing a gap between AI sentiment research and practical financial signal generation.
         </p>
 
         <p class="research-section-label">Methods</p>
         <p class="research-body">
-          Two LLMs — <strong>GPT-4o</strong> and <strong>Llama 3.3 70B Instruct</strong> — were tested on 45
-          ambiguous corporate financial headlines drawn from 2023–2024. Headlines were defined as ambiguous: corporate
+          Two LLMs, <strong>GPT-4o</strong> and <strong>Llama 3.3 70B Instruct</strong>, were tested on 45
+          ambiguous corporate financial headlines drawn from 2023–2024. Headlines were defined as ambiguous, meaning corporate
           events with no clearly positive or negative valence. Both models used identical deterministic prompts
           (temperature = 0), and their sentiment labels (Positive / Neutral / Negative) were compared across the
           full sample. Labels were then matched to next-day stock returns to evaluate whether AI sentiment aligns
@@ -192,7 +192,7 @@
           detectable directional relationship between AI sentiment and next-day returns, it falls short of statistical
           significance at standard thresholds. These findings suggest that AI sentiment classification should be treated
           as one noisy input among many, rather than a reliable standalone directional indicator. Future work should
-          scale the dataset, incorporate intraday data, and test finance-specific models — and could explore combining
+          scale the dataset, incorporate intraday data, and test finance-specific models, and could explore combining
           AI sentiment with traditional financial indicators for stronger predictive performance.
         </p>
       </div>
