@@ -214,6 +214,7 @@
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="experience.html">Experience</a>
+      <a href="projects.html">Projects</a>
       <a href="research.html">Research</a>
       <a href="honors.html">Honors</a>
       <a href="cv.html">CV</a>
@@ -237,29 +238,41 @@
       <!-- Sidebar navigation -->
       <aside class="exp-sidebar reveal">
         <ul class="exp-sidebar-list" id="exp-sidebar">
-          <li class="exp-sidebar-item active" data-target="panel-ailabs" onclick="switchExp(this)">
+          <li class="exp-sidebar-item active" data-target="panel-ic3" onclick="switchExp(this)">
+            <span class="exp-sidebar-dot current"></span>
+            <div class="exp-sidebar-role">Summer Resident Fellow</div>
+            <div class="exp-sidebar-company">IC3</div>
+            <div class="exp-sidebar-period">Jun 2026 to Present</div>
+          </li>
+          <li class="exp-sidebar-item" data-target="panel-seo" onclick="switchExp(this)">
+            <span class="exp-sidebar-dot current"></span>
+            <div class="exp-sidebar-role">Tech Developer Intern</div>
+            <div class="exp-sidebar-company">SEO</div>
+            <div class="exp-sidebar-period">May 2026 to Present</div>
+          </li>
+          <li class="exp-sidebar-item" data-target="panel-ailabs" onclick="switchExp(this)">
             <span class="exp-sidebar-dot current"></span>
             <div class="exp-sidebar-role">Econometric Research Analyst</div>
             <div class="exp-sidebar-company">Princeton AI Lab</div>
-            <div class="exp-sidebar-period">Feb 2026 – Present</div>
+            <div class="exp-sidebar-period">Feb 2026 to Present</div>
           </li>
           <li class="exp-sidebar-item" data-target="panel-biostrive" onclick="switchExp(this)">
             <span class="exp-sidebar-dot current"></span>
             <div class="exp-sidebar-role">Software Engineer</div>
             <div class="exp-sidebar-company">BioStrive</div>
-            <div class="exp-sidebar-period">Nov 2025 – Present</div>
+            <div class="exp-sidebar-period">Nov 2025 to Present</div>
           </li>
           <li class="exp-sidebar-item" data-target="panel-andromeda" onclick="switchExp(this)">
             <span class="exp-sidebar-dot"></span>
             <div class="exp-sidebar-role">ML Engineering Intern</div>
             <div class="exp-sidebar-company">Andromeda Labs</div>
-            <div class="exp-sidebar-period">May – Aug 2025</div>
+            <div class="exp-sidebar-period">May to Aug 2025</div>
           </li>
           <li class="exp-sidebar-item" data-target="panel-cerebras" onclick="switchExp(this)">
             <span class="exp-sidebar-dot"></span>
             <div class="exp-sidebar-role">AI Fellow</div>
             <div class="exp-sidebar-company">Cerebras AI</div>
-            <div class="exp-sidebar-period">Oct 2024 – Apr 2025</div>
+            <div class="exp-sidebar-period">Oct 2024 to Apr 2025</div>
           </li>
         </ul>
       </aside>
@@ -267,15 +280,141 @@
       <!-- Detail panels -->
       <div class="exp-panels reveal">
 
+        <!-- IC3 -->
+        <div class="exp-panel active card" id="panel-ic3">
+          <div class="exp-detail-header">
+            <div>
+              <h2 class="exp-detail-role">Summer Resident Fellow</h2>
+              <p class="exp-detail-company">IC3, the Initiative for Cryptocurrencies &amp; Contracts</p>
+            </div>
+            <div class="exp-detail-right">
+              <p class="exp-detail-period">Jun 2026 to Present</p>
+              <p class="exp-detail-location">Summer Residency</p>
+            </div>
+          </div>
+
+          <p class="exp-detail-label">About the Role</p>
+          <p class="exp-detail-body">
+            IC3 is an academic consortium studying the science behind blockchains, and the residency puts students
+            alongside researchers working on consensus, cryptography, and mechanism design. My work sits on the
+            economics side of that boundary. A consensus protocol can be provably correct and still fail in practice
+            if the validators running it are paid more to deviate than to comply, so the interesting question is
+            what the incentives actually are once real money is moving through the system. That question is answered
+            with data, which meant building the tooling to read blockchains directly and turn raw transaction
+            histories into evidence about how value flows and who captures it.
+          </p>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Key Contributions</p>
+          <ul class="exp-detail-bullets">
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Built data extraction and analysis tooling to study incentive compatibility and mechanism design tradeoffs across multiple blockchain consensus protocols, processing on chain liquidity and transaction data from constant product automated market makers.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Wrote analysis tooling to quantify maximal extractable value in Ethereum block production, processing on chain transaction data to measure how the ordering of transactions within a block redistributes value and what that means for ordering fairness.</span>
+            </li>
+          </ul>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Skills &amp; Tools</p>
+          <div>
+            <span class="exp-skill-tag">Python</span>
+            <span class="exp-skill-tag">Mechanism Design</span>
+            <span class="exp-skill-tag">Consensus Protocols</span>
+            <span class="exp-skill-tag">MEV</span>
+            <span class="exp-skill-tag">Automated Market Makers</span>
+            <span class="exp-skill-tag">Ethereum</span>
+            <span class="exp-skill-tag">On Chain Data</span>
+            <span class="exp-skill-tag">Game Theory</span>
+          </div>
+        </div>
+
+        <!-- SEO -->
+        <div class="exp-panel card" id="panel-seo">
+          <div class="exp-detail-header">
+            <div>
+              <h2 class="exp-detail-role">Tech Developer Intern</h2>
+              <p class="exp-detail-company">Sponsors for Educational Opportunity (SEO)</p>
+            </div>
+            <div class="exp-detail-right">
+              <p class="exp-detail-period">May 2026 to Present</p>
+              <p class="exp-detail-location">New York, NY</p>
+            </div>
+          </div>
+
+          <p class="exp-detail-label">About the Role</p>
+          <p class="exp-detail-body">
+            The SEO Tech Developer Program is an intensive engineering track that pairs several hundred hours of
+            algorithms and systems instruction with real team delivery under SCRUM. The training half moves fast
+            through data structures, algorithms, and the full software development lifecycle. The building half is
+            where it counts. My team shipped
+            <a href="projects.html#portfoliu" style="color:var(--sage); font-weight:500;">PortfoliU</a>, a portfolio
+            optimization platform that solves Markowitz mean variance problems as convex programs and validates them
+            against a walk forward backtest. I led the backend, which meant owning the optimization engine, the risk
+            models, the market data layer, and the API contract the frontend consumes. The architecture was judged
+            the strongest across every group in the cohort.
+          </p>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Key Contributions</p>
+          <ul class="exp-detail-bullets">
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Completed 300+ hours of rigorous training in data structures, algorithms, and full stack software engineering, building fluency across the software development lifecycle from design through deployment.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Collaborated within SCRUM engineering teams to design, test, and deploy applications integrating Python and Flask backends with MySQL databases, JavaScript interfaces, and external API services.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Led backend development of a portfolio optimization platform using FastAPI, async SQLAlchemy, and cvxpy for Markowitz mean variance optimization, recognized for the best architectural design across all groups.</span>
+            </li>
+          </ul>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Featured Work</p>
+          <p class="exp-detail-body">
+            PortfoliU is live at
+            <a href="https://optimal-portfolio-nine.vercel.app/" target="_blank" rel="noopener" style="color:var(--sage); font-weight:500;">optimal-portfolio-nine.vercel.app</a>
+            with the source on
+            <a href="https://github.com/jadencutinha/optimal-portfolio" target="_blank" rel="noopener" style="color:var(--sage); font-weight:500;">GitHub</a>.
+            A longer write up of the solver, the risk models, and the backtesting engine lives on the
+            <a href="projects.html#portfoliu" style="color:var(--sage); font-weight:500;">projects page</a>.
+          </p>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Skills &amp; Tools</p>
+          <div>
+            <span class="exp-skill-tag">Python</span>
+            <span class="exp-skill-tag">FastAPI</span>
+            <span class="exp-skill-tag">cvxpy</span>
+            <span class="exp-skill-tag">async SQLAlchemy</span>
+            <span class="exp-skill-tag">Flask</span>
+            <span class="exp-skill-tag">MySQL</span>
+            <span class="exp-skill-tag">Redis</span>
+            <span class="exp-skill-tag">React</span>
+            <span class="exp-skill-tag">TypeScript</span>
+            <span class="exp-skill-tag">SCRUM</span>
+          </div>
+        </div>
+
         <!-- Princeton AI Lab -->
-        <div class="exp-panel active card" id="panel-ailabs">
+        <div class="exp-panel card" id="panel-ailabs">
           <div class="exp-detail-header">
             <div>
               <h2 class="exp-detail-role">Econometric Research Analyst</h2>
               <p class="exp-detail-company">The Princeton Laboratory for Artificial Intelligence</p>
             </div>
             <div class="exp-detail-right">
-              <p class="exp-detail-period">Feb 2026 – Present</p>
+              <p class="exp-detail-period">Feb 2026 to Present</p>
               <p class="exp-detail-location">Princeton, NJ</p>
             </div>
           </div>
@@ -285,7 +424,7 @@
             Conducting applied econometric research at the intersection of artificial intelligence and financial
             markets within Princeton's Laboratory for Artificial Intelligence. This role sits at the boundary
             of quantitative finance and machine learning, building and validating novel indicators that use
-            large-scale textual data to forecast asset price movements. The work directly informs ongoing
+            large scale textual data to forecast asset price movements. The work directly informs ongoing
             research into market microstructure and the predictability of returns.
           </p>
 
@@ -295,7 +434,7 @@
           <ul class="exp-detail-bullets">
             <li>
               <span class="exp-bullet-marker"></span>
-              <span>Constructed and empirically validated sentiment-based indicators as leading signals for asset price movements, demonstrating their incremental predictive power relative to traditional macroeconomic and fundamental factors.</span>
+              <span>Constructed and empirically validated sentiment based indicators as leading signals for asset price movements, demonstrating their incremental predictive power relative to traditional macroeconomic and fundamental factors.</span>
             </li>
             <li>
               <span class="exp-bullet-marker"></span>
@@ -326,16 +465,16 @@
               <p class="exp-detail-company">BioStrive</p>
             </div>
             <div class="exp-detail-right">
-              <p class="exp-detail-period">Nov 2025 – Present</p>
+              <p class="exp-detail-period">Nov 2025 to Present</p>
               <p class="exp-detail-location">Remote</p>
             </div>
           </div>
 
           <p class="exp-detail-label">About the Role</p>
           <p class="exp-detail-body">
-            Architecting backend infrastructure for a life-sciences intelligence platform focused on document
+            Architecting backend infrastructure for a life sciences intelligence platform focused on document
             understanding, regulatory compliance, and evidence traceability. Work spans the full pipeline,
-            from ingesting multi-document clinical and economic literature to generating auditable, structured
+            from ingesting clinical and economic literature across many documents to generating auditable, structured
             claims linked directly to source evidence. The platform serves medical, legal, and regulatory
             teams who need trustworthy, scalable analysis of life sciences data.
           </p>
@@ -346,15 +485,15 @@
           <ul class="exp-detail-bullets">
             <li>
               <span class="exp-bullet-marker"></span>
-              <span>Designed data pipelines to synthesize multi-document clinical and economic literature into structured insights, enabling efficient evaluation of product claims at scale.</span>
+              <span>Designed data pipelines to synthesize clinical and economic literature across many documents into structured insights, enabling efficient evaluation of product claims at scale.</span>
             </li>
             <li>
               <span class="exp-bullet-marker"></span>
-              <span>Built traceability systems linking generated claims to source evidence, improving auditability and directly supporting medical, legal, and regulatory decision-making workflows.</span>
+              <span>Built traceability systems linking generated claims to source evidence, improving auditability and directly supporting medical, legal, and regulatory decision making workflows.</span>
             </li>
             <li>
               <span class="exp-bullet-marker"></span>
-              <span>Developed secure document-processing workflows and scalable APIs to standardize validation and analysis of life sciences data, ensuring compliant and isolated data handling across all environments.</span>
+              <span>Developed secure document processing workflows and scalable APIs to standardize validation and analysis of life sciences data, ensuring compliant and isolated data handling across all environments.</span>
             </li>
           </ul>
 
@@ -381,17 +520,17 @@
               <p class="exp-detail-company">Andromeda Labs, LLC</p>
             </div>
             <div class="exp-detail-right">
-              <p class="exp-detail-period">May 2025 – Aug 2025</p>
+              <p class="exp-detail-period">May 2025 to Aug 2025</p>
               <p class="exp-detail-location">New York, NY</p>
             </div>
           </div>
 
           <p class="exp-detail-label">About the Role</p>
           <p class="exp-detail-body">
-            Led full-stack development of a Web3-native event discovery and management platform during
-            a summer internship in New York. Responsible for architecting both frontend and backend systems
+            Led development of a Web3 native event discovery and management platform across the whole stack during
+            a summer internship in New York. Responsible for architecting both the interface and the services behind it
             from the ground up, with a particular focus on blockchain integration, implementing wallet
-            authentication, transaction execution, and on-chain receipt generation for end users. The platform
+            authentication, transaction execution, and on chain receipt generation for end users. The platform
             was designed for production readiness with live smart contract and database integration.
           </p>
 
@@ -401,7 +540,7 @@
           <ul class="exp-detail-bullets">
             <li>
               <span class="exp-bullet-marker"></span>
-              <span>Led development of a multi-page web platform enabling dynamic event discovery and management, improving usability through structured filtering and robust administrative controls.</span>
+              <span>Led development of a multi page web platform enabling dynamic event discovery and management, improving usability through structured filtering and robust administrative controls.</span>
             </li>
             <li>
               <span class="exp-bullet-marker"></span>
@@ -409,7 +548,7 @@
             </li>
             <li>
               <span class="exp-bullet-marker"></span>
-              <span>Architected front-end and backend systems with clear separation of concerns, ensuring scalability and readiness for live smart contract and database integration.</span>
+              <span>Architected the interface and backend systems with a clear separation of concerns, ensuring scalability and readiness for live smart contract and database integration.</span>
             </li>
           </ul>
 
@@ -436,16 +575,16 @@
               <p class="exp-detail-company">Cerebras AI</p>
             </div>
             <div class="exp-detail-right">
-              <p class="exp-detail-period">Oct 2024 – Apr 2025</p>
-              <p class="exp-detail-location">Remote / Princeton</p>
+              <p class="exp-detail-period">Oct 2024 to Apr 2025</p>
+              <p class="exp-detail-location">Remote and Princeton</p>
             </div>
           </div>
 
           <p class="exp-detail-label">About the Role</p>
           <p class="exp-detail-body">
-            Selected as a Cerebras AI Fellow, a competitive program placing high-potential students on
-            applied AI projects powered by Cerebras hardware infrastructure. Built real-time sports analytics
-            tooling designed to support data-driven decision-making for coaching and scouting teams,
+            Selected as a Cerebras AI Fellow, a competitive program placing students of high promise on
+            applied AI projects powered by Cerebras hardware infrastructure. Built live sports analytics
+            tooling designed to ground coaching and scouting decisions in data,
             combining predictive modeling with containerized data pipelines optimized for rapid inference.
             This fellowship represented one of the first industry AI experiences of the undergraduate career.
           </p>
@@ -456,7 +595,7 @@
           <ul class="exp-detail-bullets">
             <li>
               <span class="exp-bullet-marker"></span>
-              <span>Developed real-time sports analytics tools to evaluate player performance and generate projections, enabling data-driven decision-making for coaches and scouts.</span>
+              <span>Developed live sports analytics tools to evaluate player performance and generate projections, giving coaches and scouts decisions grounded in data.</span>
             </li>
             <li>
               <span class="exp-bullet-marker"></span>
@@ -488,6 +627,7 @@
     <span class="footer-name">Jaden Cutinha</span>
     <div class="footer-links">
       <a href="experience.html">Experience</a>
+      <a href="projects.html">Projects</a>
       <a href="research.html">Research</a>
       <a href="honors.html">Honors</a>
       <a href="cv.html">CV</a>
