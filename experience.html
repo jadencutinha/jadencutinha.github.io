@@ -238,11 +238,17 @@
       <!-- Sidebar navigation -->
       <aside class="exp-sidebar reveal">
         <ul class="exp-sidebar-list" id="exp-sidebar">
-          <li class="exp-sidebar-item active" data-target="panel-ic3" onclick="switchExp(this)">
+          <li class="exp-sidebar-item active" data-target="panel-sage" onclick="switchExp(this)">
             <span class="exp-sidebar-dot current"></span>
+            <div class="exp-sidebar-role">Private Equity Intern</div>
+            <div class="exp-sidebar-company">Sage Investment Group</div>
+            <div class="exp-sidebar-period">Jul 2026 to Present</div>
+          </li>
+          <li class="exp-sidebar-item" data-target="panel-ic3" onclick="switchExp(this)">
+            <span class="exp-sidebar-dot"></span>
             <div class="exp-sidebar-role">Summer Resident Fellow</div>
             <div class="exp-sidebar-company">IC3</div>
-            <div class="exp-sidebar-period">Jun 2026 to Present</div>
+            <div class="exp-sidebar-period">Jun 2026 to Jul 2026</div>
           </li>
           <li class="exp-sidebar-item" data-target="panel-seo" onclick="switchExp(this)">
             <span class="exp-sidebar-dot current"></span>
@@ -251,10 +257,10 @@
             <div class="exp-sidebar-period">May 2026 to Present</div>
           </li>
           <li class="exp-sidebar-item" data-target="panel-biostrive" onclick="switchExp(this)">
-            <span class="exp-sidebar-dot current"></span>
+            <span class="exp-sidebar-dot"></span>
             <div class="exp-sidebar-role">Software Engineer</div>
             <div class="exp-sidebar-company">BioStrive</div>
-            <div class="exp-sidebar-period">Nov 2025 to Present</div>
+            <div class="exp-sidebar-period">Nov 2025 to Jul 2026</div>
           </li>
           <li class="exp-sidebar-item" data-target="panel-ailabs" onclick="switchExp(this)">
             <span class="exp-sidebar-dot"></span>
@@ -280,15 +286,72 @@
       <!-- Detail panels -->
       <div class="exp-panels reveal">
 
+        <!-- Sage Investment Group -->
+        <div class="exp-panel active card" id="panel-sage">
+          <div class="exp-detail-header">
+            <div>
+              <h2 class="exp-detail-role">Private Equity Intern</h2>
+              <p class="exp-detail-company">Sage Investment Group</p>
+            </div>
+            <div class="exp-detail-right">
+              <p class="exp-detail-period">Jul 2026 to Present</p>
+              <p class="exp-detail-location">Real Estate Private Equity</p>
+            </div>
+          </div>
+
+          <p class="exp-detail-label">About the Role</p>
+          <p class="exp-detail-body">
+            Sage Investment Group is a real estate private equity firm that acquires underperforming hotels and
+            converts them into attainable apartment housing through adaptive reuse, an approach recently recognized
+            with a CoStar Impact Award. Working alongside the acquisitions team, my role is to build the data
+            infrastructure behind how the firm finds deals, proves its standing in the market, and measures the
+            social return of what it builds, turning messy public signals into evidence the investment team and its
+            investors can act on.
+          </p>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Key Contributions</p>
+          <ul class="exp-detail-bullets">
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Building an automated deal sourcing engine that runs every week, pulling hotel listings and cross referencing public signals of distress, from troubled loans and bankruptcy filings to tax delinquency, then ranking the results into a clean weekly deal sheet of qualified off market conversion candidates. Off market sourcing is the core of the business, so widening the top of the funnel automatically hands hours of manual digging back to the acquisitions team and surfaces deals that would otherwise stay hidden.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Prototyped a national census of every public hotel to apartment conversion, capturing operator, location, unit count, cost, and timeline, then mapping and benchmarking the field against Sage. Built from public data alone, the working prototype establishes Sage as the most prolific operator in the set within the tight 100 to 200 unit band its investor materials describe, turning market leader from a claim into a defensible, sourced benchmark while revealing which markets are heating up and where whitespace remains as the firm expands toward its seventh state.</span>
+            </li>
+            <li>
+              <span class="exp-bullet-marker"></span>
+              <span>Building a shareable impact dashboard that quantifies the social good behind each conversion, attainable homes delivered, monthly savings against comparable Class A rents, and construction waste avoided through adaptive reuse, all computed from public unit counts and housing data. As investors increasingly underwrite social returns, hard numbers give fundraising and marketing a credible, sourced complement to the firm's recent CoStar Impact Award.</span>
+            </li>
+          </ul>
+
+          <div class="exp-detail-divider"></div>
+
+          <p class="exp-detail-label">Skills &amp; Tools</p>
+          <div>
+            <span class="exp-skill-tag">Python</span>
+            <span class="exp-skill-tag">Data Pipelines</span>
+            <span class="exp-skill-tag">Web Scraping</span>
+            <span class="exp-skill-tag">Real Estate Private Equity</span>
+            <span class="exp-skill-tag">Deal Sourcing</span>
+            <span class="exp-skill-tag">Market Analysis</span>
+            <span class="exp-skill-tag">Geospatial Mapping</span>
+            <span class="exp-skill-tag">Data Visualization</span>
+            <span class="exp-skill-tag">Public Records</span>
+          </div>
+        </div>
+
         <!-- IC3 -->
-        <div class="exp-panel active card" id="panel-ic3">
+        <div class="exp-panel card" id="panel-ic3">
           <div class="exp-detail-header">
             <div>
               <h2 class="exp-detail-role">Summer Resident Fellow</h2>
               <p class="exp-detail-company">IC3, the Initiative for Cryptocurrencies &amp; Contracts</p>
             </div>
             <div class="exp-detail-right">
-              <p class="exp-detail-period">Jun 2026 to Present</p>
+              <p class="exp-detail-period">Jun 2026 to Jul 2026</p>
               <p class="exp-detail-location">Summer Residency</p>
             </div>
           </div>
@@ -414,7 +477,7 @@
               <p class="exp-detail-company">BioStrive</p>
             </div>
             <div class="exp-detail-right">
-              <p class="exp-detail-period">Nov 2025 to Present</p>
+              <p class="exp-detail-period">Nov 2025 to Jul 2026</p>
               <p class="exp-detail-location">Remote</p>
             </div>
           </div>
