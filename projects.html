@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Jaden Cutinha</title>
-  <meta name="description" content="Projects by Jaden Cutinha, including PortfoliU, a portfolio optimization platform built on convex optimization, walk forward backtesting, and a FastAPI backend." />
+  <meta name="description" content="Projects by Jaden Cutinha, including PortfoliU (convex portfolio optimization), Murmur (a distributed Raft key/value store in Rust), and Sable (an LSM-tree storage engine in Rust)." />
   <link rel="stylesheet" href="assets/css/style.css" />
   <style>
     /* ── Project page additions ── */
@@ -88,7 +88,7 @@
   <div class="container">
     <p class="page-hero-eyebrow">Projects</p>
     <h1>Engineering Work</h1>
-    <p>Systems built end to end, from the mathematics of the solver through the API surface and the interface that people actually use.</p>
+    <p>Systems built end to end, from the mathematics of a convex solver to the internals of a Raft cluster and an LSM-tree storage engine, through the API surface and the interface that people actually use.</p>
   </div>
 </div>
 
@@ -272,6 +272,229 @@
               <span class="skill-pill">WebSockets</span>
               <span class="skill-pill">Vercel</span>
               <span class="skill-pill">GitHub Actions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Murmur ── -->
+    <div class="research-full-card reveal" id="murmur">
+      <div class="card">
+        <div class="research-meta-row">
+          <span class="research-meta-pill highlight">Distributed Systems</span>
+          <span class="research-meta-pill">Rust</span>
+          <span class="research-meta-pill">2026</span>
+          <span class="research-meta-pill">Raft Consensus</span>
+        </div>
+
+        <h2 style="color:var(--navy); margin-bottom:12px;">
+          Murmur, a Distributed Strongly Consistent Key/Value Store
+        </h2>
+        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
+          A single-node storage engine replicated across a cluster by a hand-written Raft, so every write commits through a majority quorum.
+        </p>
+
+        <div class="project-links">
+          <a href="https://github.com/jadencutinha/murmur" target="_blank" rel="noopener" class="btn btn-secondary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            Source Code
+          </a>
+        </div>
+
+        <p class="research-section-label">Overview</p>
+        <p class="research-body">
+          Murmur is a distributed key/value store that keeps a replicated log consistent across a cluster of nodes even
+          when machines crash, restart, or fall behind. A single-node storage engine sits underneath, and a hand-written
+          implementation of the Raft consensus algorithm sits on top, coordinating the replicas so that clients see one
+          coherent, linearizable store rather than a set of diverging copies. The goal was to build consensus from first
+          principles rather than reach for a library, and to make every guarantee something the test suite can prove.
+        </p>
+
+        <p class="research-section-label">Consensus and Replication</p>
+        <p class="research-body">
+          The heart of the system is a from-scratch Raft. Leaders are chosen through randomized election timeouts, and a
+          PreVote round guards against a partitioned node disrupting a healthy cluster by forcing needless elections. Once
+          a leader is established it replicates its log to followers, and when logs diverge after a leadership change the
+          leader repairs them through conflict backtracking, walking the follower's log backward until it finds the last
+          point of agreement. Every operation commits only after a majority quorum has durably accepted it, which is what
+          gives the store its strong consistency.
+        </p>
+
+        <p class="research-section-label">Durability and Recovery</p>
+        <p class="research-body">
+          Consensus is only as trustworthy as what survives a power loss. Murmur fsyncs its current term, its vote, and
+          its log to disk before acting on them, so a node that crashes mid-election or mid-append recovers to a state
+          Raft still considers valid. To keep the log from growing without bound it performs log compaction, and it brings
+          lagging or newly added followers up to date by shipping a snapshot of committed state rather than replaying
+          history from the beginning.
+        </p>
+
+        <p class="research-section-label">Exactly-Once Client Semantics</p>
+        <p class="research-body">
+          Retries are unavoidable in a distributed system, so a client that resends a request after a leader change must
+          not have its operation applied twice. Murmur tags each client with an ID and each request with a sequence
+          number, and the servers deduplicate on that sequence number so a repeated request returns the original result
+          instead of mutating state again. This holds across leader changes, giving the store exactly-once semantics from
+          the client's point of view.
+        </p>
+
+        <p class="research-section-label">Architecture and Testing</p>
+        <p class="research-body">
+          Consensus is written as a pure, I/O-free state machine. It takes in events and returns actions, touching no
+          network or disk directly, which makes the tricky parts of Raft unit-testable without spinning up a runtime. A
+          gRPC transport built on tonic and prost carries messages between nodes, and the whole system is verified by
+          dedicated election, replication, persistence, and chaos test suites that inject crashes and partitions to
+          confirm the invariants hold.
+        </p>
+
+        <p class="research-section-label">Core Capabilities</p>
+        <div class="project-feature-grid">
+          <div class="project-feature">
+            <h4>Leader Election with PreVote</h4>
+            <p>Randomized election timeouts elect a leader, and a PreVote round stops a partitioned node from forcing disruptive elections.</p>
+          </div>
+          <div class="project-feature">
+            <h4>Log Replication and Repair</h4>
+            <p>Followers are kept in sync by append, and divergent logs are healed through conflict-backtracking repair after leadership changes.</p>
+          </div>
+          <div class="project-feature">
+            <h4>Snapshots and Compaction</h4>
+            <p>Log compaction bounds disk growth, and snapshot transfer brings lagging or new followers up to date quickly.</p>
+          </div>
+          <div class="project-feature">
+            <h4>Exactly-Once Semantics</h4>
+            <p>Client IDs and server-side sequence-number dedup make retried requests idempotent across leader changes.</p>
+          </div>
+        </div>
+
+        <p class="research-section-label">Stack</p>
+        <div class="project-stack">
+          <div>
+            <p class="project-stack-label">Core</p>
+            <div class="skill-pills">
+              <span class="skill-pill">Rust</span>
+              <span class="skill-pill">Raft</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-stack-label">Transport</p>
+            <div class="skill-pills">
+              <span class="skill-pill">gRPC</span>
+              <span class="skill-pill">tonic</span>
+              <span class="skill-pill">prost</span>
+              <span class="skill-pill">Protocol Buffers</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-stack-label">Guarantees</p>
+            <div class="skill-pills">
+              <span class="skill-pill">Linearizable</span>
+              <span class="skill-pill">Crash-Safe</span>
+              <span class="skill-pill">Exactly-Once</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Sable ── -->
+    <div class="research-full-card reveal" id="sable">
+      <div class="card">
+        <div class="research-meta-row">
+          <span class="research-meta-pill highlight">Storage Engines</span>
+          <span class="research-meta-pill">Rust</span>
+          <span class="research-meta-pill">2026</span>
+          <span class="research-meta-pill">LSM-Tree</span>
+        </div>
+
+        <h2 style="color:var(--navy); margin-bottom:12px;">
+          Sable, an LSM-Tree Storage Engine
+        </h2>
+        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
+          A durable, crash-recoverable key/value database built from scratch in Rust, modeled on LevelDB and RocksDB.
+        </p>
+
+        <div class="project-links">
+          <a href="https://github.com/jadencutinha/sable" target="_blank" rel="noopener" class="btn btn-secondary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            Source Code
+          </a>
+        </div>
+
+        <p class="research-section-label">Overview</p>
+        <p class="research-body">
+          Sable is a key/value database engine written from scratch in Rust, structured as a log-structured merge tree in
+          the lineage of LevelDB and RocksDB. An LSM-tree turns random writes into fast sequential ones by buffering them
+          in memory and flushing sorted runs to disk, then merging those runs in the background. The project was an
+          exercise in building that design end to end, from the write-ahead log up through compaction, with durability
+          that holds under crashes as the non-negotiable requirement.
+        </p>
+
+        <p class="research-section-label">Write Path and Durability</p>
+        <p class="research-body">
+          Every write first lands in a checksummed write-ahead log and a sorted, versioned in-memory memtable, so an
+          acknowledged write is on durable storage before the client hears success. Recovery replays the log on startup
+          and truncates a torn tail, the partial record a crash can leave behind mid-write, so the engine always recovers
+          to a consistent point. The result is a simple contract: every acknowledged write survives a crash or a power
+          loss.
+        </p>
+
+        <p class="research-section-label">Read Path and On-Disk Format</p>
+        <p class="research-body">
+          Flushed data lives in on-disk SSTables built from prefix-compressed blocks with per-block CRCs to catch
+          corruption, and each table carries a Bloom filter so the engine can skip tables that cannot contain a key. Reads
+          traverse the memtable and the sorted tables through a lock-free merged path, and MVCC snapshot isolation lets
+          readers see a consistent view while writes continue. Leveled compaction merges overlapping tables in the
+          background to keep read amplification and space under control.
+        </p>
+
+        <p class="research-section-label">Benchmarks</p>
+        <div class="result-grid">
+          <div class="result-box">
+            <div class="val">~50%</div>
+            <div class="lbl">of RocksDB 8.10 read/write throughput on a 200K-key workload</div>
+          </div>
+          <div class="result-box">
+            <div class="val">2.75×</div>
+            <div class="lbl">faster negative lookups than RocksDB via Bloom filters</div>
+          </div>
+          <div class="result-box">
+            <div class="val">78.5%</div>
+            <div class="lbl">of probes skipped on misses by the Bloom filter</div>
+          </div>
+        </div>
+        <p class="research-body" style="margin-top:16px;">
+          Measured against RocksDB 8.10 on a 200,000-key workload, Sable sustained roughly half of a mature,
+          production-grade engine's read and write throughput while serving negative lookups, queries for keys that do
+          not exist, about 2.75 times faster. That speedup comes directly from the Bloom filters, which skipped 78.5% of
+          disk probes on misses. Correctness is backed by unit, integration, and crash-recovery test suites.
+        </p>
+
+        <p class="research-section-label">Stack</p>
+        <div class="project-stack">
+          <div>
+            <p class="project-stack-label">Core</p>
+            <div class="skill-pills">
+              <span class="skill-pill">Rust</span>
+              <span class="skill-pill">LSM-Tree</span>
+              <span class="skill-pill">SSTables</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-stack-label">Durability</p>
+            <div class="skill-pills">
+              <span class="skill-pill">Write-Ahead Log</span>
+              <span class="skill-pill">CRC Checksums</span>
+              <span class="skill-pill">MVCC</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-stack-label">Performance</p>
+            <div class="skill-pills">
+              <span class="skill-pill">Bloom Filters</span>
+              <span class="skill-pill">Leveled Compaction</span>
+              <span class="skill-pill">RocksDB (benchmark)</span>
             </div>
           </div>
         </div>

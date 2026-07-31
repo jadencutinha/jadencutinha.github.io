@@ -377,7 +377,7 @@
           <div class="cv-exp-item">
             <div class="cv-exp-row">
               <p class="cv-exp-role">Tech Developer Intern</p>
-              <p class="cv-exp-date">May 2026 to Present</p>
+              <p class="cv-exp-date">Jun 2026 to Jul 2026</p>
             </div>
             <p class="cv-exp-company">Sponsors for Educational Opportunity (SEO) · New York, NY</p>
             <ul class="cv-bullets">
@@ -392,17 +392,17 @@
               <p class="cv-exp-role">Software Engineer</p>
               <p class="cv-exp-date">Nov 2025 to Jul 2026</p>
             </div>
-            <p class="cv-exp-company">BioStrive · Remote</p>
+            <p class="cv-exp-company">BioStrive · AI Claims-Intelligence Startup, backed by the Anderson Venture Accelerator · Remote</p>
             <ul class="cv-bullets">
-              <li>Designed data pipelines to synthesize clinical and economic literature across many documents into structured insights, enabling efficient evaluation of product claims.</li>
-              <li>Built traceability systems linking generated claims to source evidence, improving auditability and supporting medical, legal, and regulatory decision making workflows.</li>
-              <li>Developed secure document processing workflows and scalable APIs to standardize validation and analysis of life sciences data while ensuring compliant and isolated data handling.</li>
+              <li>Architected and built a backend document-processing pipeline transforming clinical and economic PDFs into structured, source-linked claims with page-level citation traceability for medical, legal, and regulatory review.</li>
+              <li>Implemented secure authentication and authorization using JWT, RBAC (admin and user), bcrypt password hashing, short-lived access tokens, refresh-token rotation, and user-scoped authorization.</li>
+              <li>Enforced multi-tenant isolation via Cosmos DB partition keys and Blob Storage path prefixes, securing data at rest and in transit (AES-256, TLS) with a configurable 30-day metadata TTL and delete-chat cascade.</li>
             </ul>
           </div>
 
           <div class="cv-exp-item">
             <div class="cv-exp-row">
-              <p class="cv-exp-role">Econometric Research Analyst</p>
+              <p class="cv-exp-role">Artificial Intelligence Research Analyst</p>
               <p class="cv-exp-date">Sep 2025 to May 2026</p>
             </div>
             <p class="cv-exp-company">The Princeton Laboratory for Artificial Intelligence · Princeton, NJ</p>
@@ -458,6 +458,32 @@
 
           <div class="cv-exp-item">
             <div class="cv-exp-row">
+              <p class="cv-exp-role">Murmur, Distributed Key/Value Store</p>
+              <p class="cv-exp-date">2026</p>
+            </div>
+            <p class="cv-exp-company">Rust · gRPC · Raft · <a href="https://github.com/jadencutinha/murmur" target="_blank" rel="noopener" style="color:var(--sage)">Source</a></p>
+            <ul class="cv-bullets">
+              <li>Built a distributed, strongly consistent key/value store that replicates a single-node engine across a cluster via a hand-written implementation of the Raft consensus algorithm, with leader election, PreVote, log replication, and conflict-backtracking repair.</li>
+              <li>Implemented crash-safe persistence (fsync'd term, vote, and log), log compaction with snapshot transfer for lagging followers, and exactly-once client semantics via client IDs and server-side sequence-number dedup across leader changes.</li>
+              <li>Structured consensus as a pure, I/O-free state machine (unit-testable without a runtime) behind a gRPC transport (tonic/prost); every operation commits through a majority quorum, verified by election, replication, persistence, and chaos test suites.</li>
+            </ul>
+          </div>
+
+          <div class="cv-exp-item">
+            <div class="cv-exp-row">
+              <p class="cv-exp-role">Sable, LSM-Tree Storage Engine</p>
+              <p class="cv-exp-date">2026</p>
+            </div>
+            <p class="cv-exp-company">Rust · <a href="https://github.com/jadencutinha/sable" target="_blank" rel="noopener" style="color:var(--sage)">Source</a></p>
+            <ul class="cv-bullets">
+              <li>Built a durable, crash-recoverable LSM-tree key/value database from scratch in Rust (modeled on LevelDB and RocksDB): a checksummed write-ahead log, sorted versioned memtable, and recovery with torn-tail truncation, so every acknowledged write survives crash or power loss.</li>
+              <li>Implemented on-disk SSTables with prefix-compressed blocks, per-block CRCs, and Bloom filters, a lock-free merged read path, and MVCC snapshot isolation with leveled compaction; verified by unit, integration, and crash-recovery test suites.</li>
+              <li>Benchmarked against RocksDB 8.10 on a 200K-key workload: sustained roughly 50% of its read/write throughput while serving negative lookups 2.75× faster via Bloom filters (78.5% probe-skip on misses).</li>
+            </ul>
+          </div>
+
+          <div class="cv-exp-item">
+            <div class="cv-exp-row">
               <p class="cv-exp-role">Tree of Thoughts Ablation Study</p>
               <p class="cv-exp-date">Spring 2025</p>
             </div>
@@ -506,8 +532,10 @@
             <p class="cv-honors-org">Princeton University</p>
             <ul class="cv-honors-list">
               <li>Bank of America Student Leader, one of 300 selected from 20,000 applicants</li>
+              <li>HackPrinceton Finalist, Fintech Track (2026)</li>
               <li>Cerebras AI Research Fellow (Oct 2024 to Apr 2025)</li>
               <li>Princeton Advanced AI Alignment Group Member</li>
+              <li>Princeton COSCON Computer Science Contest Top 5 Finalist (2026)</li>
               <li>Princeton COSCON Computer Science Contest Top 5 Finalist (Nov 2025)</li>
               <li>Princeton COSCON Computer Science Contest Honorable Mention (Nov 2024)</li>
             </ul>
@@ -534,7 +562,7 @@
           <div class="cv-skills-grid">
             <div>
               <p class="cv-skill-group-label">Languages</p>
-              <p class="cv-skill-list">Python · JavaScript · TypeScript · SQL · R · Solidity</p>
+              <p class="cv-skill-list">Python · Rust · Java · C · TypeScript · JavaScript · SQL · R · Solidity</p>
             </div>
             <div>
               <p class="cv-skill-group-label">ML, AI &amp; Optimization</p>
@@ -542,7 +570,7 @@
             </div>
             <div>
               <p class="cv-skill-group-label">Engineering</p>
-              <p class="cv-skill-list">FastAPI · Flask · async SQLAlchemy · Redis · Docker · REST APIs · Web3.js · React · Node.js · PostgreSQL · MySQL</p>
+              <p class="cv-skill-list">FastAPI · Flask · async SQLAlchemy · gRPC · Protocol Buffers · React · TanStack Query · Node.js · Web3.js · Redis · Docker · Git · Azure (Cosmos DB, Blob Storage) · RocksDB · PostgreSQL · MySQL · REST APIs</p>
             </div>
           </div>
         </div>
