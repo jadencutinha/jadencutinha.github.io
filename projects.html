@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Jaden Cutinha</title>
-  <meta name="description" content="Projects by Jaden Cutinha, including PortfoliU (convex portfolio optimization), Murmur (a distributed Raft key/value store in Rust), and Sable (an LSM-tree storage engine in Rust)." />
+  <meta name="description" content="Projects by Jaden Cutinha: Murmur, a distributed Raft key/value store in Rust; Sable, an LSM-tree storage engine in Rust; and Halo, a convex portfolio optimizer." />
   <link rel="stylesheet" href="assets/css/style.css" />
   <style>
     /* ── Project page additions ── */
@@ -60,9 +60,57 @@
       color: var(--text-muted);
       line-height: 1.75;
     }
+
+    /* ── Interactive Raft demo ── */
+    .raft-demo { margin-top: 10px; }
+    .raft-hint { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+    .raft-cluster { display: flex; flex-wrap: wrap; gap: 12px; }
+    .raft-node {
+      flex: 1 1 0; min-width: 104px;
+      border: 1px solid var(--border); border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.6);
+      padding: 12px 10px 14px; cursor: pointer; text-align: center;
+      transition: var(--transition);
+    }
+    .raft-node:hover { border-color: var(--sage); }
+    .raft-node.flash { box-shadow: 0 0 0 3px rgba(122,155,122,0.35); }
+    .raft-node-id { font-family: var(--font-mono); font-weight: 600; color: var(--navy); font-size: 0.92rem; }
+    .raft-node-role {
+      display: inline-block; margin-top: 7px; font-size: 0.64rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 9px; border-radius: var(--radius-xl);
+    }
+    .raft-node[data-role="leader"] { border-color: var(--sage); background: rgba(122,155,122,0.12); }
+    .raft-node[data-role="leader"] .raft-node-role { background: var(--sage); color: #fff; }
+    .raft-node[data-role="follower"] .raft-node-role { background: rgba(26,39,68,0.08); color: var(--navy-mid); }
+    .raft-node[data-role="candidate"] .raft-node-role { background: var(--gold); color: var(--navy); }
+    .raft-node[data-role="candidate"] { animation: raftPulse 0.8s ease-in-out infinite; }
+    .raft-node[data-role="down"] { opacity: 0.55; border-style: dashed; background: transparent; }
+    .raft-node[data-role="down"] .raft-node-role { background: rgba(0,0,0,0.10); color: var(--text-muted); }
+    .raft-node-term { font-family: var(--font-mono); font-size: 0.64rem; color: var(--text-muted); margin-top: 9px; }
+    .raft-log-row { display: flex; gap: 3px; justify-content: center; align-items: center; margin-top: 9px; min-height: 13px; flex-wrap: wrap; }
+    .raft-log-cell { width: 8px; height: 13px; border-radius: 2px; background: var(--sage); opacity: 0.85; }
+    .raft-log-more { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); }
+    @keyframes raftPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(201,162,39,0.5);} 50% { box-shadow: 0 0 0 5px rgba(201,162,39,0);} }
+    .raft-controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+    .raft-btn {
+      font-family: var(--font-body); font-size: 0.82rem; font-weight: 500;
+      padding: 8px 16px; border-radius: var(--radius-md); border: 1px solid var(--border);
+      background: var(--white); color: var(--navy); cursor: pointer; transition: var(--transition);
+    }
+    .raft-btn:hover { border-color: var(--sage); color: var(--sage); }
+    .raft-console {
+      font-family: var(--font-mono); font-size: 0.76rem; line-height: 1.65;
+      background: var(--navy); color: rgba(255,255,255,0.82);
+      border-radius: var(--radius-md); padding: 14px 16px; height: 118px; overflow-y: auto;
+    }
+    .raft-console div { margin-bottom: 3px; }
+    .raft-console .p { color: var(--sage); }
+    .raft-console .t { color: var(--sage-light); font-weight: 600; }
+
     @media (max-width: 768px) {
       .project-stack { grid-template-columns: 1fr; }
       .project-feature-grid { grid-template-columns: 1fr; }
+      .raft-node { min-width: 84px; padding: 10px 6px 12px; }
     }
   </style>
 </head>
@@ -88,15 +136,262 @@
   <div class="container">
     <p class="page-hero-eyebrow">Projects</p>
     <h1>Engineering Work</h1>
-    <p>Systems built end to end, from the mathematics of a convex solver to the internals of a Raft cluster and an LSM-tree storage engine, through the API surface and the interface that people actually use.</p>
+    <p>A distributed key/value store, a storage engine, and a portfolio optimizer, each built from the ground up. Different domains, but the same instinct: write the hard part yourself instead of importing it, and make every claim something a test can check.</p>
   </div>
 </div>
 
 <section class="section">
   <div class="container">
 
-    <!-- ── PortfoliU ── -->
-    <div class="research-full-card reveal" id="portfoliu">
+    <!-- ── Murmur ── -->
+    <div class="research-full-card reveal" id="murmur">
+      <div class="card">
+        <div class="research-meta-row">
+          <span class="research-meta-pill highlight">Distributed Systems</span>
+          <span class="research-meta-pill">Rust</span>
+          <span class="research-meta-pill">2026</span>
+          <span class="research-meta-pill">Raft Consensus</span>
+        </div>
+
+        <h2 style="color:var(--navy); margin-bottom:12px;">
+          Murmur, a Distributed Key/Value Store
+        </h2>
+        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
+          A key/value store that stays consistent across a cluster of machines, built on a Raft implementation I wrote by hand.
+        </p>
+
+        <div class="project-links">
+          <a href="https://github.com/jadencutinha/murmur" target="_blank" rel="noopener" class="btn btn-secondary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            Source Code
+          </a>
+        </div>
+
+        <p class="research-section-label">Try It, a Live Raft Cluster</p>
+        <div class="raft-demo" id="raft-demo">
+          <p class="raft-hint">
+            Raft is the algorithm that keeps the copies agreeing on one history of writes, even when machines fail.
+            Rather than describe it, here is a five-server cluster you can break. Click any server to crash or restart it;
+            crash the leader and watch the survivors elect a new one. Writes keep committing as long as three of the five are up.
+          </p>
+          <div class="raft-cluster"></div>
+          <div class="raft-controls">
+            <button class="raft-btn" data-act="write">Client write</button>
+            <button class="raft-btn" data-act="crash">Crash the leader</button>
+            <button class="raft-btn" data-act="reset">Reset</button>
+          </div>
+          <div class="raft-console"></div>
+        </div>
+
+        <p class="research-section-label">What it is</p>
+        <p class="research-body">
+          Murmur is a key/value store that runs across several machines and keeps them agreeing on a single, ordered
+          history of writes, even when some of those machines crash or fall behind. Underneath sits an ordinary
+          single-node engine. On top sits a Raft implementation I wrote from scratch, no consensus library. To a client
+          it behaves like one store, not five copies that might quietly diverge.
+        </p>
+
+        <p class="research-section-label">Why I built it</p>
+        <p class="research-body">
+          I kept reading that consensus is hard and mostly taking people's word for it. Building Murmur was how I stopped
+          doing that. The rule I set was that every guarantee had to be something a test could show, not something I
+          asserted in a comment. If I claimed a write survived a crash, a test had to crash the process and prove the
+          write was still there.
+        </p>
+
+        <p class="research-section-label">How consensus works here</p>
+        <p class="research-body">
+          One server is the leader and the rest are followers. The leader takes every write, appends it to its log, and
+          ships it to the followers, and a write only counts as committed once a majority have it on disk. Leaders are
+          found by election: a follower that stops hearing from the leader times out and runs for the job. A PreVote step
+          keeps a briefly partitioned server from bumping the term and forcing a pointless election when nothing was
+          actually wrong. When two logs disagree after a leadership change, the new leader walks the follower's log
+          backward to the last entry they share and overwrites from there.
+        </p>
+
+        <p class="research-section-label">Surviving crashes</p>
+        <p class="research-body">
+          A node writes its term, its vote, and its log to disk with fsync before it acts on any of them, so a crash
+          mid-election or mid-append leaves it in a state Raft still considers legal when it comes back. Logs do not grow
+          forever. Murmur compacts them and ships a snapshot to any follower that has fallen too far behind, instead of
+          replaying history from the first entry.
+        </p>
+
+        <p class="research-section-label">Not applying anything twice</p>
+        <p class="research-body">
+          Networks drop responses, so clients retry, and a naive store would apply the same operation twice. Every client
+          gets an ID and stamps each request with a sequence number. The servers remember the last sequence number they
+          have seen from each client and hand back the original result for a repeat instead of running it again. That
+          holds even when the retry lands on a different leader.
+        </p>
+
+        <p class="research-section-label">How it is built and tested</p>
+        <p class="research-body">
+          The consensus logic is a pure state machine: events in, actions out, with no sockets or disk of its own. That
+          was a deliberate choice, because it lets the hard parts of Raft be unit-tested without standing up a network.
+          gRPC over tonic and prost carries the real messages between servers. Four suites cover elections, replication,
+          persistence, and chaos, the last of which injects crashes and partitions and checks that the invariants still hold.
+        </p>
+
+        <p class="research-section-label">Core Capabilities</p>
+        <div class="project-feature-grid">
+          <div class="project-feature">
+            <h4>Leader Election with PreVote</h4>
+            <p>Randomized timeouts elect a leader, and a PreVote round stops a partitioned server from forcing disruptive elections.</p>
+          </div>
+          <div class="project-feature">
+            <h4>Log Replication and Repair</h4>
+            <p>Followers stay in sync by append, and divergent logs are healed by walking back to the last shared entry.</p>
+          </div>
+          <div class="project-feature">
+            <h4>Snapshots and Compaction</h4>
+            <p>Compaction bounds disk growth, and snapshot transfer brings lagging or new followers up to date fast.</p>
+          </div>
+          <div class="project-feature">
+            <h4>Exactly-Once Semantics</h4>
+            <p>Client IDs and per-client sequence-number dedup make retried requests safe across leader changes.</p>
+          </div>
+        </div>
+
+        <p class="research-section-label">Stack</p>
+        <div class="project-stack">
+          <div>
+            <p class="project-stack-label">Core</p>
+            <div class="skill-pills">
+              <span class="skill-pill">Rust</span>
+              <span class="skill-pill">Raft</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-stack-label">Transport</p>
+            <div class="skill-pills">
+              <span class="skill-pill">gRPC</span>
+              <span class="skill-pill">tonic</span>
+              <span class="skill-pill">prost</span>
+              <span class="skill-pill">Protocol Buffers</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-stack-label">Guarantees</p>
+            <div class="skill-pills">
+              <span class="skill-pill">Linearizable</span>
+              <span class="skill-pill">Crash-Safe</span>
+              <span class="skill-pill">Exactly-Once</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Sable ── -->
+    <div class="research-full-card reveal" id="sable">
+      <div class="card">
+        <div class="research-meta-row">
+          <span class="research-meta-pill highlight">Storage Engines</span>
+          <span class="research-meta-pill">Rust</span>
+          <span class="research-meta-pill">2026</span>
+          <span class="research-meta-pill">LSM-Tree</span>
+        </div>
+
+        <h2 style="color:var(--navy); margin-bottom:12px;">
+          Sable, an LSM-Tree Storage Engine
+        </h2>
+        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
+          A crash-safe key/value database I wrote from scratch in Rust, in the same family as LevelDB and RocksDB.
+        </p>
+
+        <div class="project-links">
+          <a href="https://github.com/jadencutinha/sable" target="_blank" rel="noopener" class="btn btn-secondary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            Source Code
+          </a>
+        </div>
+
+        <p class="research-section-label">What it is</p>
+        <p class="research-body">
+          Sable is a storage engine, the layer a database uses to actually put bytes on disk and get them back. It is
+          built as a log-structured merge tree, the design behind LevelDB and RocksDB, which takes the scattered writes an
+          application throws at it and turns them into fast sequential ones by batching in memory and flushing sorted
+          files to disk. I built the whole path myself, from the write-ahead log up through background compaction, and
+          treated crash-safety as the one thing I would not compromise on.
+        </p>
+
+        <p class="research-section-label">The write path, and why it survives a crash</p>
+        <p class="research-body">
+          Every write goes two places before Sable admits it succeeded: a write-ahead log on disk, checksummed so
+          corruption gets caught, and a sorted in-memory table. If the process dies, startup replays that log and trims
+          the torn tail, the half-written record a crash leaves behind, so recovery always lands on a clean boundary. The
+          contract is deliberately boring: if Sable said a write succeeded, it is still there after a crash or a power cut.
+        </p>
+
+        <p class="research-section-label">The read path and on-disk format</p>
+        <p class="research-body">
+          Once memory fills up, the table is flushed to an SSTable on disk: sorted blocks, prefix-compressed to save
+          space, each with its own CRC. Every SSTable carries a Bloom filter, a small probabilistic index that can say
+          "this key is definitely not here" and let a lookup skip the file entirely. Reads merge the in-memory table and
+          the on-disk files through a lock-free path, and MVCC snapshots let a reader see a stable view while writes keep
+          coming. Leveled compaction runs in the background, merging overlapping files to keep reads and disk usage in check.
+        </p>
+
+        <p class="research-section-label">Benchmarks, honestly</p>
+        <div class="result-grid">
+          <div class="result-box">
+            <div class="val">~50%</div>
+            <div class="lbl">of RocksDB 8.10 read/write throughput on a 200K-key workload</div>
+          </div>
+          <div class="result-box">
+            <div class="val">2.75×</div>
+            <div class="lbl">faster negative lookups than RocksDB, thanks to Bloom filters</div>
+          </div>
+          <div class="result-box">
+            <div class="val">78.5%</div>
+            <div class="lbl">of probes skipped on misses by the Bloom filter</div>
+          </div>
+        </div>
+        <p class="research-body" style="margin-top:16px;">
+          I benchmarked Sable against RocksDB 8.10, a database with a decade of tuning behind it, on a 200,000-key
+          workload, mostly to see how far off a from-scratch engine would land. It held about half of RocksDB's read and
+          write throughput, which I will happily take against that bar. The one place it won outright was negative
+          lookups, keys that do not exist: roughly 2.75 times faster, because the Bloom filters skipped 78.5% of the disk
+          probes that would otherwise happen. Correctness is pinned down by unit, integration, and crash-recovery tests.
+        </p>
+        <p class="project-note">
+          Losing to RocksDB on throughput and beating it on negative lookups taught me more than a clean win would have.
+          Most of the gap is compaction tuning and cache design, and the win came from getting one data structure right.
+        </p>
+
+        <p class="research-section-label">Stack</p>
+        <div class="project-stack">
+          <div>
+            <p class="project-stack-label">Core</p>
+            <div class="skill-pills">
+              <span class="skill-pill">Rust</span>
+              <span class="skill-pill">LSM-Tree</span>
+              <span class="skill-pill">SSTables</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-stack-label">Durability</p>
+            <div class="skill-pills">
+              <span class="skill-pill">Write-Ahead Log</span>
+              <span class="skill-pill">CRC Checksums</span>
+              <span class="skill-pill">MVCC</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-stack-label">Performance</p>
+            <div class="skill-pills">
+              <span class="skill-pill">Bloom Filters</span>
+              <span class="skill-pill">Leveled Compaction</span>
+              <span class="skill-pill">RocksDB (benchmark)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Halo ── -->
+    <div class="research-full-card reveal" id="halo">
       <div class="card">
         <div class="research-meta-row">
           <span class="research-meta-pill highlight">Flagship Project</span>
@@ -106,10 +401,10 @@
         </div>
 
         <h2 style="color:var(--navy); margin-bottom:12px;">
-          PortfoliU, Optimal Portfolio Construction via Convex Optimization
+          Halo, Optimal Portfolio Construction via Convex Optimization
         </h2>
         <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
-          A full stack platform that turns Markowitz mean variance theory into a solver, a backtester, and a product.
+          A full-stack platform that turns Markowitz mean-variance theory into a working solver, a backtester, and a product.
         </p>
 
         <div class="project-links">
@@ -125,66 +420,64 @@
 
         <p class="research-section-label">Overview</p>
         <p class="research-body">
-          PortfoliU began as a question that most retail investing tools quietly avoid. Given a universe of assets, what
-          weights should an investor actually hold, and can that answer be defended mathematically rather than asserted?
-          Modern portfolio theory answers this with convex optimization, so I built the platform around a real solver
-          instead of a heuristic. A user selects a set of tickers, chooses an objective and a set of constraints, and the
-          backend returns the optimal weight vector along with the efficient frontier that surrounds it.
+          Most retail investing tools hand you a pie chart and hope you do not ask where the numbers came from. Halo
+          answers the underlying question directly: given a set of assets, what weights should you actually hold, and can
+          that answer be defended instead of asserted? Modern portfolio theory frames this as a convex optimization
+          problem, so I built the platform around a real solver rather than a rule of thumb. You pick tickers, choose an
+          objective and some constraints, and the backend returns the optimal weights along with the efficient frontier
+          around them.
         </p>
         <p class="research-body">
-          What began as a coursework project inside the SEO Tech Developer Program grew into the piece of engineering I
-          have spent the most time on. I led the backend, which meant owning the optimization engine, the risk models,
-          the market data layer, the backtesting simulator, and the API contract that the React frontend consumes. The
-          work was recognized as the strongest architectural design across every group in the program.
+          It started as a project inside the SEO Tech Developer Program and turned into the thing I have put the most
+          hours into. I led the backend, which meant owning the optimizer, the risk models, the market-data layer, the
+          backtester, and the API contract the React frontend consumes. The program judged our architecture the strongest
+          of any team in the cohort.
         </p>
 
         <p class="research-section-label">The Optimization Engine</p>
         <p class="research-body">
-          The core of the system is a cvxpy program that solves eight distinct portfolio construction objectives.
-          Minimum variance and target return are straightforward quadratic programs. Maximum Sharpe is not, because a
-          ratio of a linear numerator to a quadratic denominator is non convex in the weights. The engine handles this
-          with the Charnes and Cooper transformation, which exploits the scale invariance of the Sharpe ratio to
-          rewrite the problem as an equivalent convex program in a rescaled variable. Conditional Value at Risk is
-          formulated through the Rockafellar and Uryasev linear program, which turns a tail risk measure that looks
-          combinatorial into something a solver can handle directly. Risk parity uses a convex log barrier
-          reformulation, and maximum diversification and net of cost objectives round out the set.
+          At the center is a cvxpy program that handles eight different objectives. Some are easy: minimum variance and
+          target return are plain quadratic programs. Maximum Sharpe is not, because maximizing a linear-over-quadratic
+          ratio is non-convex in the weights, so I use the Charnes-Cooper transformation, which leans on the Sharpe
+          ratio's scale invariance to rewrite it as an equivalent convex program. Conditional Value at Risk goes through
+          the Rockafellar-Uryasev linear program, which turns a tail-risk measure that looks combinatorial into something
+          a convex solver can chew through. Risk parity uses a convex log-barrier form, and maximum diversification and
+          net-of-cost round out the set.
         </p>
         <p class="research-body">
-          Constraints matter as much as objectives. The engine supports long only portfolios, per asset weight bounds,
-          sector exposure limits, turnover caps, and no trade bands, all of which map cleanly onto the convex
-          formulation without breaking solver guarantees.
+          Constraints matter as much as objectives, so the engine takes long-only rules, per-asset weight bounds, sector
+          caps, turnover limits, and no-trade bands, all of which fold into the convex formulation without breaking the
+          solver's guarantees.
         </p>
 
         <p class="research-section-label">Risk Estimation</p>
         <p class="research-body">
-          A mean variance optimizer is only as trustworthy as the covariance matrix it is handed. Sample covariance is
-          notoriously ill conditioned when the number of assets approaches the number of observations, which produces
-          optimal weights that are wildly sensitive to noise. PortfoliU therefore offers four estimators. Sample
-          covariance is the baseline. Ledoit-Wolf shrinkage pulls the sample estimate toward a structured target and
-          stabilizes the inverse. Exponentially weighted moving average estimation lets recent volatility dominate.
-          A PCA factor model strips the estimate down to its leading components. Expected returns can be estimated
-          directly from history or through Black-Litterman, which blends an equilibrium prior with subjective views.
+          An optimizer trusts whatever covariance matrix you feed it, and sample covariance is a bad thing to trust when
+          you have nearly as many assets as data points, since the weights it produces swing wildly on noise. So Halo
+          ships four estimators: plain sample covariance as a baseline, Ledoit-Wolf shrinkage to pull the estimate toward
+          something stable, an EWMA version that lets recent volatility dominate, and a PCA factor model that keeps only
+          the leading components. Expected returns come either straight from history or from Black-Litterman, which blends
+          a market-implied prior with your own views.
         </p>
 
         <p class="research-section-label">Backtesting</p>
         <p class="research-body">
-          Any optimizer looks brilliant when it is allowed to peek at the future. The backtesting engine runs walk
-          forward, refitting the covariance and return estimates only on data available at each rebalance date, so
-          lookahead bias never enters the simulation. Rebalancing cadence is configurable, transaction costs and
-          turnover constraints are charged against the portfolio, and results are benchmarked against a broad index
-          fund, an equal weight allocation, and a classic 60/40 split. The engine reports CAGR, Sortino ratio, Calmar
-          ratio, alpha, beta, information ratio, and maximum drawdown rather than a single headline number.
+          It is easy to build a backtest that cheats by looking at data it would not have had. Halo's runs walk forward:
+          at each rebalance it refits covariance and returns only on data available up to that date, so no lookahead
+          creeps in. Rebalance cadence is configurable, trading costs and turnover are charged to the portfolio, and every
+          run is measured against an index fund, an equal-weight book, and a 60/40 split. It reports CAGR, Sortino,
+          Calmar, alpha, beta, information ratio, and max drawdown, not a single headline number.
         </p>
 
         <p class="research-section-label">Results</p>
         <div class="result-grid">
           <div class="result-box">
             <div class="val">0.48</div>
-            <div class="lbl">Optimized Sharpe over a five year walk forward backtest</div>
+            <div class="lbl">Optimized Sharpe over a five-year walk-forward backtest</div>
           </div>
           <div class="result-box">
             <div class="val">0.20</div>
-            <div class="lbl">Sharpe for the index, equal weight, and 60/40 benchmarks</div>
+            <div class="lbl">Sharpe for the index, equal-weight, and 60/40 benchmarks</div>
           </div>
           <div class="result-box">
             <div class="val">80%</div>
@@ -192,29 +485,25 @@
           </div>
         </div>
         <p class="research-body" style="margin-top:16px;">
-          Across a five year walk forward backtest the optimized portfolio beat every benchmark on risk adjusted
-          return, delivering roughly 0.48 Sharpe against roughly 0.20 for the index fund, the equal weight portfolio,
-          and the 60/40 allocation, with positive alpha and a lower maximum drawdown. The gap is not free money. It is
-          what disciplined covariance estimation and cost aware rebalancing buy you once lookahead bias is removed from
-          the evaluation.
+          Over a five-year walk-forward backtest the optimized portfolio beat every benchmark on a risk-adjusted basis,
+          about 0.48 Sharpe against roughly 0.20 for the index, equal-weight, and 60/40 books, with positive alpha and a
+          smaller drawdown. That edge comes from careful covariance estimation and cost-aware rebalancing, measured
+          honestly with no lookahead, not from anything exotic.
         </p>
 
         <p class="research-section-label">Architecture</p>
         <p class="research-body">
-          The backend is a FastAPI service using async SQLAlchemy against Supabase Postgres, with Redis caching in
-          front of the market data layer so that repeated optimizations over the same universe never pay twice for the
-          same price history. Market data flows through a pluggable provider interface. Financial Modeling Prep supplies
-          real end of day pricing, and a deterministic synthetic provider stands in when no API key is present, which
-          keeps the test suite hermetic and lets contributors run the stack cold. Authentication runs through Supabase
-          with server side JWT verification against JWKS. Long running parameter sweeps execute as background jobs and
-          stream their results to the client over WebSocket, rendering as an interactive Sharpe heatmap as the sweep
-          fills in.
+          The backend is FastAPI on async SQLAlchemy over Supabase Postgres, with Redis in front of the market-data layer
+          so repeated optimizations over the same universe do not re-fetch the same price history. Data comes through a
+          pluggable provider interface: Financial Modeling Prep for real end-of-day prices, and a deterministic synthetic
+          provider that stands in when there is no API key, which keeps the tests hermetic and lets anyone run the stack
+          cold. Auth is Supabase with server-side JWT verification against JWKS. Long parameter sweeps run as background
+          jobs and stream their results over WebSocket, filling in an interactive Sharpe heatmap as they go.
         </p>
         <p class="research-body">
-          The frontend is React and TypeScript built with Vite, using TanStack Query to manage server state and Recharts
-          to draw the efficient frontier, the weight allocations, the drawdown curves, and the live heatmap. Continuous
-          integration gates every merge on linting across both halves of the stack and on eighty percent backend test
-          coverage.
+          The frontend is React and TypeScript on Vite, using TanStack Query for server state and Recharts for the
+          efficient frontier, the weight breakdowns, the drawdown curves, and the live heatmap. CI blocks any merge that
+          fails linting on either half of the stack or drops backend coverage below eighty percent.
         </p>
 
         <p class="research-section-label">Beyond the Solver</p>
@@ -278,233 +567,10 @@
       </div>
     </div>
 
-    <!-- ── Murmur ── -->
-    <div class="research-full-card reveal" id="murmur">
-      <div class="card">
-        <div class="research-meta-row">
-          <span class="research-meta-pill highlight">Distributed Systems</span>
-          <span class="research-meta-pill">Rust</span>
-          <span class="research-meta-pill">2026</span>
-          <span class="research-meta-pill">Raft Consensus</span>
-        </div>
-
-        <h2 style="color:var(--navy); margin-bottom:12px;">
-          Murmur, a Distributed Strongly Consistent Key/Value Store
-        </h2>
-        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
-          A single-node storage engine replicated across a cluster by a hand-written Raft, so every write commits through a majority quorum.
-        </p>
-
-        <div class="project-links">
-          <a href="https://github.com/jadencutinha/murmur" target="_blank" rel="noopener" class="btn btn-secondary">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-            Source Code
-          </a>
-        </div>
-
-        <p class="research-section-label">Overview</p>
-        <p class="research-body">
-          Murmur is a distributed key/value store that keeps a replicated log consistent across a cluster of nodes even
-          when machines crash, restart, or fall behind. A single-node storage engine sits underneath, and a hand-written
-          implementation of the Raft consensus algorithm sits on top, coordinating the replicas so that clients see one
-          coherent, linearizable store rather than a set of diverging copies. The goal was to build consensus from first
-          principles rather than reach for a library, and to make every guarantee something the test suite can prove.
-        </p>
-
-        <p class="research-section-label">Consensus and Replication</p>
-        <p class="research-body">
-          The heart of the system is a from-scratch Raft. Leaders are chosen through randomized election timeouts, and a
-          PreVote round guards against a partitioned node disrupting a healthy cluster by forcing needless elections. Once
-          a leader is established it replicates its log to followers, and when logs diverge after a leadership change the
-          leader repairs them through conflict backtracking, walking the follower's log backward until it finds the last
-          point of agreement. Every operation commits only after a majority quorum has durably accepted it, which is what
-          gives the store its strong consistency.
-        </p>
-
-        <p class="research-section-label">Durability and Recovery</p>
-        <p class="research-body">
-          Consensus is only as trustworthy as what survives a power loss. Murmur fsyncs its current term, its vote, and
-          its log to disk before acting on them, so a node that crashes mid-election or mid-append recovers to a state
-          Raft still considers valid. To keep the log from growing without bound it performs log compaction, and it brings
-          lagging or newly added followers up to date by shipping a snapshot of committed state rather than replaying
-          history from the beginning.
-        </p>
-
-        <p class="research-section-label">Exactly-Once Client Semantics</p>
-        <p class="research-body">
-          Retries are unavoidable in a distributed system, so a client that resends a request after a leader change must
-          not have its operation applied twice. Murmur tags each client with an ID and each request with a sequence
-          number, and the servers deduplicate on that sequence number so a repeated request returns the original result
-          instead of mutating state again. This holds across leader changes, giving the store exactly-once semantics from
-          the client's point of view.
-        </p>
-
-        <p class="research-section-label">Architecture and Testing</p>
-        <p class="research-body">
-          Consensus is written as a pure, I/O-free state machine. It takes in events and returns actions, touching no
-          network or disk directly, which makes the tricky parts of Raft unit-testable without spinning up a runtime. A
-          gRPC transport built on tonic and prost carries messages between nodes, and the whole system is verified by
-          dedicated election, replication, persistence, and chaos test suites that inject crashes and partitions to
-          confirm the invariants hold.
-        </p>
-
-        <p class="research-section-label">Core Capabilities</p>
-        <div class="project-feature-grid">
-          <div class="project-feature">
-            <h4>Leader Election with PreVote</h4>
-            <p>Randomized election timeouts elect a leader, and a PreVote round stops a partitioned node from forcing disruptive elections.</p>
-          </div>
-          <div class="project-feature">
-            <h4>Log Replication and Repair</h4>
-            <p>Followers are kept in sync by append, and divergent logs are healed through conflict-backtracking repair after leadership changes.</p>
-          </div>
-          <div class="project-feature">
-            <h4>Snapshots and Compaction</h4>
-            <p>Log compaction bounds disk growth, and snapshot transfer brings lagging or new followers up to date quickly.</p>
-          </div>
-          <div class="project-feature">
-            <h4>Exactly-Once Semantics</h4>
-            <p>Client IDs and server-side sequence-number dedup make retried requests idempotent across leader changes.</p>
-          </div>
-        </div>
-
-        <p class="research-section-label">Stack</p>
-        <div class="project-stack">
-          <div>
-            <p class="project-stack-label">Core</p>
-            <div class="skill-pills">
-              <span class="skill-pill">Rust</span>
-              <span class="skill-pill">Raft</span>
-            </div>
-          </div>
-          <div>
-            <p class="project-stack-label">Transport</p>
-            <div class="skill-pills">
-              <span class="skill-pill">gRPC</span>
-              <span class="skill-pill">tonic</span>
-              <span class="skill-pill">prost</span>
-              <span class="skill-pill">Protocol Buffers</span>
-            </div>
-          </div>
-          <div>
-            <p class="project-stack-label">Guarantees</p>
-            <div class="skill-pills">
-              <span class="skill-pill">Linearizable</span>
-              <span class="skill-pill">Crash-Safe</span>
-              <span class="skill-pill">Exactly-Once</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Sable ── -->
-    <div class="research-full-card reveal" id="sable">
-      <div class="card">
-        <div class="research-meta-row">
-          <span class="research-meta-pill highlight">Storage Engines</span>
-          <span class="research-meta-pill">Rust</span>
-          <span class="research-meta-pill">2026</span>
-          <span class="research-meta-pill">LSM-Tree</span>
-        </div>
-
-        <h2 style="color:var(--navy); margin-bottom:12px;">
-          Sable, an LSM-Tree Storage Engine
-        </h2>
-        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
-          A durable, crash-recoverable key/value database built from scratch in Rust, modeled on LevelDB and RocksDB.
-        </p>
-
-        <div class="project-links">
-          <a href="https://github.com/jadencutinha/sable" target="_blank" rel="noopener" class="btn btn-secondary">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-            Source Code
-          </a>
-        </div>
-
-        <p class="research-section-label">Overview</p>
-        <p class="research-body">
-          Sable is a key/value database engine written from scratch in Rust, structured as a log-structured merge tree in
-          the lineage of LevelDB and RocksDB. An LSM-tree turns random writes into fast sequential ones by buffering them
-          in memory and flushing sorted runs to disk, then merging those runs in the background. The project was an
-          exercise in building that design end to end, from the write-ahead log up through compaction, with durability
-          that holds under crashes as the non-negotiable requirement.
-        </p>
-
-        <p class="research-section-label">Write Path and Durability</p>
-        <p class="research-body">
-          Every write first lands in a checksummed write-ahead log and a sorted, versioned in-memory memtable, so an
-          acknowledged write is on durable storage before the client hears success. Recovery replays the log on startup
-          and truncates a torn tail, the partial record a crash can leave behind mid-write, so the engine always recovers
-          to a consistent point. The result is a simple contract: every acknowledged write survives a crash or a power
-          loss.
-        </p>
-
-        <p class="research-section-label">Read Path and On-Disk Format</p>
-        <p class="research-body">
-          Flushed data lives in on-disk SSTables built from prefix-compressed blocks with per-block CRCs to catch
-          corruption, and each table carries a Bloom filter so the engine can skip tables that cannot contain a key. Reads
-          traverse the memtable and the sorted tables through a lock-free merged path, and MVCC snapshot isolation lets
-          readers see a consistent view while writes continue. Leveled compaction merges overlapping tables in the
-          background to keep read amplification and space under control.
-        </p>
-
-        <p class="research-section-label">Benchmarks</p>
-        <div class="result-grid">
-          <div class="result-box">
-            <div class="val">~50%</div>
-            <div class="lbl">of RocksDB 8.10 read/write throughput on a 200K-key workload</div>
-          </div>
-          <div class="result-box">
-            <div class="val">2.75×</div>
-            <div class="lbl">faster negative lookups than RocksDB via Bloom filters</div>
-          </div>
-          <div class="result-box">
-            <div class="val">78.5%</div>
-            <div class="lbl">of probes skipped on misses by the Bloom filter</div>
-          </div>
-        </div>
-        <p class="research-body" style="margin-top:16px;">
-          Measured against RocksDB 8.10 on a 200,000-key workload, Sable sustained roughly half of a mature,
-          production-grade engine's read and write throughput while serving negative lookups, queries for keys that do
-          not exist, about 2.75 times faster. That speedup comes directly from the Bloom filters, which skipped 78.5% of
-          disk probes on misses. Correctness is backed by unit, integration, and crash-recovery test suites.
-        </p>
-
-        <p class="research-section-label">Stack</p>
-        <div class="project-stack">
-          <div>
-            <p class="project-stack-label">Core</p>
-            <div class="skill-pills">
-              <span class="skill-pill">Rust</span>
-              <span class="skill-pill">LSM-Tree</span>
-              <span class="skill-pill">SSTables</span>
-            </div>
-          </div>
-          <div>
-            <p class="project-stack-label">Durability</p>
-            <div class="skill-pills">
-              <span class="skill-pill">Write-Ahead Log</span>
-              <span class="skill-pill">CRC Checksums</span>
-              <span class="skill-pill">MVCC</span>
-            </div>
-          </div>
-          <div>
-            <p class="project-stack-label">Performance</p>
-            <div class="skill-pills">
-              <span class="skill-pill">Bloom Filters</span>
-              <span class="skill-pill">Leveled Compaction</span>
-              <span class="skill-pill">RocksDB (benchmark)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- ── Secondary projects ── -->
     <div class="section-header reveal">
       <h2 class="section-title">Other Work</h2>
-      <p class="section-lead">Selected projects spanning language model reasoning, blockchain systems, and applied machine learning.</p>
+      <p class="section-lead">A couple of other things worth a look: an ablation study on how language models reason, and a Web3 platform I built over a summer.</p>
     </div>
 
     <div class="research-grid">
@@ -512,10 +578,10 @@
         <p class="research-venue">Princeton · COS 484 · Natural Language Processing</p>
         <h3 class="research-title">Tree of Thoughts Search Ablation</h3>
         <p class="research-abstract">
-          A two person ablation study replacing the breadth first and depth first search inside Tree of Thoughts
-          reasoning with k beam A star search and Monte Carlo Tree Search, holding generation and evaluation fixed so
-          that the search algorithm is the only variable. A star reached 19 percent on the Game of 24 against 8 percent
-          for breadth first search at nearly identical API cost.
+          A two-person ablation study that swaps the breadth-first and depth-first search inside Tree of Thoughts
+          reasoning for k-beam A* search and Monte Carlo Tree Search, holding generation and evaluation fixed so the
+          search algorithm is the only thing that changes. A* reached 19 percent on the Game of 24 against 8 percent for
+          breadth-first search at nearly identical API cost.
         </p>
         <span class="research-link">Read the full study →</span>
       </a>
@@ -524,9 +590,9 @@
         <p class="research-venue">Andromeda Labs · New York, NY</p>
         <h3 class="research-title">Web3 Event Discovery Platform</h3>
         <p class="research-abstract">
-          A multi page event discovery and management platform with wallet authentication, on chain transaction
-          execution, and verifiable receipt generation, architected with a clean separation between the interface and
-          the services behind it so that live smart contract integration could drop in without a rewrite.
+          A multi-page event discovery and management platform with wallet authentication, on-chain transaction
+          execution, and verifiable receipt generation, built with a clean split between the interface and the services
+          behind it so live smart-contract integration could drop in without a rewrite.
         </p>
         <span class="research-link">See the role →</span>
       </a>
@@ -553,5 +619,141 @@
 
 <div class="lightbox" id="lightbox"><img id="lightbox-img" src="" alt="Project image" /></div>
 <script src="assets/js/main.js"></script>
+<script>
+(function () {
+  var root = document.getElementById('raft-demo');
+  if (!root) return;
+  var N = 5, MAJORITY = 3;
+  var cluster = root.querySelector('.raft-cluster');
+  var consoleEl = root.querySelector('.raft-console');
+  var nodes, term;
+
+  function alive() { return nodes.filter(function (n) { return !n.down; }); }
+  function leader() {
+    for (var i = 0; i < nodes.length; i++) { if (nodes[i].role === 'leader' && !nodes[i].down) return nodes[i]; }
+    return null;
+  }
+
+  function logLine(html) {
+    var line = document.createElement('div');
+    line.innerHTML = '<span class="p">&rsaquo;</span> ' + html;
+    consoleEl.appendChild(line);
+    consoleEl.scrollTop = consoleEl.scrollHeight;
+  }
+
+  function render() {
+    cluster.innerHTML = '';
+    nodes.forEach(function (n) {
+      var role = n.down ? 'down' : n.role;
+      var label = role.charAt(0).toUpperCase() + role.slice(1);
+      var el = document.createElement('div');
+      el.className = 'raft-node';
+      el.setAttribute('data-role', role);
+      el.setAttribute('data-id', n.id);
+      var shown = Math.min(n.log, 12), cells = '';
+      for (var i = 0; i < shown; i++) cells += '<span class="raft-log-cell"></span>';
+      var more = n.log > 12 ? '<span class="raft-log-more">+' + (n.log - 12) + '</span>' : '';
+      el.innerHTML =
+        '<div class="raft-node-id">S' + n.id + '</div>' +
+        '<div class="raft-node-role">' + label + '</div>' +
+        '<div class="raft-node-term">' + (n.down ? 'offline' : 'term ' + term) + '</div>' +
+        '<div class="raft-log-row">' + cells + more + '</div>';
+      cluster.appendChild(el);
+    });
+  }
+
+  function flash(id) {
+    var el = cluster.querySelector('[data-id="' + id + '"]');
+    if (!el) return;
+    el.classList.add('flash');
+    setTimeout(function () { el.classList.remove('flash'); }, 480);
+  }
+
+  function elect() {
+    if (alive().length < MAJORITY) {
+      nodes.forEach(function (n) { if (!n.down) n.role = 'follower'; });
+      logLine('Only ' + alive().length + ' of ' + N + ' servers are up. Without a majority no leader can be elected, so the cluster is unavailable until one returns.');
+      return;
+    }
+    var a = alive().slice().sort(function (x, y) { return y.log - x.log || x.id - y.id; });
+    var cand = a[0];
+    term += 1;
+    nodes.forEach(function (n) { if (!n.down) n.role = 'follower'; });
+    cand.role = 'leader';
+    logLine('<span class="t">S' + cand.id + '</span> timed out, ran for leader in term ' + term + ', and won a majority of votes.');
+  }
+
+  function clientWrite() {
+    var l = leader();
+    if (!l) { logLine('There is no leader right now, so a write cannot commit. Restart a server or reset.'); return; }
+    if (alive().length < MAJORITY) { logLine('Only ' + alive().length + ' servers up. Without a majority, a write cannot commit.'); return; }
+    var idx = l.log + 1;
+    nodes.forEach(function (n) { if (!n.down) n.log = idx; });
+    render();
+    alive().forEach(function (n) { flash(n.id); });
+    logLine('<span class="t">S' + l.id + '</span> appended entry ' + idx + ', replicated it to a majority, and committed at index ' + idx + '.');
+  }
+
+  function crashLeader() {
+    var l = leader();
+    if (!l) { logLine('There is no leader to crash. Try a reset.'); return; }
+    l.down = true; l.role = 'follower';
+    render();
+    logLine('<span class="t">S' + l.id + '</span> (leader) crashed. Its followers stop hearing heartbeats…');
+    elect();
+    render();
+  }
+
+  function toggle(id) {
+    var n = nodes[id - 1];
+    if (!n) return;
+    if (n.down) {
+      n.down = false; n.role = 'follower';
+      var l = leader();
+      if (l && n.log < l.log) {
+        var c = l.log - n.log; n.log = l.log;
+        logLine('<span class="t">S' + n.id + '</span> restarted and caught up ' + c + ' entr' + (c === 1 ? 'y' : 'ies') + ' from the leader.');
+      } else {
+        logLine('<span class="t">S' + n.id + '</span> restarted as a follower.');
+      }
+      if (!leader() && alive().length >= MAJORITY) elect();
+    } else {
+      var wasLeader = n.role === 'leader';
+      n.down = true; n.role = 'follower';
+      if (wasLeader) {
+        logLine('<span class="t">S' + n.id + '</span> (leader) crashed.');
+        elect();
+      } else {
+        logLine('<span class="t">S' + n.id + '</span> crashed. With a majority still up, the cluster keeps serving.');
+      }
+    }
+    render();
+  }
+
+  function reset() {
+    term = 1;
+    nodes = [];
+    for (var i = 0; i < N; i++) nodes.push({ id: i + 1, role: i === 0 ? 'leader' : 'follower', log: 0, down: false });
+    consoleEl.innerHTML = '';
+    render();
+    logLine('Cluster online. <span class="t">S1</span> is leader for term 1. Five servers, so a majority is ' + MAJORITY + '.');
+  }
+
+  cluster.addEventListener('click', function (e) {
+    var node = e.target.closest('.raft-node');
+    if (node) toggle(parseInt(node.getAttribute('data-id'), 10));
+  });
+  root.querySelectorAll('[data-act]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var a = btn.getAttribute('data-act');
+      if (a === 'write') clientWrite();
+      else if (a === 'crash') crashLeader();
+      else if (a === 'reset') reset();
+    });
+  });
+
+  reset();
+})();
+</script>
 </body>
 </html>
