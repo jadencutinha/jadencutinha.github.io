@@ -255,10 +255,16 @@ nav {
   color: var(--sage);
   margin-bottom: 20px;
 }
-.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.stat-item { text-align: center; padding: 16px; background: rgba(26,39,68,0.04); border-radius: var(--radius-md); }
-.stat-value { font-family: var(--font-display); font-size: 1.9rem; color: var(--navy); line-height: 1; margin-bottom: 4px; }
-.stat-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+.hero-facts { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.hero-facts li { display: flex; flex-direction: column; gap: 3px; }
+.hero-fact-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--sage);
+}
+.hero-fact-value { font-size: 0.92rem; color: var(--navy-mid); font-weight: 500; line-height: 1.45; }
 .hero-card-divider { height: 1px; background: var(--border); margin: 20px 0; }
 .contact-row { display: flex; flex-direction: column; gap: 10px; }
 .contact-item { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; color: var(--text-muted); }
@@ -404,20 +410,45 @@ nav {
 .honors-badge svg { width: 22px; height: 22px; stroke: var(--white); }
 .honors-school { font-size: 1.28rem; color: var(--navy); }
 .honors-affiliation { font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-body); font-weight: 400; }
-.honors-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.honors-list li {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 14px 18px;
-  background: rgba(255,255,255,0.6);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  font-size: 0.92rem;
-  color: var(--text-main);
-  line-height: 1.55;
+
+.honors-subhead {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--sage);
+  margin: 36px 0 4px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.honors-list { list-style: none; display: flex; flex-direction: column; }
+.honor-entry {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 24px;
+  padding: 18px 8px;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
   transition: var(--transition);
 }
-.honors-list li:hover { background: rgba(255,255,255,0.9); box-shadow: var(--shadow-sm); }
-.honor-icon { color: var(--gold); flex-shrink: 0; margin-top: 1px; font-size: 1rem; }
+.honor-entry:last-child { border-bottom: none; }
+.honor-entry:hover { background: rgba(255,255,255,0.5); }
+.honor-entry--affil { grid-template-columns: 1fr; }
+.honor-year {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--sage);
+  letter-spacing: 0.03em;
+}
+.honor-title {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.honor-note { font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; }
 
 /* ── Research Page ── */
 .research-full-card { margin-bottom: 64px; }
@@ -544,5 +575,4 @@ footer {
 }
 @media (max-width: 480px) {
   .skills-grid { grid-template-columns: 1fr; }
-  .stat-grid { grid-template-columns: 1fr 1fr; }
 }
