@@ -1,222 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Research | Jaden Cutinha</title>
-  <meta name="description" content="Research by Jaden Cutinha in NLP, AI search algorithms, and financial sentiment analysis." />
-  <link rel="stylesheet" href="assets/css/style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>Research | Jaden Cutinha</title>
+<meta name="description" content="Research by Jaden Cutinha in NLP, AI search algorithms, and financial sentiment analysis." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/editorial.css" />
 </head>
-<body>
+<body class="sub">
 
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="index.html">Jaden <span>Cutinha</span></a>
-    <div class="nav-hamburger"><span></span><span></span><span></span></div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="experience.html">Experience</a>
-      <a href="projects.html">Projects</a>
-      <a href="research.html">Research</a>
-      <a href="honors.html">Honors</a>
-      <a href="cv.html">CV</a>
-      <a href="mailto:jc3311@princeton.edu" class="nav-cta">Contact</a>
-    </div>
-  </div>
-</nav>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div id="veil" aria-hidden="true"></div>
 
-<div class="page-hero">
-  <div class="container">
-    <p class="page-hero-eyebrow">Research</p>
+<header class="topnav">
+  <a class="brand" href="index.html">Jaden Cutinha</a>
+  <nav class="navlinks" aria-label="Sections">
+    <a href="experience.html">experience</a>
+    <a href="projects.html">projects</a>
+    <a href="research.html" class="current">research</a>
+    <a href="honors.html">honors</a>
+    <a href="cv.html">cv</a>
+  </nav>
+</header>
+
+<main class="page">
+  <div class="page-head">
+    <p class="eyebrow">research</p>
     <h1>Research Work</h1>
-    <p>Academic and applied research in artificial intelligence, natural language processing, and quantitative finance, spanning course projects and independent lab work at Princeton University.</p>
+    <p class="lead">Academic and applied research in artificial intelligence, natural language processing, and quantitative finance — spanning course work and independent lab work at Princeton.</p>
   </div>
-</div>
 
-<section class="section">
-  <div class="container">
+  <div class="doc">
 
-    <!-- ── Paper 1: Tree of Thoughts ── -->
-    <div class="research-full-card reveal" id="tot">
-      <div class="card">
-        <div class="research-meta-row">
-          <span class="research-meta-pill highlight">COS 484 · Natural Language Processing</span>
-          <span class="research-meta-pill">Princeton University</span>
-          <span class="research-meta-pill">Spring 2025</span>
-          <span class="research-meta-pill">Coauthored · Equal Contribution</span>
-        </div>
+    <!-- ── Tree of Thoughts ── -->
+    <article class="entry" id="tot">
+      <p class="metatags"><span class="hl">COS 484 · Natural Language Processing</span> · Princeton University · Spring 2025 · Coauthored, equal contribution</p>
+      <h2 class="entry-title">Dissecting Tree of Thoughts — an Ablation Study of ToT Search Algorithms</h2>
+      <p class="byline"><b>Jaden Cutinha</b> &amp; Junze Xie · Princeton University</p>
 
-        <h2 style="color:var(--navy); margin-bottom:12px;">
-          Dissecting Tree of Thoughts, an Ablation Study of ToT Search Algorithms
-        </h2>
-        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
-          <strong>Jaden Cutinha</strong> &amp; Junze Xie · Princeton University
-        </p>
+      <img src="https://www.image2url.com/r2/default/images/1779894437677-0eb55d08-7b09-4d3c-b009-6b344bf3a8be.png" alt="Tree of Thoughts research poster" class="poster" loading="lazy" />
 
-        <img
-          src="https://www.image2url.com/r2/default/images/1779894437677-0eb55d08-7b09-4d3c-b009-6b344bf3a8be.png"
-          alt="Tree of Thoughts research poster"
-          class="research-poster"
-          title="Click to enlarge"
-        />
+      <p class="label">overview</p>
+      <p class="body">
+        Large language models have demonstrated remarkable capabilities across diverse reasoning tasks, yet they often
+        struggle with problems requiring planning, exploration, or backtracking. Tree of Thoughts, introduced by Yao et
+        al. (2023), addresses this limitation by framing problem solving as a search over a tree of intermediate
+        reasoning steps. The original method relies on breadth first search and depth first search, relatively simple
+        algorithms that do not fully exploit accumulated information about the search frontier.
+      </p>
+      <p class="body">
+        This paper asks a focused question. <em>If the improvements of Tree of Thoughts over chain of thought prompting
+        stem from deliberate search, would more informed search strategies yield further gains?</em> We replace the
+        original breadth first and depth first search with <strong>k beam A* search</strong>, which treats the problem
+        as a shortest path search using model value scores as a heuristic, and <strong>Monte Carlo Tree Search</strong>,
+        which treats it as a sequential decision problem with simulated rollouts and exploration in the style of upper
+        confidence bounds. Every other variable, meaning the generation method, the evaluation method, the proposal
+        completions, and the value samples, is held fixed so that the search algorithm is the sole independent variable.
+      </p>
 
-        <p class="research-section-label">Overview</p>
-        <p class="research-body">
-          Large language models have demonstrated remarkable capabilities across diverse reasoning tasks,
-          yet they often struggle with problems requiring planning, exploration, or backtracking. Tree of Thoughts,
-          introduced by Yao et al. (2023), addresses this limitation by framing problem solving as a search over a tree
-          of intermediate reasoning steps. The original method relies on breadth first search and depth first
-          search, relatively simple algorithms that do not fully exploit accumulated information about the search frontier.
-        </p>
-        <p class="research-body">
-          This paper asks a focused question. <em>If the improvements of Tree of Thoughts over chain of thought prompting stem from deliberate search,
-          would more informed search strategies yield further gains?</em> We replace the original breadth first and depth first search with
-          <strong>k beam A star search</strong>, which treats the problem as a shortest path search using model value scores as a
-          heuristic, and <strong>Monte Carlo Tree Search</strong>, which treats it as a sequential decision problem
-          with simulated rollouts and exploration in the style of upper confidence bounds. Every other variable, meaning the generation method, the evaluation method,
-          the proposal completions, and the value samples, is held fixed so that the search algorithm is the sole independent variable.
-        </p>
+      <p class="label">methods</p>
+      <p class="body">
+        Experiments were conducted on two standard benchmarks, the <strong>Game of 24</strong> and <strong>5×5 mini
+        crosswords</strong>, using a GPT-4o-mini backbone. Puzzles were drawn from fixed index ranges to ensure
+        reproducibility. Each trial logged accuracy, API call count, and wall clock time. For A*, the max heap size was
+        set to 7 and expansion was capped at 10 counted steps for mini crosswords. Beam width was k = 5 for A* and
+        breadth first search. Monte Carlo Tree Search used three value rollouts.
+      </p>
 
-        <p class="research-section-label">Methods</p>
-        <p class="research-body">
-          Experiments were conducted on two standard benchmarks, the <strong>Game of 24</strong> and
-          <strong>5×5 mini crosswords</strong>, using a GPT-4o-mini backbone. Puzzles were drawn from fixed index
-          ranges to ensure reproducibility. Each trial logged accuracy, API call count, and wall clock time.
-          For A star, the max heap size was set to 7 and expansion was capped at 10 counted steps for mini crosswords.
-          Beam width was k = 5 for A star and breadth first search. Monte Carlo Tree Search used three value rollouts.
-        </p>
-
-        <p class="research-section-label">Key Results</p>
-        <div class="result-grid">
-          <div class="result-box">
-            <div class="val">19%</div>
-            <div class="lbl">A star accuracy on the Game of 24</div>
-          </div>
-          <div class="result-box">
-            <div class="val">16%</div>
-            <div class="lbl">Monte Carlo Tree Search accuracy on the Game of 24</div>
-          </div>
-          <div class="result-box">
-            <div class="val">8%</div>
-            <div class="lbl">Breadth first search accuracy on the Game of 24</div>
-          </div>
-        </div>
-        <p class="research-body" style="margin-top:16px;">
-          On the Game of 24, A star significantly outperformed breadth first search while using a nearly identical number of API calls,
-          89.66 against 86.24 per trial, demonstrating that heuristic guided global ordering delivers meaningful gains
-          at no extra cost. Monte Carlo Tree Search achieved 16% accuracy at only 64.9 API calls per trial, the most efficient configuration.
-          On mini crosswords, all three methods converged to similar accuracy near 20 to 26 percent, because tight search budgets
-          prevent any method from escaping a weak early word choice.
-        </p>
-
-        <p class="research-section-label">Takeaways</p>
-        <p class="research-body">
-          The advantage of A star on the Game of 24 is attributable to its global best first ordering combined with value scores averaged along the path,
-          which systematically allocates search effort toward the most promising trajectories.
-          The strict pruning of breadth first search at each layer loses recoverable paths that a globally ordered frontier would have found.
-          Monte Carlo Tree Search, by running random rollouts to the horizon and backing up scores as prefix support, gives paths a second
-          chance, explaining why it exceeds breadth first search but falls short of the systematic ordering that A star provides.
-          These findings suggest that more informative search is a genuine lever for improving reasoning performance.
-        </p>
+      <p class="label">key results</p>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">19<span class="u">%</span></div><div class="stat-lbl">A* accuracy on the Game of 24</div></div>
+        <div class="stat"><div class="stat-val">16<span class="u">%</span></div><div class="stat-lbl">Monte Carlo Tree Search accuracy on the Game of 24</div></div>
+        <div class="stat"><div class="stat-val">8<span class="u">%</span></div><div class="stat-lbl">Breadth first search accuracy on the Game of 24</div></div>
       </div>
-    </div>
+      <p class="body">
+        On the Game of 24, A* significantly outperformed breadth first search while using a nearly identical number of
+        API calls, 89.66 against 86.24 per trial, demonstrating that heuristic guided global ordering delivers
+        meaningful gains at no extra cost. Monte Carlo Tree Search achieved 16% accuracy at only 64.9 API calls per
+        trial, the most efficient configuration. On mini crosswords, all three methods converged to similar accuracy
+        near 20 to 26 percent, because tight search budgets prevent any method from escaping a weak early word choice.
+      </p>
 
-    <!-- ── Paper 2: Sentiment ── -->
-    <div class="research-full-card reveal" id="sentiment">
-      <div class="card">
-        <div class="research-meta-row">
-          <span class="research-meta-pill highlight">AI Fluency Lab · Independent Research</span>
-          <span class="research-meta-pill">Princeton University</span>
-          <span class="research-meta-pill">May 2026</span>
-          <span class="research-meta-pill">Solo Author</span>
-        </div>
+      <p class="label">takeaways</p>
+      <p class="body">
+        The advantage of A* on the Game of 24 is attributable to its global best first ordering combined with value
+        scores averaged along the path, which systematically allocates search effort toward the most promising
+        trajectories. The strict pruning of breadth first search at each layer loses recoverable paths that a globally
+        ordered frontier would have found. Monte Carlo Tree Search, by running random rollouts to the horizon and
+        backing up scores as prefix support, gives paths a second chance, explaining why it exceeds breadth first search
+        but falls short of the systematic ordering that A* provides. These findings suggest that more informative search
+        is a genuine lever for improving reasoning performance.
+      </p>
+    </article>
 
-        <h2 style="color:var(--navy); margin-bottom:12px;">
-          Evaluating AI Sentiment Consistency and Market Relevance
-        </h2>
-        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0;">
-          <strong>Jaden Cutinha</strong> · Computer Science, Princeton University, Class of 2028
-        </p>
+    <!-- ── Sentiment ── -->
+    <article class="entry" id="sentiment">
+      <p class="metatags"><span class="hl">AI Fluency Lab · Independent Research</span> · Princeton University · May 2026 · Solo author</p>
+      <h2 class="entry-title">Evaluating AI Sentiment Consistency and Market Relevance</h2>
+      <p class="byline"><b>Jaden Cutinha</b> · Computer Science, Princeton University, Class of 2028</p>
 
-        <img
-          src="https://www.image2url.com/r2/default/images/1779894524716-3782669e-af20-4ad3-b547-3fbb78b06d9d.png"
-          alt="AI Sentiment Consistency research poster"
-          class="research-poster"
-          title="Click to enlarge"
-        />
+      <img src="https://www.image2url.com/r2/default/images/1779894524716-3782669e-af20-4ad3-b547-3fbb78b06d9d.png" alt="AI Sentiment Consistency research poster" class="poster" loading="lazy" />
 
-        <p class="research-section-label">Research Question</p>
-        <p class="research-body">
-          Can AI reliably interpret ambiguous financial news, and does that interpretation help predict the stock market?
-          This project examines whether leading AI models agree on sentiment and whether their judgments correlate with
-          next day market movements, addressing a gap between AI sentiment research and practical financial signal generation.
-        </p>
+      <p class="label">research question</p>
+      <p class="body">
+        Can AI reliably interpret ambiguous financial news, and does that interpretation help predict the stock market?
+        This project examines whether leading AI models agree on sentiment and whether their judgments correlate with
+        next day market movements, addressing a gap between AI sentiment research and practical financial signal generation.
+      </p>
 
-        <p class="research-section-label">Methods</p>
-        <p class="research-body">
-          Two language models, <strong>GPT-4o</strong> and <strong>Llama 3.3 70B Instruct</strong>, were tested on 45
-          ambiguous corporate financial headlines drawn from 2023 and 2024. Headlines were defined as ambiguous, meaning corporate
-          events with no clearly positive or negative valence. Both models used identical deterministic prompts
-          at temperature zero, and their sentiment labels of positive, neutral, and negative were compared across the
-          full sample. Labels were then matched to next day stock returns to evaluate whether AI sentiment aligns
-          with real market behavior. An OLS regression was run with the GPT-4o sentiment score as predictor and
-          the next day percentage return as the dependent variable.
-        </p>
+      <p class="label">methods</p>
+      <p class="body">
+        Two language models, <strong>GPT-4o</strong> and <strong>Llama 3.3 70B Instruct</strong>, were tested on 45
+        ambiguous corporate financial headlines drawn from 2023 and 2024. Headlines were defined as ambiguous, meaning
+        corporate events with no clearly positive or negative valence. Both models used identical deterministic prompts
+        at temperature zero, and their sentiment labels of positive, neutral, and negative were compared across the full
+        sample. Labels were then matched to next day stock returns to evaluate whether AI sentiment aligns with real
+        market behavior. An OLS regression was run with the GPT-4o sentiment score as predictor and the next day
+        percentage return as the dependent variable.
+      </p>
 
-        <p class="research-section-label">Key Results</p>
-        <div class="result-grid">
-          <div class="result-box">
-            <div class="val">29%</div>
-            <div class="lbl">Disagreement rate between the two models</div>
-          </div>
-          <div class="result-box">
-            <div class="val">κ = 0.55</div>
-            <div class="lbl">Cohen's Kappa, indicating moderate agreement</div>
-          </div>
-          <div class="result-box">
-            <div class="val">R² = 0.17</div>
-            <div class="lbl">Fit of sentiment against next day return</div>
-          </div>
-        </div>
-        <p class="research-body" style="margin-top:16px;">
-          The models disagreed on approximately 30% of headlines, indicating that AI financial sentiment is not a
-          fully objective signal. Disagreements were most common for headlines involving strategic shifts and pricing
-          changes, where the direction of the implication is inherently open to interpretation. GPT-4o sentiment showed a statistically
-          detectable but weak relationship with next day returns, with R² = 0.170 at p = 0.206, suggesting the effect
-          size is insufficient for standalone predictive use.
-        </p>
-
-        <p class="research-section-label">Conclusions &amp; Implications</p>
-        <p class="research-body">
-          Language models exhibit meaningful disagreement with one another when classifying ambiguous financial sentiment, indicating
-          that model outputs reflect the interpretation of a particular model rather than an objective signal. While there is a
-          detectable directional relationship between AI sentiment and next day returns, it falls short of statistical
-          significance at standard thresholds. These findings suggest that AI sentiment classification should be treated
-          as one noisy input among many, rather than a reliable standalone directional indicator. Future work should
-          scale the dataset, incorporate intraday data, and test models built specifically for finance, and could explore combining
-          AI sentiment with traditional financial indicators for stronger predictive performance.
-        </p>
+      <p class="label">key results</p>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">29<span class="u">%</span></div><div class="stat-lbl">Disagreement rate between the two models</div></div>
+        <div class="stat"><div class="stat-val"><span class="u">κ =</span> 0.55</div><div class="stat-lbl">Cohen's Kappa, indicating moderate agreement</div></div>
+        <div class="stat"><div class="stat-val"><span class="u">R² =</span> 0.17</div><div class="stat-lbl">Fit of sentiment against next day return</div></div>
       </div>
-    </div>
+      <p class="body">
+        The models disagreed on approximately 30% of headlines, indicating that AI financial sentiment is not a fully
+        objective signal. Disagreements were most common for headlines involving strategic shifts and pricing changes,
+        where the direction of the implication is inherently open to interpretation. GPT-4o sentiment showed a
+        statistically detectable but weak relationship with next day returns, with R² = 0.170 at p = 0.206, suggesting
+        the effect size is insufficient for standalone predictive use.
+      </p>
+
+      <p class="label">conclusions &amp; implications</p>
+      <p class="body">
+        Language models exhibit meaningful disagreement with one another when classifying ambiguous financial sentiment,
+        indicating that model outputs reflect the interpretation of a particular model rather than an objective signal.
+        While there is a detectable directional relationship between AI sentiment and next day returns, it falls short
+        of statistical significance at standard thresholds. These findings suggest that AI sentiment classification
+        should be treated as one noisy input among many, rather than a reliable standalone directional indicator. Future
+        work should scale the dataset, incorporate intraday data, and test models built specifically for finance, and
+        could explore combining AI sentiment with traditional financial indicators for stronger predictive performance.
+      </p>
+    </article>
 
   </div>
-</section>
+</main>
 
-<footer>
-  <div class="footer-inner">
-    <span class="footer-name">Jaden Cutinha</span>
-    <div class="footer-links">
-      <a href="projects.html">Projects</a>
-      <a href="research.html">Research</a>
-      <a href="honors.html">Honors</a>
-      <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank">LinkedIn</a>
-      <a href="mailto:jc3311@princeton.edu">Email</a>
-    </div>
-    <span class="footer-copy">© 2026 Jaden Cutinha</span>
-  </div>
+<footer class="foot">
+  <span class="foot-name">Jaden Cutinha</span>
+  <nav class="foot-links">
+    <a href="experience.html">experience</a>
+    <a href="projects.html">projects</a>
+    <a href="research.html">research</a>
+    <a href="honors.html">honors</a>
+    <a href="cv.html">cv</a>
+    <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank" rel="noopener">linkedin</a>
+    <a href="mailto:jc3311@princeton.edu">email</a>
+  </nav>
+  <span class="foot-copy">© 2026</span>
 </footer>
 
 <div class="lightbox" id="lightbox"><img id="lightbox-img" src="" alt="Research poster" /></div>
-<script src="assets/js/main.js"></script>
+
+<script src="assets/js/editorial.js"></script>
+<script>
+(function () {
+  var lb = document.getElementById('lightbox'), img = document.getElementById('lightbox-img');
+  document.querySelectorAll('.poster').forEach(function (p) {
+    p.addEventListener('click', function () { img.src = p.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); img.src = ''; });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); img.src = ''; } });
+})();
+</script>
 </body>
 </html>

@@ -1,485 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jaden Cutinha | Princeton University</title>
-  <meta name="description" content="Jaden Cutinha is a Computer Science student at Princeton University with minors in Statistics & Machine Learning and Quantitative Economics. He builds optimization systems and researches AI, NLP, and financial econometrics." />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <style>
-    .featured-project {
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .featured-metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .featured-metric {
-      padding: 18px;
-      background: rgba(26,39,68,0.04);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-    .featured-metric-value {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      color: var(--navy);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .featured-metric-label {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-    @media (max-width: 860px) {
-      .featured-project { grid-template-columns: 1fr; gap: 28px; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>Jaden Cutinha | Princeton University</title>
+<meta name="description" content="Jaden Cutinha is a Computer Science student at Princeton University with minors in Statistics & Machine Learning and Quantitative Economics. He builds optimization systems and researches AI, NLP, and financial econometrics." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/editorial.css" />
 </head>
 <body>
 
-<!-- ── Navigation ── -->
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="index.html">Jaden <span>Cutinha</span></a>
-    <div class="nav-hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="experience.html">Experience</a>
-      <a href="projects.html">Projects</a>
-      <a href="research.html">Research</a>
-      <a href="honors.html">Honors</a>
-      <a href="cv.html">CV</a>
-      <a href="mailto:jc3311@princeton.edu" class="nav-cta">Contact</a>
-    </div>
-  </div>
-</nav>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div id="veil" aria-hidden="true"></div>
 
-<!-- ── Hero ── -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-text">
-        <p class="hero-eyebrow">Princeton University · Class of 2028</p>
-        <h1 class="hero-name">Jaden<br>Cutinha</h1>
-        <p class="hero-title">
-          Computer Science student at Princeton with minors in Statistics &amp; Machine Learning
-          and Quantitative Economics. I build optimization systems, study how language models
-          reason, and research where machine learning meets financial markets.
-        </p>
-      </div>
+<main class="home">
+  <header class="identity">
+    <h1>Jaden Cutinha</h1>
+    <p class="intro">
+      Computer science at Princeton, with minors in Statistics &amp; Machine Learning
+      and Quantitative Economics. I build optimization systems, study how language
+      models reason, and research where machine learning meets <em>markets</em>.
+    </p>
+    <nav class="links" aria-label="Profiles">
+      <a href="https://github.com/jadencutinha" target="_blank" rel="noopener">github</a>
+      <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank" rel="noopener">linkedin</a>
+      <a href="cv.html">resume</a>
+      <a href="mailto:jc3311@princeton.edu">email</a>
+    </nav>
+  </header>
 
-      <div class="hero-card">
-        <p class="hero-card-label">At a Glance</p>
-        <ul class="hero-facts">
-          <li>
-            <span class="hero-fact-label">Program</span>
-            <span class="hero-fact-value">B.S.E. Computer Science</span>
-          </li>
-          <li>
-            <span class="hero-fact-label">Minors</span>
-            <span class="hero-fact-value">Statistics &amp; Machine Learning · Quantitative Economics</span>
-          </li>
-          <li>
-            <span class="hero-fact-label">Currently</span>
-            <span class="hero-fact-value">Private Equity Intern · Sage Investment Group</span>
-          </li>
-          <li>
-            <span class="hero-fact-label">Expected Graduation</span>
-            <span class="hero-fact-value">May 2028</span>
-          </li>
-        </ul>
-        <div class="hero-card-divider"></div>
-        <div class="contact-row">
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <span>jc3311@princeton.edu</span>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <span>Bothell, WA &amp; Princeton, NJ</span>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </div>
-            <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank">linkedin.com/in/jaden-cutinha</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Education ── -->
-<section class="section section--alt">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">Academic Background</h2>
-    </div>
-    <div class="card reveal" style="max-width: 680px; margin: 0 auto;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
-        <div>
-          <h3 style="color:var(--navy); font-family:var(--font-display); font-size:1.3rem;">Princeton University</h3>
-          <p style="color:var(--sage); font-weight:500; font-size:0.9rem; margin-top:4px;">Princeton, New Jersey</p>
-        </div>
-        <span class="mono" style="color:var(--text-muted);">Aug 2024 to May 2028</span>
-      </div>
-      <p style="font-size:0.95rem; color:var(--text-main); font-weight:600; margin-bottom:8px;">Bachelor of Science in Engineering</p>
-      <p style="margin-bottom:12px;">Major in <strong>Computer Science</strong>, with minors in <strong>Statistics &amp; Machine Learning</strong> and <strong>Quantitative Economics</strong>.</p>
-      <div style="margin-top:16px;">
-        <p class="section-eyebrow" style="text-align:left; margin-bottom:10px;">Relevant Coursework</p>
-        <div class="skill-pills">
-          <span class="skill-pill">COS522 Computational Complexity (Graduate)</span>
-          <span class="skill-pill">COS333 Advanced Programming Techniques</span>
-          <span class="skill-pill">COS484 Natural Language Processing</span>
-          <span class="skill-pill">COS226 Data Structures &amp; Algorithms</span>
-          <span class="skill-pill">COS398 Independent Research in NLP</span>
-          <span class="skill-pill">COS240 Mathematical Computation Theory</span>
-          <span class="skill-pill">MAT321 Numerical Analysis</span>
-          <span class="skill-pill">ECO313 Econometric Mathematical Applications</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Experience ── -->
-<section class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">Professional Work</h2>
-      <p class="section-lead">A track record spanning AI research, software engineering, and machine learning across academia and industry.</p>
+  <nav class="menu" aria-label="Sections">
+    <div class="folder">
+      <button class="folder-trigger" type="button" aria-expanded="false">experience</button>
+      <ul class="flyout">
+        <li><a href="experience.html">Sage Investment Group <span class="sub">— Private Equity Intern</span></a></li>
+        <li><a href="experience.html">SEO Tech Developer <span class="sub">— Backend Lead, Halo</span></a></li>
+        <li><a href="experience.html">BioStrive <span class="sub">— Software Engineer</span></a></li>
+        <li><a href="experience.html">Princeton AI Lab <span class="sub">— Research Analyst</span></a></li>
+        <li><a href="experience.html">Andromeda Labs <span class="sub">— ML Engineer</span></a></li>
+        <li><a href="experience.html">Cerebras <span class="sub">— AI Fellow</span></a></li>
+      </ul>
     </div>
 
-    <div class="experience-list">
-
-      <!-- Sage Investment Group -->
-      <div class="card exp-card reveal">
-        <div class="exp-meta">
-          <p class="exp-period">Jul 2026 to Present</p>
-          <p class="exp-org">Sage Investment Group</p>
-        </div>
-        <div class="exp-content">
-          <p class="exp-role">Private Equity Intern</p>
-          <p class="exp-company">Sage Investment Group · Real Estate Private Equity</p>
-          <p class="exp-desc">
-            Building the data infrastructure behind how a real estate private equity firm sources deals, proves its
-            market position, and measures impact. Sage acquires underperforming hotels and converts them into
-            attainable housing through adaptive reuse, and my work turns public, unstructured signals into evidence
-            the acquisitions team and its investors can act on.
-          </p>
-          <ul class="exp-bullets">
-            <li>Building an automated deal sourcing engine that pulls hotel listings weekly and cross references public distress signals, troubled loans, bankruptcy filings, and tax delinquency, into a ranked deal sheet of qualified off market conversion candidates.</li>
-            <li>Prototyped a national census of every public hotel to apartment conversion from public data alone, benchmarking operators, units, cost, and timeline to establish Sage as the most prolific operator in the 100 to 200 unit band its investor materials describe.</li>
-            <li>Building an impact dashboard quantifying attainable homes delivered, monthly savings against comparable Class A rents, and construction waste avoided, giving fundraising hard numbers behind the firm's recent CoStar Impact Award.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="exp-divider reveal"></div>
-
-      <!-- SEO -->
-      <div class="card exp-card reveal">
-        <div class="exp-meta">
-          <p class="exp-period">Jun 2026 to Jul 2026</p>
-          <p class="exp-org">New York, NY</p>
-        </div>
-        <div class="exp-content">
-          <p class="exp-role">Tech Developer Intern</p>
-          <p class="exp-company">Sponsors for Educational Opportunity (SEO)</p>
-          <p class="exp-desc">
-            Selected for the SEO Tech Developer Program, an intensive engineering track combining several hundred
-            hours of algorithms and systems training with team delivery under SCRUM. My capstone became
-            <a href="projects.html#halo" style="color:var(--sage); font-weight:500;">Halo</a>, a portfolio
-            optimization platform whose backend I led and whose architecture was judged the strongest in the cohort.
-          </p>
-          <ul class="exp-bullets">
-            <li>Completed 300+ hours of rigorous training in data structures, algorithms, and full stack software engineering, building fluency across the software development lifecycle from design through deployment.</li>
-            <li>Collaborated within SCRUM engineering teams to design, test, and deploy applications pairing Python and Flask backends with MySQL databases, JavaScript interfaces, and external API services.</li>
-            <li>Led backend development of a portfolio optimization platform built on FastAPI, async SQLAlchemy, and cvxpy for Markowitz mean variance optimization, recognized for the best architectural design across all groups.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="exp-divider reveal"></div>
-
-      <!-- BioStrive -->
-      <div class="card exp-card reveal">
-        <div class="exp-meta">
-          <p class="exp-period">Nov 2025 to Jul 2026</p>
-          <p class="exp-org">BioStrive</p>
-        </div>
-        <div class="exp-content">
-          <p class="exp-role">Software Engineer</p>
-          <p class="exp-company">BioStrive</p>
-          <p class="exp-desc">
-            Architecting backend infrastructure for an AI claims-intelligence startup backed by the Anderson
-            Venture Accelerator, with a focus on document intelligence, regulatory compliance, and evidence
-            traceability. Work spans the document-processing pipeline, authentication and authorization, and
-            multi-tenant data isolation on Azure.
-          </p>
-          <ul class="exp-bullets">
-            <li>Architected a backend document-processing pipeline transforming clinical and economic PDFs into structured, source-linked claims with page-level citation traceability for medical, legal, and regulatory review.</li>
-            <li>Implemented secure auth with JWT, role-based access control, bcrypt hashing, and short-lived access tokens with refresh-token rotation and user-scoped authorization.</li>
-            <li>Enforced multi-tenant isolation via Cosmos DB partition keys and Blob Storage path prefixes, securing data at rest and in transit (AES-256, TLS) with a configurable metadata TTL.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="exp-divider reveal"></div>
-
-      <!-- Princeton AI Lab -->
-      <div class="card exp-card reveal">
-        <div class="exp-meta">
-          <p class="exp-period">Sep 2025 to May 2026</p>
-          <p class="exp-org">Princeton University</p>
-        </div>
-        <div class="exp-content">
-          <p class="exp-role">Artificial Intelligence Research Analyst</p>
-          <p class="exp-company">The Princeton Laboratory for Artificial Intelligence</p>
-          <p class="exp-desc">
-            Conducted applied econometric research at the intersection of AI and financial markets,
-            constructing and validating novel sentiment based indicators as leading signals for asset
-            price movements. This work involved integrating large scale textual data with macroeconomic
-            and fundamental factors to systematically study return predictability.
-          </p>
-          <ul class="exp-bullets">
-            <li>Built and empirically validated sentiment based leading indicators, demonstrating incremental predictive power relative to traditional macroeconomic and fundamental factors.</li>
-            <li>Designed a systematic framework that integrates textual sentiment with market and economic data to model investor behavior, generating statistically significant insights on market inefficiencies.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="exp-divider reveal"></div>
-
-      <!-- Andromeda Labs -->
-      <div class="card exp-card reveal">
-        <div class="exp-meta">
-          <p class="exp-period">May 2025 to Aug 2025</p>
-          <p class="exp-org">New York, NY</p>
-        </div>
-        <div class="exp-content">
-          <p class="exp-role">Machine Learning Engineering Intern</p>
-          <p class="exp-company">Andromeda Labs, LLC</p>
-          <p class="exp-desc">
-            Led development of a Web3 event discovery platform across the whole stack, designing
-            both the interface and the services behind it for production scale. Implemented blockchain
-            wallet authentication and smart contract integration end to end.
-          </p>
-          <ul class="exp-bullets">
-            <li>Led development of a multi page web platform enabling dynamic event discovery and management, improving usability through structured filtering and administrative controls.</li>
-            <li>Implemented Web3 functionality to enable secure wallet authentication, transaction execution, and verifiable receipt generation for end users.</li>
-            <li>Architected the interface and backend systems with a clear separation of concerns, ensuring scalability and readiness for live smart contract and database integration.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="exp-divider reveal"></div>
-
-      <!-- Cerebras -->
-      <div class="card exp-card reveal">
-        <div class="exp-meta">
-          <p class="exp-period">Oct 2024 to Apr 2025</p>
-          <p class="exp-org">Cerebras AI</p>
-        </div>
-        <div class="exp-content">
-          <p class="exp-role">Cerebras AI Fellow</p>
-          <p class="exp-company">Cerebras AI</p>
-          <p class="exp-desc">
-            Selected as one of a small cohort of Cerebras AI Fellows, building live sports
-            analytics tools powered by Cerebras hardware. Developed predictive ML models and
-            containerized data pipelines designed for rapid inference and actionable performance insights.
-          </p>
-          <ul class="exp-bullets">
-            <li>Developed live sports analytics tools to evaluate player performance and generate projections, giving coaches and scouts decisions grounded in data.</li>
-            <li>Built predictive models and a containerized data pipeline to streamline data processing, visualization, and rapid inference for actionable insights.</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── Featured Project ── -->
-<section class="section section--alt">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">Featured Project</h2>
-      <p class="section-lead">The system I have spent the most time on, from the convex program at its center out to the interface.</p>
+    <div class="folder">
+      <button class="folder-trigger" type="button" aria-expanded="false">projects</button>
+      <ul class="flyout">
+        <li><a href="projects.html#halo">Halo <span class="sub">— Markowitz portfolio optimizer</span></a></li>
+        <li><a href="projects.html#murmur">Murmur <span class="sub">— Raft-replicated key/value store</span></a></li>
+        <li><a href="projects.html#sable">Sable <span class="sub">— LSM-tree storage engine</span></a></li>
+        <li><a href="projects.html">All engineering work <span class="sub">→</span></a></li>
+      </ul>
     </div>
 
-    <div class="card reveal">
-      <div class="featured-project">
-        <div>
-          <p class="research-venue" style="margin-bottom:10px;">SEO Tech Developer Program · Backend Lead</p>
-          <h3 style="color:var(--navy); font-family:var(--font-display); font-size:1.5rem; margin-bottom:12px;">
-            Halo, Optimal Portfolio Construction
-          </h3>
-          <p style="font-size:0.95rem; line-height:1.75; margin-bottom:14px;">
-            Halo turns Markowitz mean-variance theory into something you can actually use. Pick a set of assets and it
-            returns the weights you should hold, solved as a convex program in cvxpy across eight objectives, with
-            covariance estimated four different ways and the result checked on a walk-forward backtest that never sees
-            future prices.
-          </p>
-          <p style="font-size:0.95rem; line-height:1.75; margin-bottom:18px;">
-            I led the backend: the solver, the risk models, the market-data layer, the backtester, and the API contract.
-            It was judged the best architecture of any team in the cohort.
-          </p>
-          <div class="skill-pills" style="margin-bottom:20px;">
-            <span class="skill-pill">FastAPI</span>
-            <span class="skill-pill">cvxpy</span>
-            <span class="skill-pill">async SQLAlchemy</span>
-            <span class="skill-pill">Redis</span>
-            <span class="skill-pill">React</span>
-            <span class="skill-pill">TypeScript</span>
-          </div>
-          <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a href="projects.html#halo" class="btn btn-primary">Read the Deep Dive</a>
-            <a href="https://optimal-portfolio-nine.vercel.app/" target="_blank" rel="noopener" class="btn btn-secondary">Live Platform</a>
-            <a href="https://github.com/jadencutinha/optimal-portfolio" target="_blank" rel="noopener" class="btn btn-secondary">Source</a>
-          </div>
-        </div>
+    <div class="folder">
+      <button class="folder-trigger" type="button" aria-expanded="false">research</button>
+      <ul class="flyout">
+        <li><a href="research.html#tot">Dissecting Tree of Thoughts <span class="sub">— ablation of ToT search, COS 484</span></a></li>
+        <li><a href="research.html#sentiment">AI Sentiment &amp; Market Relevance <span class="sub">— LLM agreement as a market signal</span></a></li>
+      </ul>
+    </div>
 
-        <div class="featured-metrics">
-          <div class="featured-metric">
-            <div class="featured-metric-value">0.48</div>
-            <div class="featured-metric-label">Optimized Sharpe over five years, against 0.20 for every benchmark</div>
-          </div>
-          <div class="featured-metric">
-            <div class="featured-metric-value">8</div>
-            <div class="featured-metric-label">Convex objectives, from minimum variance to CVaR</div>
-          </div>
-          <div class="featured-metric">
-            <div class="featured-metric-value">4</div>
-            <div class="featured-metric-label">Covariance estimators including Ledoit-Wolf shrinkage</div>
-          </div>
-          <div class="featured-metric">
-            <div class="featured-metric-value">80%</div>
-            <div class="featured-metric-label">Backend test coverage gated in continuous integration</div>
-          </div>
-        </div>
-      </div>
+    <div class="folder">
+      <button class="folder-trigger" type="button" aria-expanded="false">honors</button>
+      <ul class="flyout">
+        <li><a href="honors.html">HackPrinceton Finalist <span class="sub">— Fintech Track</span></a></li>
+        <li><a href="honors.html">Princeton COSCON <span class="sub">— Top-5 Finalist</span></a></li>
+        <li><a href="honors.html">Cerebras AI Research Fellow</a></li>
+        <li><a href="honors.html">All honors <span class="sub">→</span></a></li>
+      </ul>
     </div>
-  </div>
-</section>
+  </nav>
+</main>
 
-<!-- ── Research Preview ── -->
-<section class="section">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">Selected Research</h2>
-      <p class="section-lead">Academic and applied research at the intersection of AI systems, natural language processing, and quantitative finance.</p>
-    </div>
-    <div class="research-grid">
-      <a href="research.html#tot" class="card research-card reveal">
-        <div class="research-thumb">
-          <img src="https://www.image2url.com/r2/default/images/1779894437677-0eb55d08-7b09-4d3c-b009-6b344bf3a8be.png" alt="Tree of Thoughts research poster" loading="lazy" />
-        </div>
-        <p class="research-venue">Princeton · COS 484 · NLP</p>
-        <h3 class="research-title">Dissecting Tree of Thoughts, an Ablation Study of ToT Search Algorithms</h3>
-        <p class="research-abstract">An ablation study replacing the breadth first and depth first search in Tree of Thoughts reasoning with k beam A star search and Monte Carlo Tree Search, evaluated on the Game of 24 and mini crosswords.</p>
-        <span class="research-link">Read more →</span>
-      </a>
-      <a href="research.html#sentiment" class="card research-card reveal">
-        <div class="research-thumb">
-          <img src="https://www.image2url.com/r2/default/images/1779894524716-3782669e-af20-4ad3-b547-3fbb78b06d9d.png" alt="AI Sentiment research poster" loading="lazy" />
-        </div>
-        <p class="research-venue">Princeton · AI Fluency Lab</p>
-        <h3 class="research-title">Evaluating AI Sentiment Consistency and Market Relevance</h3>
-        <p class="research-abstract">A study examining how accurately and consistently LLMs classify financial sentiment in news articles, and whether model agreement predicts next day market movements.</p>
-        <span class="research-link">Read more →</span>
-      </a>
-    </div>
-  </div>
-</section>
+<p class="status" aria-hidden="true"><span class="dot"></span>currently — <b>Private Equity Intern, Sage Investment Group</b></p>
 
-<!-- ── Skills ── -->
-<section class="section section--alt">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">Technical Skills &amp; Capabilities</h2>
-    </div>
-    <div class="card reveal">
-      <div class="skills-grid">
-        <div class="skill-category">
-          <p class="skill-category-label">Languages</p>
-          <div class="skill-pills">
-            <span class="skill-pill">Python</span>
-            <span class="skill-pill">Rust</span>
-            <span class="skill-pill">Java</span>
-            <span class="skill-pill">C</span>
-            <span class="skill-pill">TypeScript</span>
-            <span class="skill-pill">JavaScript</span>
-            <span class="skill-pill">SQL</span>
-            <span class="skill-pill">R</span>
-            <span class="skill-pill">Solidity</span>
-          </div>
-        </div>
-        <div class="skill-category">
-          <p class="skill-category-label">ML, AI &amp; Optimization</p>
-          <div class="skill-pills">
-            <span class="skill-pill">PyTorch</span>
-            <span class="skill-pill">Transformers</span>
-            <span class="skill-pill">scikit-learn</span>
-            <span class="skill-pill">cvxpy</span>
-            <span class="skill-pill">NumPy</span>
-            <span class="skill-pill">pandas</span>
-            <span class="skill-pill">LangChain</span>
-            <span class="skill-pill">LLM APIs</span>
-          </div>
-        </div>
-        <div class="skill-category">
-          <p class="skill-category-label">Engineering</p>
-          <div class="skill-pills">
-            <span class="skill-pill">FastAPI</span>
-            <span class="skill-pill">Flask</span>
-            <span class="skill-pill">async SQLAlchemy</span>
-            <span class="skill-pill">gRPC</span>
-            <span class="skill-pill">Protocol Buffers</span>
-            <span class="skill-pill">React</span>
-            <span class="skill-pill">TanStack Query</span>
-            <span class="skill-pill">Node.js</span>
-            <span class="skill-pill">Web3.js</span>
-            <span class="skill-pill">Redis</span>
-            <span class="skill-pill">Docker</span>
-            <span class="skill-pill">Git</span>
-            <span class="skill-pill">Azure</span>
-            <span class="skill-pill">Cosmos DB</span>
-            <span class="skill-pill">RocksDB</span>
-            <span class="skill-pill">PostgreSQL</span>
-            <span class="skill-pill">MySQL</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Footer ── -->
-<footer>
-  <div class="footer-inner">
-    <span class="footer-name">Jaden Cutinha</span>
-    <div class="footer-links">
-      <a href="projects.html">Projects</a>
-      <a href="research.html">Research</a>
-      <a href="honors.html">Honors</a>
-      <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank">LinkedIn</a>
-      <a href="mailto:jc3311@princeton.edu">Email</a>
-    </div>
-    <span class="footer-copy">© 2026 Jaden Cutinha</span>
-  </div>
-</footer>
-
-<div class="lightbox" id="lightbox"><img id="lightbox-img" src="" alt="Research poster" /></div>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/editorial.js"></script>
 </body>
 </html>

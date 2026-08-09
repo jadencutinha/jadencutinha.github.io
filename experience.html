@@ -1,660 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Experience | Jaden Cutinha</title>
-  <meta name="description" content="Professional experience of Jaden Cutinha in AI research, software engineering, and machine learning." />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <style>
-    /* ── Experience page tab system ── */
-    .exp-tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0;
-    }
-    .exp-tab {
-      font-family: var(--font-body);
-      font-size: 0.875rem;
-      font-weight: 500;
-      padding: 10px 22px;
-      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-      border: 1px solid transparent;
-      border-bottom: none;
-      cursor: pointer;
-      color: var(--text-muted);
-      background: transparent;
-      transition: var(--transition);
-      position: relative;
-      bottom: -1px;
-    }
-    .exp-tab:hover {
-      color: var(--navy);
-      background: rgba(255,255,255,0.6);
-    }
-    .exp-tab.active {
-      background: var(--cream);
-      color: var(--navy);
-      border-color: var(--border);
-      border-bottom-color: var(--cream);
-      font-weight: 600;
-    }
-    .exp-panel { display: none; }
-    .exp-panel.active { display: block; }
-
-    /* ── Detail layout inside each panel ── */
-    .exp-detail-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .exp-detail-role {
-      font-size: 1.5rem;
-      color: var(--navy);
-      font-family: var(--font-display);
-      margin-bottom: 4px;
-    }
-    .exp-detail-company {
-      font-size: 1rem;
-      color: var(--sage);
-      font-weight: 600;
-      margin-bottom: 0;
-    }
-    .exp-detail-right { text-align: right; }
-    .exp-detail-period {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      margin-bottom: 6px;
-    }
-    .exp-detail-location {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-    }
-    .exp-detail-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 24px 0;
-    }
-    .exp-detail-label {
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--sage);
-      margin-bottom: 12px;
-      margin-top: 28px;
-    }
-    .exp-detail-label:first-of-type { margin-top: 0; }
-    .exp-detail-body {
-      font-size: 0.96rem;
-      color: var(--text-muted);
-      line-height: 1.78;
-      margin-bottom: 0;
-    }
-    .exp-detail-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin: 0;
-      padding: 0;
-    }
-    .exp-detail-bullets li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.93rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-    .exp-bullet-marker {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--sage);
-      margin-top: 8px;
-      flex-shrink: 0;
-    }
-    .exp-skill-tag {
-      display: inline-flex;
-      font-size: 0.78rem;
-      font-weight: 500;
-      padding: 4px 12px;
-      border-radius: var(--radius-xl);
-      background: rgba(26,39,68,0.06);
-      color: var(--navy-mid);
-      border: 1px solid var(--border);
-      margin: 4px 4px 0 0;
-    }
-
-    /* ── Side-by-side layout ── */
-    .exp-page-grid {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 40px;
-      align-items: flex-start;
-    }
-    .exp-sidebar {
-      position: sticky;
-      top: 84px;
-    }
-    .exp-sidebar-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .exp-sidebar-item {
-      cursor: pointer;
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      transition: var(--transition);
-      border: 1px solid transparent;
-    }
-    .exp-sidebar-item:hover {
-      background: rgba(255,255,255,0.65);
-      border-color: var(--border);
-    }
-    .exp-sidebar-item.active {
-      background: var(--white);
-      border-color: var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-    .exp-sidebar-role {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--navy);
-      line-height: 1.3;
-      margin-bottom: 3px;
-    }
-    .exp-sidebar-company {
-      font-size: 0.78rem;
-      color: var(--sage);
-      font-weight: 500;
-      margin-bottom: 3px;
-    }
-    .exp-sidebar-period {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-    .exp-sidebar-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--sage-light);
-      display: inline-block;
-      margin-right: 6px;
-      vertical-align: middle;
-    }
-    .exp-sidebar-dot.current { background: var(--sage); }
-
-    @media (max-width: 768px) {
-      .exp-page-grid { grid-template-columns: 1fr; }
-      .exp-sidebar { position: static; }
-      .exp-sidebar-list { flex-direction: row; flex-wrap: wrap; gap: 8px; }
-      .exp-sidebar-item { padding: 8px 14px; }
-      .exp-sidebar-period { display: none; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>Experience | Jaden Cutinha</title>
+<meta name="description" content="Professional experience of Jaden Cutinha across AI research, software engineering, machine learning, and quantitative finance." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/editorial.css" />
 </head>
-<body>
+<body class="sub">
 
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="index.html">Jaden <span>Cutinha</span></a>
-    <div class="nav-hamburger"><span></span><span></span><span></span></div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="experience.html">Experience</a>
-      <a href="projects.html">Projects</a>
-      <a href="research.html">Research</a>
-      <a href="honors.html">Honors</a>
-      <a href="cv.html">CV</a>
-      <a href="mailto:jc3311@princeton.edu" class="nav-cta">Contact</a>
-    </div>
-  </div>
-</nav>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div id="veil" aria-hidden="true"></div>
 
-<div class="page-hero">
-  <div class="container">
-    <p class="page-hero-eyebrow">Professional Experience</p>
+<header class="topnav">
+  <a class="brand" href="index.html">Jaden Cutinha</a>
+  <nav class="navlinks" aria-label="Sections">
+    <a href="experience.html" class="current">experience</a>
+    <a href="projects.html">projects</a>
+    <a href="research.html">research</a>
+    <a href="honors.html">honors</a>
+    <a href="cv.html">cv</a>
+  </nav>
+</header>
+
+<main class="page">
+  <div class="page-head">
+    <p class="eyebrow">experience</p>
     <h1>Work &amp; Research</h1>
-    <p>A track record spanning AI research, software engineering, and machine learning across academia and industry, from Princeton labs to New York startups.</p>
+    <p class="lead">A track record spanning AI research, software engineering, machine learning, and quantitative finance — from Princeton labs to New York startups.</p>
   </div>
-</div>
 
-<section class="section">
-  <div class="container">
-    <div class="exp-page-grid">
+  <div class="exp-list">
 
-      <!-- Sidebar navigation -->
-      <aside class="exp-sidebar reveal">
-        <ul class="exp-sidebar-list" id="exp-sidebar">
-          <li class="exp-sidebar-item active" data-target="panel-sage" onclick="switchExp(this)">
-            <span class="exp-sidebar-dot current"></span>
-            <div class="exp-sidebar-role">Private Equity Intern</div>
-            <div class="exp-sidebar-company">Sage Investment Group</div>
-            <div class="exp-sidebar-period">Jul 2026 to Present</div>
-          </li>
-          <li class="exp-sidebar-item" data-target="panel-seo" onclick="switchExp(this)">
-            <span class="exp-sidebar-dot"></span>
-            <div class="exp-sidebar-role">Tech Developer Intern</div>
-            <div class="exp-sidebar-company">SEO</div>
-            <div class="exp-sidebar-period">Jun 2026 to Jul 2026</div>
-          </li>
-          <li class="exp-sidebar-item" data-target="panel-biostrive" onclick="switchExp(this)">
-            <span class="exp-sidebar-dot"></span>
-            <div class="exp-sidebar-role">Software Engineer</div>
-            <div class="exp-sidebar-company">BioStrive</div>
-            <div class="exp-sidebar-period">Nov 2025 to Jul 2026</div>
-          </li>
-          <li class="exp-sidebar-item" data-target="panel-ailabs" onclick="switchExp(this)">
-            <span class="exp-sidebar-dot"></span>
-            <div class="exp-sidebar-role">Artificial Intelligence Research Analyst</div>
-            <div class="exp-sidebar-company">Princeton AI Lab</div>
-            <div class="exp-sidebar-period">Sep 2025 to May 2026</div>
-          </li>
-          <li class="exp-sidebar-item" data-target="panel-andromeda" onclick="switchExp(this)">
-            <span class="exp-sidebar-dot"></span>
-            <div class="exp-sidebar-role">ML Engineering Intern</div>
-            <div class="exp-sidebar-company">Andromeda Labs</div>
-            <div class="exp-sidebar-period">May to Aug 2025</div>
-          </li>
-          <li class="exp-sidebar-item" data-target="panel-cerebras" onclick="switchExp(this)">
-            <span class="exp-sidebar-dot"></span>
-            <div class="exp-sidebar-role">AI Fellow</div>
-            <div class="exp-sidebar-company">Cerebras AI</div>
-            <div class="exp-sidebar-period">Oct 2024 to Apr 2025</div>
-          </li>
+    <!-- Sage -->
+    <article class="exp">
+      <div class="exp-meta">
+        <p class="exp-period">Jul 2026 — Present</p>
+        <p class="exp-loc">Real Estate Private Equity</p>
+      </div>
+      <div class="exp-body">
+        <h2 class="exp-role">Private Equity Intern</h2>
+        <p class="exp-company">Sage Investment Group</p>
+        <p class="exp-desc">
+          Sage acquires underperforming hotels and converts them into attainable apartment housing through adaptive
+          reuse — an approach recently recognized with a CoStar Impact Award. Working alongside the acquisitions team,
+          my role is to build the data infrastructure behind how the firm finds deals, proves its standing in the
+          market, and measures the social return of what it builds — turning messy public signals into evidence the
+          investment team and its investors can act on.
+        </p>
+        <p class="exp-label">selected work</p>
+        <ul class="exp-points">
+          <li>Building an automated deal-sourcing engine that runs weekly, pulling hotel listings and cross-referencing public signals of distress — troubled loans, bankruptcy filings, tax delinquency — then ranking the results into a clean deal sheet of qualified off-market conversion candidates. Off-market sourcing is the core of the business, so widening the top of the funnel automatically hands hours of manual digging back to the team.</li>
+          <li>Prototyped a national census of every public hotel-to-apartment conversion — operator, location, unit count, cost, timeline — then benchmarked the field against Sage. Built from public data alone, it establishes Sage as the most prolific operator in the 100–200-unit band its investor materials describe, turning "market leader" from a claim into a sourced benchmark.</li>
+          <li>Building a shareable impact dashboard quantifying the social good behind each conversion — attainable homes delivered, monthly savings against comparable Class-A rents, and construction waste avoided through adaptive reuse — computed from public unit counts and housing data.</li>
         </ul>
-      </aside>
+        <p class="exp-stack"><b>stack —</b> python · data pipelines · web scraping · geospatial mapping · market analysis · data visualization · public records</p>
+      </div>
+    </article>
 
-      <!-- Detail panels -->
-      <div class="exp-panels reveal">
+    <!-- SEO -->
+    <article class="exp">
+      <div class="exp-meta">
+        <p class="exp-period">Jun 2026 — Jul 2026</p>
+        <p class="exp-loc">New York, NY</p>
+      </div>
+      <div class="exp-body">
+        <h2 class="exp-role">Tech Developer Intern</h2>
+        <p class="exp-company">Sponsors for Educational Opportunity (SEO)</p>
+        <p class="exp-desc">
+          An intensive engineering track pairing several hundred hours of algorithms and systems instruction with
+          real team delivery under SCRUM. My team shipped <a href="projects.html#halo">Halo</a>, a portfolio
+          optimization platform that solves Markowitz mean-variance problems as convex programs and validates them
+          against a walk-forward backtest. I led the backend — owning the optimization engine, the risk models, the
+          market-data layer, and the API contract the frontend consumes. The architecture was judged the strongest
+          across every group in the cohort.
+        </p>
+        <p class="exp-label">selected work</p>
+        <ul class="exp-points">
+          <li>Completed 300+ hours of rigorous training in data structures, algorithms, and full-stack software engineering, building fluency across the software development lifecycle from design through deployment.</li>
+          <li>Collaborated within SCRUM engineering teams to design, test, and deploy applications integrating Python and Flask backends with MySQL databases, JavaScript interfaces, and external API services.</li>
+          <li>Led backend development of a portfolio optimization platform using FastAPI, async SQLAlchemy, and cvxpy for Markowitz mean-variance optimization — recognized for the best architectural design across all groups.</li>
+        </ul>
+        <p class="exp-featured">
+          Halo is live at <a href="https://optimal-portfolio-nine.vercel.app/" target="_blank" rel="noopener">optimal-portfolio-nine.vercel.app</a>,
+          with source on <a href="https://github.com/jadencutinha/optimal-portfolio" target="_blank" rel="noopener">GitHub</a>
+          and a longer write-up on the <a href="projects.html#halo">projects page</a>.
+        </p>
+        <p class="exp-stack"><b>stack —</b> python · fastapi · cvxpy · async sqlalchemy · flask · mysql · redis · react · typescript · scrum</p>
+      </div>
+    </article>
 
-        <!-- Sage Investment Group -->
-        <div class="exp-panel active card" id="panel-sage">
-          <div class="exp-detail-header">
-            <div>
-              <h2 class="exp-detail-role">Private Equity Intern</h2>
-              <p class="exp-detail-company">Sage Investment Group</p>
-            </div>
-            <div class="exp-detail-right">
-              <p class="exp-detail-period">Jul 2026 to Present</p>
-              <p class="exp-detail-location">Real Estate Private Equity</p>
-            </div>
-          </div>
+    <!-- BioStrive -->
+    <article class="exp">
+      <div class="exp-meta">
+        <p class="exp-period">Nov 2025 — Jul 2026</p>
+        <p class="exp-loc">Remote</p>
+      </div>
+      <div class="exp-body">
+        <h2 class="exp-role">Software Engineer</h2>
+        <p class="exp-company">BioStrive</p>
+        <p class="exp-desc">
+          Architecting backend infrastructure for an AI claims-intelligence startup backed by the Anderson Venture
+          Accelerator, building a life-sciences platform focused on document understanding, regulatory compliance,
+          and evidence traceability. Work spans the full pipeline — from ingesting clinical and economic PDFs to
+          generating auditable, source-linked claims with page-level citation traceability — serving medical, legal,
+          and regulatory teams who need trustworthy analysis of life-sciences data.
+        </p>
+        <p class="exp-label">selected work</p>
+        <ul class="exp-points">
+          <li>Architected and built a backend document-processing pipeline that transforms clinical and economic PDFs into structured, source-linked claims with page-level citation traceability for medical, legal, and regulatory review.</li>
+          <li>Implemented secure authentication and authorization using JWT, role-based access control, bcrypt password hashing, short-lived access tokens with refresh-token rotation, and user-scoped authorization.</li>
+          <li>Enforced multi-tenant isolation via Cosmos DB partition keys and Blob Storage path prefixes, securing data at rest and in transit (AES-256, TLS) with a configurable metadata TTL and delete-chat cascade.</li>
+        </ul>
+        <p class="exp-stack"><b>stack —</b> python · azure · cosmos db · blob storage · jwt / rbac · rest apis · document ai · docker · regulatory compliance</p>
+      </div>
+    </article>
 
-          <p class="exp-detail-label">About the Role</p>
-          <p class="exp-detail-body">
-            Sage Investment Group is a real estate private equity firm that acquires underperforming hotels and
-            converts them into attainable apartment housing through adaptive reuse, an approach recently recognized
-            with a CoStar Impact Award. Working alongside the acquisitions team, my role is to build the data
-            infrastructure behind how the firm finds deals, proves its standing in the market, and measures the
-            social return of what it builds, turning messy public signals into evidence the investment team and its
-            investors can act on.
-          </p>
+    <!-- Princeton AI Lab -->
+    <article class="exp">
+      <div class="exp-meta">
+        <p class="exp-period">Sep 2025 — May 2026</p>
+        <p class="exp-loc">Princeton, NJ</p>
+      </div>
+      <div class="exp-body">
+        <h2 class="exp-role">AI Research Analyst</h2>
+        <p class="exp-company">The Princeton Laboratory for Artificial Intelligence</p>
+        <p class="exp-desc">
+          Applied econometric research at the intersection of artificial intelligence and financial markets. The role
+          sat at the boundary of quantitative finance and machine learning, building and validating novel indicators
+          that used large-scale textual data to forecast asset-price movements — work that directly informed ongoing
+          research into market microstructure and the predictability of returns.
+        </p>
+        <p class="exp-label">selected work</p>
+        <ul class="exp-points">
+          <li>Constructed and empirically validated sentiment-based indicators as leading signals for asset-price movements, demonstrating their incremental predictive power relative to traditional macroeconomic and fundamental factors.</li>
+          <li>Designed a systematic framework integrating textual sentiment with market and economic data to model investor behavior, generating statistically significant insights on return predictability and market inefficiencies.</li>
+        </ul>
+        <p class="exp-stack"><b>stack —</b> python · econometrics · nlp · llm apis · ols regression · sentiment analysis · time series · financial data</p>
+      </div>
+    </article>
 
-          <div class="exp-detail-divider"></div>
+    <!-- Andromeda -->
+    <article class="exp">
+      <div class="exp-meta">
+        <p class="exp-period">May 2025 — Aug 2025</p>
+        <p class="exp-loc">New York, NY</p>
+      </div>
+      <div class="exp-body">
+        <h2 class="exp-role">Machine Learning Engineering Intern</h2>
+        <p class="exp-company">Andromeda Labs, LLC</p>
+        <p class="exp-desc">
+          Led development of a Web3-native event discovery and management platform across the whole stack, architecting
+          both the interface and the services behind it from the ground up — with a particular focus on blockchain
+          integration: wallet authentication, transaction execution, and on-chain receipt generation, designed for
+          production readiness with live smart-contract and database integration.
+        </p>
+        <p class="exp-label">selected work</p>
+        <ul class="exp-points">
+          <li>Led development of a multi-page web platform enabling dynamic event discovery and management, improving usability through structured filtering and robust administrative controls.</li>
+          <li>Implemented Web3 functionality enabling secure wallet authentication, transaction execution, and verifiable receipt generation for end users.</li>
+          <li>Architected the interface and backend systems with a clear separation of concerns, ensuring scalability and readiness for live smart-contract and database integration.</li>
+        </ul>
+        <p class="exp-stack"><b>stack —</b> react · node.js · web3.js · solidity · smart contracts · rest apis · postgresql · typescript</p>
+      </div>
+    </article>
 
-          <p class="exp-detail-label">Key Contributions</p>
-          <ul class="exp-detail-bullets">
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Building an automated deal sourcing engine that runs every week, pulling hotel listings and cross referencing public signals of distress, from troubled loans and bankruptcy filings to tax delinquency, then ranking the results into a clean weekly deal sheet of qualified off market conversion candidates. Off market sourcing is the core of the business, so widening the top of the funnel automatically hands hours of manual digging back to the acquisitions team and surfaces deals that would otherwise stay hidden.</span>
-            </li>
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Prototyped a national census of every public hotel to apartment conversion, capturing operator, location, unit count, cost, and timeline, then mapping and benchmarking the field against Sage. Built from public data alone, the working prototype establishes Sage as the most prolific operator in the set within the tight 100 to 200 unit band its investor materials describe, turning market leader from a claim into a defensible, sourced benchmark while revealing which markets are heating up and where whitespace remains as the firm expands toward its seventh state.</span>
-            </li>
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Building a shareable impact dashboard that quantifies the social good behind each conversion, attainable homes delivered, monthly savings against comparable Class A rents, and construction waste avoided through adaptive reuse, all computed from public unit counts and housing data. As investors increasingly underwrite social returns, hard numbers give fundraising and marketing a credible, sourced complement to the firm's recent CoStar Impact Award.</span>
-            </li>
-          </ul>
+    <!-- Cerebras -->
+    <article class="exp">
+      <div class="exp-meta">
+        <p class="exp-period">Oct 2024 — Apr 2025</p>
+        <p class="exp-loc">Remote &amp; Princeton</p>
+      </div>
+      <div class="exp-body">
+        <h2 class="exp-role">Cerebras AI Fellow</h2>
+        <p class="exp-company">Cerebras AI</p>
+        <p class="exp-desc">
+          A competitive fellowship placing students of high promise on applied AI projects powered by Cerebras
+          hardware. Built live sports-analytics tooling designed to ground coaching and scouting decisions in data,
+          combining predictive modeling with containerized data pipelines optimized for rapid inference — one of the
+          first industry AI experiences of my undergraduate career.
+        </p>
+        <p class="exp-label">selected work</p>
+        <ul class="exp-points">
+          <li>Developed live sports-analytics tools to evaluate player performance and generate projections, giving coaches and scouts decisions grounded in data.</li>
+          <li>Built predictive models and a containerized data pipeline to streamline data processing, visualization, and rapid inference for actionable performance insights.</li>
+        </ul>
+        <p class="exp-stack"><b>stack —</b> python · pytorch · predictive modeling · docker · data visualization · sports analytics · cerebras sdk</p>
+      </div>
+    </article>
 
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Skills &amp; Tools</p>
-          <div>
-            <span class="exp-skill-tag">Python</span>
-            <span class="exp-skill-tag">Data Pipelines</span>
-            <span class="exp-skill-tag">Web Scraping</span>
-            <span class="exp-skill-tag">Real Estate Private Equity</span>
-            <span class="exp-skill-tag">Deal Sourcing</span>
-            <span class="exp-skill-tag">Market Analysis</span>
-            <span class="exp-skill-tag">Geospatial Mapping</span>
-            <span class="exp-skill-tag">Data Visualization</span>
-            <span class="exp-skill-tag">Public Records</span>
-          </div>
-        </div>
-
-        <!-- SEO -->
-        <div class="exp-panel card" id="panel-seo">
-          <div class="exp-detail-header">
-            <div>
-              <h2 class="exp-detail-role">Tech Developer Intern</h2>
-              <p class="exp-detail-company">Sponsors for Educational Opportunity (SEO)</p>
-            </div>
-            <div class="exp-detail-right">
-              <p class="exp-detail-period">Jun 2026 to Jul 2026</p>
-              <p class="exp-detail-location">New York, NY</p>
-            </div>
-          </div>
-
-          <p class="exp-detail-label">About the Role</p>
-          <p class="exp-detail-body">
-            The SEO Tech Developer Program is an intensive engineering track that pairs several hundred hours of
-            algorithms and systems instruction with real team delivery under SCRUM. The training half moves fast
-            through data structures, algorithms, and the full software development lifecycle. The building half is
-            where it counts. My team shipped
-            <a href="projects.html#halo" style="color:var(--sage); font-weight:500;">Halo</a>, a portfolio
-            optimization platform that solves Markowitz mean variance problems as convex programs and validates them
-            against a walk forward backtest. I led the backend, which meant owning the optimization engine, the risk
-            models, the market data layer, and the API contract the frontend consumes. The architecture was judged
-            the strongest across every group in the cohort.
-          </p>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Key Contributions</p>
-          <ul class="exp-detail-bullets">
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Completed 300+ hours of rigorous training in data structures, algorithms, and full stack software engineering, building fluency across the software development lifecycle from design through deployment.</span>
-            </li>
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Collaborated within SCRUM engineering teams to design, test, and deploy applications integrating Python and Flask backends with MySQL databases, JavaScript interfaces, and external API services.</span>
-            </li>
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Led backend development of a portfolio optimization platform using FastAPI, async SQLAlchemy, and cvxpy for Markowitz mean variance optimization, recognized for the best architectural design across all groups.</span>
-            </li>
-          </ul>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Featured Work</p>
-          <p class="exp-detail-body">
-            Halo is live at
-            <a href="https://optimal-portfolio-nine.vercel.app/" target="_blank" rel="noopener" style="color:var(--sage); font-weight:500;">optimal-portfolio-nine.vercel.app</a>
-            with the source on
-            <a href="https://github.com/jadencutinha/optimal-portfolio" target="_blank" rel="noopener" style="color:var(--sage); font-weight:500;">GitHub</a>.
-            A longer write up of the solver, the risk models, and the backtesting engine lives on the
-            <a href="projects.html#halo" style="color:var(--sage); font-weight:500;">projects page</a>.
-          </p>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Skills &amp; Tools</p>
-          <div>
-            <span class="exp-skill-tag">Python</span>
-            <span class="exp-skill-tag">FastAPI</span>
-            <span class="exp-skill-tag">cvxpy</span>
-            <span class="exp-skill-tag">async SQLAlchemy</span>
-            <span class="exp-skill-tag">Flask</span>
-            <span class="exp-skill-tag">MySQL</span>
-            <span class="exp-skill-tag">Redis</span>
-            <span class="exp-skill-tag">React</span>
-            <span class="exp-skill-tag">TypeScript</span>
-            <span class="exp-skill-tag">SCRUM</span>
-          </div>
-        </div>
-
-        <!-- BioStrive -->
-        <div class="exp-panel card" id="panel-biostrive">
-          <div class="exp-detail-header">
-            <div>
-              <h2 class="exp-detail-role">Software Engineer</h2>
-              <p class="exp-detail-company">BioStrive</p>
-            </div>
-            <div class="exp-detail-right">
-              <p class="exp-detail-period">Nov 2025 to Jul 2026</p>
-              <p class="exp-detail-location">Remote</p>
-            </div>
-          </div>
-
-          <p class="exp-detail-label">About the Role</p>
-          <p class="exp-detail-body">
-            Architecting backend infrastructure for BioStrive, an AI claims-intelligence startup backed by the
-            Anderson Venture Accelerator, building a life sciences platform focused on document understanding,
-            regulatory compliance, and evidence traceability. Work spans the full pipeline, from ingesting clinical
-            and economic PDFs across many documents to generating auditable, source-linked claims with page-level
-            citation traceability. The platform serves medical, legal, and regulatory teams who need trustworthy,
-            scalable analysis of life sciences data.
-          </p>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Key Contributions</p>
-          <ul class="exp-detail-bullets">
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Architected and built a backend document-processing pipeline that transforms clinical and economic PDFs into structured, source-linked claims with page-level citation traceability for medical, legal, and regulatory review.</span>
-            </li>
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Implemented secure authentication and authorization using JWT, role-based access control (admin and user), bcrypt password hashing, short-lived access tokens with refresh-token rotation, and user-scoped authorization.</span>
-            </li>
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Enforced multi-tenant isolation via Cosmos DB partition keys and Blob Storage path prefixes, securing data at rest and in transit (AES-256, TLS) with a configurable 30-day metadata TTL and delete-chat cascade.</span>
-            </li>
-          </ul>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Skills &amp; Tools</p>
-          <div>
-            <span class="exp-skill-tag">Python</span>
-            <span class="exp-skill-tag">Azure</span>
-            <span class="exp-skill-tag">Cosmos DB</span>
-            <span class="exp-skill-tag">Blob Storage</span>
-            <span class="exp-skill-tag">JWT / RBAC</span>
-            <span class="exp-skill-tag">REST APIs</span>
-            <span class="exp-skill-tag">Document AI</span>
-            <span class="exp-skill-tag">Data Pipelines</span>
-            <span class="exp-skill-tag">Docker</span>
-            <span class="exp-skill-tag">Regulatory Compliance</span>
-          </div>
-        </div>
-
-        <!-- Princeton AI Lab -->
-        <div class="exp-panel card" id="panel-ailabs">
-          <div class="exp-detail-header">
-            <div>
-              <h2 class="exp-detail-role">Artificial Intelligence Research Analyst</h2>
-              <p class="exp-detail-company">The Princeton Laboratory for Artificial Intelligence</p>
-            </div>
-            <div class="exp-detail-right">
-              <p class="exp-detail-period">Sep 2025 to May 2026</p>
-              <p class="exp-detail-location">Princeton, NJ</p>
-            </div>
-          </div>
-
-          <p class="exp-detail-label">About the Role</p>
-          <p class="exp-detail-body">
-            Conducted applied econometric research at the intersection of artificial intelligence and financial
-            markets within Princeton's Laboratory for Artificial Intelligence. The role sat at the boundary
-            of quantitative finance and machine learning, building and validating novel indicators that used
-            large scale textual data to forecast asset price movements. The work directly informed ongoing
-            research into market microstructure and the predictability of returns.
-          </p>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Key Contributions</p>
-          <ul class="exp-detail-bullets">
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Constructed and empirically validated sentiment based indicators as leading signals for asset price movements, demonstrating their incremental predictive power relative to traditional macroeconomic and fundamental factors.</span>
-            </li>
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Designed a systematic framework integrating textual sentiment with market and economic data to model investor behavior, generating statistically significant insights on return predictability and market inefficiencies.</span>
-            </li>
-          </ul>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Skills &amp; Tools</p>
-          <div>
-            <span class="exp-skill-tag">Python</span>
-            <span class="exp-skill-tag">Econometrics</span>
-            <span class="exp-skill-tag">NLP</span>
-            <span class="exp-skill-tag">LLM APIs</span>
-            <span class="exp-skill-tag">OLS Regression</span>
-            <span class="exp-skill-tag">Sentiment Analysis</span>
-            <span class="exp-skill-tag">Time Series</span>
-            <span class="exp-skill-tag">Financial Data</span>
-          </div>
-        </div>
-
-        <!-- Andromeda Labs -->
-        <div class="exp-panel card" id="panel-andromeda">
-          <div class="exp-detail-header">
-            <div>
-              <h2 class="exp-detail-role">Machine Learning Engineering Intern</h2>
-              <p class="exp-detail-company">Andromeda Labs, LLC</p>
-            </div>
-            <div class="exp-detail-right">
-              <p class="exp-detail-period">May 2025 to Aug 2025</p>
-              <p class="exp-detail-location">New York, NY</p>
-            </div>
-          </div>
-
-          <p class="exp-detail-label">About the Role</p>
-          <p class="exp-detail-body">
-            Led development of a Web3 native event discovery and management platform across the whole stack during
-            a summer internship in New York. Responsible for architecting both the interface and the services behind it
-            from the ground up, with a particular focus on blockchain integration, implementing wallet
-            authentication, transaction execution, and on chain receipt generation for end users. The platform
-            was designed for production readiness with live smart contract and database integration.
-          </p>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Key Contributions</p>
-          <ul class="exp-detail-bullets">
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Led development of a multi page web platform enabling dynamic event discovery and management, improving usability through structured filtering and robust administrative controls.</span>
-            </li>
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Implemented Web3 functionality to enable secure wallet authentication, transaction execution, and verifiable receipt generation for end users interacting with the platform.</span>
-            </li>
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Architected the interface and backend systems with a clear separation of concerns, ensuring scalability and readiness for live smart contract and database integration.</span>
-            </li>
-          </ul>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Skills &amp; Tools</p>
-          <div>
-            <span class="exp-skill-tag">React</span>
-            <span class="exp-skill-tag">Node.js</span>
-            <span class="exp-skill-tag">Web3.js</span>
-            <span class="exp-skill-tag">Solidity</span>
-            <span class="exp-skill-tag">Smart Contracts</span>
-            <span class="exp-skill-tag">REST APIs</span>
-            <span class="exp-skill-tag">PostgreSQL</span>
-            <span class="exp-skill-tag">TypeScript</span>
-          </div>
-        </div>
-
-        <!-- Cerebras -->
-        <div class="exp-panel card" id="panel-cerebras">
-          <div class="exp-detail-header">
-            <div>
-              <h2 class="exp-detail-role">Cerebras AI Fellow</h2>
-              <p class="exp-detail-company">Cerebras AI</p>
-            </div>
-            <div class="exp-detail-right">
-              <p class="exp-detail-period">Oct 2024 to Apr 2025</p>
-              <p class="exp-detail-location">Remote and Princeton</p>
-            </div>
-          </div>
-
-          <p class="exp-detail-label">About the Role</p>
-          <p class="exp-detail-body">
-            Selected as a Cerebras AI Fellow, a competitive program placing students of high promise on
-            applied AI projects powered by Cerebras hardware infrastructure. Built live sports analytics
-            tooling designed to ground coaching and scouting decisions in data,
-            combining predictive modeling with containerized data pipelines optimized for rapid inference.
-            This fellowship represented one of the first industry AI experiences of the undergraduate career.
-          </p>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Key Contributions</p>
-          <ul class="exp-detail-bullets">
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Developed live sports analytics tools to evaluate player performance and generate projections, giving coaches and scouts decisions grounded in data.</span>
-            </li>
-            <li>
-              <span class="exp-bullet-marker"></span>
-              <span>Built predictive models and a containerized data pipeline to streamline data processing, visualization, and rapid inference for actionable performance insights.</span>
-            </li>
-          </ul>
-
-          <div class="exp-detail-divider"></div>
-
-          <p class="exp-detail-label">Skills &amp; Tools</p>
-          <div>
-            <span class="exp-skill-tag">Python</span>
-            <span class="exp-skill-tag">PyTorch</span>
-            <span class="exp-skill-tag">Predictive Modeling</span>
-            <span class="exp-skill-tag">Docker</span>
-            <span class="exp-skill-tag">Data Visualization</span>
-            <span class="exp-skill-tag">Sports Analytics</span>
-            <span class="exp-skill-tag">Cerebras SDK</span>
-          </div>
-        </div>
-
-      </div><!-- end panels -->
-    </div><!-- end grid -->
   </div>
-</section>
+</main>
 
-<footer>
-  <div class="footer-inner">
-    <span class="footer-name">Jaden Cutinha</span>
-    <div class="footer-links">
-      <a href="experience.html">Experience</a>
-      <a href="projects.html">Projects</a>
-      <a href="research.html">Research</a>
-      <a href="honors.html">Honors</a>
-      <a href="cv.html">CV</a>
-      <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank">LinkedIn</a>
-      <a href="mailto:jc3311@princeton.edu">Email</a>
-    </div>
-    <span class="footer-copy">© 2026 Jaden Cutinha</span>
-  </div>
+<footer class="foot">
+  <span class="foot-name">Jaden Cutinha</span>
+  <nav class="foot-links">
+    <a href="experience.html">experience</a>
+    <a href="projects.html">projects</a>
+    <a href="research.html">research</a>
+    <a href="honors.html">honors</a>
+    <a href="cv.html">cv</a>
+    <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank" rel="noopener">linkedin</a>
+    <a href="mailto:jc3311@princeton.edu">email</a>
+  </nav>
+  <span class="foot-copy">© 2026</span>
 </footer>
 
-<script src="assets/js/main.js"></script>
-<script>
-  function switchExp(el) {
-    // Sidebar items
-    document.querySelectorAll('.exp-sidebar-item').forEach(i => i.classList.remove('active'));
-    el.classList.add('active');
-    // Panels
-    document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById(el.dataset.target).classList.add('active');
-  }
-</script>
+<script src="assets/js/editorial.js"></script>
 </body>
 </html>
