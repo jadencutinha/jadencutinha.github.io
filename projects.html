@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="dark" />
 <title>Projects | Jaden Cutinha</title>
-<meta name="description" content="Projects by Jaden Cutinha: Murmur, a distributed Raft key/value store in Rust; Sable, an LSM-tree storage engine in Rust; and Halo, a convex portfolio optimizer." />
+<meta name="description" content="Projects by Jaden Cutinha. Murmur is a distributed Raft key/value store in Rust, Sable an LSM-tree storage engine in Rust, and Halo a convex portfolio optimizer." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
@@ -31,7 +31,7 @@
   <div class="page-head">
     <p class="eyebrow">projects</p>
     <h1>Engineering Work</h1>
-    <p class="lead">A distributed key/value store, a storage engine, and a portfolio optimizer — each built from the ground up. Different domains, one instinct: write the hard part yourself, and make every claim something a test can check.</p>
+    <p class="lead">A distributed key/value store, a storage engine, and a portfolio optimizer, each built from the ground up. Different domains, one shared instinct. Write the hard part yourself, and make every claim something a test can check.</p>
   </div>
 
   <div class="doc">
@@ -39,7 +39,7 @@
     <!-- ── Murmur ── -->
     <article class="entry" id="murmur">
       <p class="metatags"><span class="hl">Distributed Systems</span> · Rust · 2026 · Raft Consensus</p>
-      <h2 class="entry-title">Murmur — a Distributed Key/Value Store</h2>
+      <h2 class="entry-title">Murmur, a Distributed Key/Value Store</h2>
       <p class="byline">A key/value store that stays consistent across a cluster of machines, built on a Raft implementation I wrote by hand.</p>
 
       <div class="links-row">
@@ -49,7 +49,7 @@
         </a>
       </div>
 
-      <p class="label">try it — a live raft cluster</p>
+      <p class="label">try it, a live raft cluster</p>
       <div class="raft-demo" id="raft-demo">
         <p class="raft-hint">
           Raft is the algorithm that keeps the copies agreeing on one history of writes, even when machines fail.
@@ -85,7 +85,7 @@
       <p class="body">
         One server is the leader and the rest are followers. The leader takes every write, appends it to its log, and
         ships it to the followers, and a write only counts as committed once a majority have it on disk. Leaders are
-        found by election: a follower that stops hearing from the leader times out and runs for the job. A PreVote step
+        found by election. A follower that stops hearing from the leader times out and runs for the job. A PreVote step
         keeps a briefly partitioned server from bumping the term and forcing a pointless election when nothing was
         actually wrong. When two logs disagree after a leadership change, the new leader walks the follower's log
         backward to the last entry they share and overwrites from there.
@@ -109,7 +109,7 @@
 
       <p class="label">how it is built and tested</p>
       <p class="body">
-        The consensus logic is a pure state machine: events in, actions out, with no sockets or disk of its own. That
+        The consensus logic is a pure state machine, events in and actions out, with no sockets or disk of its own. That
         was a deliberate choice, because it lets the hard parts of Raft be unit-tested without standing up a network.
         gRPC over tonic and prost carries the real messages between servers. Four suites cover elections, replication,
         persistence, and chaos, the last of which injects crashes and partitions and checks that the invariants still hold.
@@ -146,7 +146,7 @@
     <!-- ── Sable ── -->
     <article class="entry" id="sable">
       <p class="metatags"><span class="hl">Storage Engines</span> · Rust · 2026 · LSM-Tree</p>
-      <h2 class="entry-title">Sable — an LSM-Tree Storage Engine</h2>
+      <h2 class="entry-title">Sable, an LSM-Tree Storage Engine</h2>
       <p class="byline">A crash-safe key/value database I wrote from scratch in Rust, in the same family as LevelDB and RocksDB.</p>
 
       <div class="links-row">
@@ -167,15 +167,15 @@
 
       <p class="label">the write path, and why it survives a crash</p>
       <p class="body">
-        Every write goes two places before Sable admits it succeeded: a write-ahead log on disk, checksummed so
-        corruption gets caught, and a sorted in-memory table. If the process dies, startup replays that log and trims
+        Every write goes two places before Sable admits it succeeded. It lands in a write-ahead log on disk, checksummed so
+        corruption gets caught, and in a sorted in-memory table. If the process dies, startup replays that log and trims
         the torn tail, the half-written record a crash leaves behind, so recovery always lands on a clean boundary. The
-        contract is deliberately boring: if Sable said a write succeeded, it is still there after a crash or a power cut.
+        contract is deliberately boring. If Sable said a write succeeded, it is still there after a crash or a power cut.
       </p>
 
       <p class="label">the read path and on-disk format</p>
       <p class="body">
-        Once memory fills up, the table is flushed to an SSTable on disk: sorted blocks, prefix-compressed to save
+        Once memory fills up, the table is flushed to an SSTable on disk, made of sorted blocks, prefix-compressed to save
         space, each with its own CRC. Every SSTable carries a Bloom filter, a small probabilistic index that can say
         "this key is definitely not here" and let a lookup skip the file entirely. Reads merge the in-memory table and
         the on-disk files through a lock-free path, and MVCC snapshots let a reader see a stable view while writes keep
@@ -192,7 +192,7 @@
         I benchmarked Sable against RocksDB 8.10, a database with a decade of tuning behind it, on a 200,000-key
         workload, mostly to see how far off a from-scratch engine would land. It held about half of RocksDB's read and
         write throughput, which I will happily take against that bar. The one place it won outright was negative
-        lookups, keys that do not exist: roughly 2.75 times faster, because the Bloom filters skipped 78.5% of the disk
+        lookups, keys that do not exist, where it ran roughly 2.75 times faster because the Bloom filters skipped 78.5% of the disk
         probes that would otherwise happen. Correctness is pinned down by unit, integration, and crash-recovery tests.
       </p>
       <p class="note">
@@ -211,7 +211,7 @@
     <!-- ── Halo ── -->
     <article class="entry" id="halo">
       <p class="metatags"><span class="hl">Flagship Project</span> · SEO Tech Developer Program · 2026 · Backend Lead</p>
-      <h2 class="entry-title">Halo — Optimal Portfolio Construction via Convex Optimization</h2>
+      <h2 class="entry-title">Halo, Optimal Portfolio Construction via Convex Optimization</h2>
       <p class="byline">A full-stack platform that turns Markowitz mean-variance theory into a working solver, a backtester, and a product.</p>
 
       <div class="links-row">
@@ -228,7 +228,7 @@
       <p class="label">overview</p>
       <p class="body">
         Most retail investing tools hand you a pie chart and hope you do not ask where the numbers came from. Halo
-        answers the underlying question directly: given a set of assets, what weights should you actually hold, and can
+        answers the underlying question directly. Given a set of assets, what weights should you actually hold, and can
         that answer be defended instead of asserted? Modern portfolio theory frames this as a convex optimization
         problem, so I built the platform around a real solver rather than a rule of thumb. You pick tickers, choose an
         objective and some constraints, and the backend returns the optimal weights along with the efficient frontier
@@ -243,7 +243,7 @@
 
       <p class="label">the optimization engine</p>
       <p class="body">
-        At the center is a cvxpy program that handles eight different objectives. Some are easy: minimum variance and
+        At the center is a cvxpy program that handles eight different objectives. Some are easy. Minimum variance and
         target return are plain quadratic programs. Maximum Sharpe is not, because maximizing a linear-over-quadratic
         ratio is non-convex in the weights, so I use the Charnes-Cooper transformation, which leans on the Sharpe
         ratio's scale invariance to rewrite it as an equivalent convex program. Conditional Value at Risk goes through
@@ -261,16 +261,16 @@
       <p class="body">
         An optimizer trusts whatever covariance matrix you feed it, and sample covariance is a bad thing to trust when
         you have nearly as many assets as data points, since the weights it produces swing wildly on noise. So Halo
-        ships four estimators: plain sample covariance as a baseline, Ledoit-Wolf shrinkage to pull the estimate toward
-        something stable, an EWMA version that lets recent volatility dominate, and a PCA factor model that keeps only
+        ships four estimators. Plain sample covariance serves as a baseline, Ledoit-Wolf shrinkage pulls the estimate toward
+        something stable, an EWMA version lets recent volatility dominate, and a PCA factor model keeps only
         the leading components. Expected returns come either straight from history or from Black-Litterman, which blends
         a market-implied prior with your own views.
       </p>
 
       <p class="label">backtesting</p>
       <p class="body">
-        It is easy to build a backtest that cheats by looking at data it would not have had. Halo's runs walk forward:
-        at each rebalance it refits covariance and returns only on data available up to that date, so no lookahead
+        It is easy to build a backtest that cheats by looking at data it would not have had. Halo's runs walk forward.
+        At each rebalance it refits covariance and returns only on data available up to that date, so no lookahead
         creeps in. Rebalance cadence is configurable, trading costs and turnover are charged to the portfolio, and every
         run is measured against an index fund, an equal-weight book, and a 60/40 split. It reports CAGR, Sortino,
         Calmar, alpha, beta, information ratio, and max drawdown, not a single headline number.
@@ -293,7 +293,7 @@
       <p class="body">
         The backend is FastAPI on async SQLAlchemy over Supabase Postgres, with Redis in front of the market-data layer
         so repeated optimizations over the same universe do not re-fetch the same price history. Data comes through a
-        pluggable provider interface: Financial Modeling Prep for real end-of-day prices, and a deterministic synthetic
+        pluggable provider interface, with Financial Modeling Prep for real end-of-day prices and a deterministic synthetic
         provider that stands in when there is no API key, which keeps the tests hermetic and lets anyone run the stack
         cold. Auth is Supabase with server-side JWT verification against JWKS. Long parameter sweeps run as background
         jobs and stream their results over WebSocket, filling in an interactive Sharpe heatmap as they go.
