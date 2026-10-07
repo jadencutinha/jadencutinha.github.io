@@ -89,11 +89,12 @@ body::after {
 .intro {
   margin-top: 1.05rem;
   max-width: 46ch;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 1.02rem;
   line-height: 1.58;
   color: var(--soft);
 }
-.intro em { font-family: var(--serif); font-style: italic; color: var(--ink); font-size: 1.06em; }
+.intro em { font: inherit; color: inherit; }
 
 .links { display: flex; flex-wrap: wrap; gap: 0.35rem 0.95rem; margin-top: 1.5rem; }
 .links a {
