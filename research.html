@@ -6,10 +6,17 @@
 <meta name="color-scheme" content="dark" />
 <title>Research | Jaden Cutinha</title>
 <meta name="description" content="Research by Jaden Cutinha in NLP, AI search algorithms, and financial sentiment analysis." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Research | Jaden Cutinha" />
+<meta property="og:description" content="Research by Jaden Cutinha in NLP, AI search algorithms, and financial sentiment analysis." />
+<meta property="og:url" content="https://jadencutinha.github.io/research.html" />
+<meta property="og:image" content="https://jadencutinha.github.io/assets/images/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/editorial.css" />
+<link rel="stylesheet" href="assets/css/editorial.css?v=3" />
 </head>
 <body class="sub">
 
@@ -42,7 +49,7 @@
       <h2 class="entry-title">Dissecting Tree of Thoughts, an Ablation Study of ToT Search Algorithms</h2>
       <p class="byline"><b>Jaden Cutinha</b> &amp; Junze Xie · Princeton University</p>
 
-      <img src="https://www.image2url.com/r2/default/images/1779894437677-0eb55d08-7b09-4d3c-b009-6b344bf3a8be.png" alt="Tree of Thoughts research poster" class="poster" loading="lazy" />
+      <img src="assets/images/tot_research.jpg" alt="Tree of Thoughts research poster" class="poster" loading="lazy" />
 
       <p class="label">overview</p>
       <p class="body">
@@ -58,8 +65,8 @@
         original breadth first and depth first search with <strong>k beam A* search</strong>, which treats the problem
         as a shortest path search using model value scores as a heuristic, and <strong>Monte Carlo Tree Search</strong>,
         which treats it as a sequential decision problem with simulated rollouts and exploration in the style of upper
-        confidence bounds. Every other variable, meaning the generation method, the evaluation method, the proposal
-        completions, and the value samples, is held fixed so that the search algorithm is the sole independent variable.
+        confidence bounds. We also ablate the LLM state evaluator. Everything else, including the generation method and
+        the proposal completions, is held fixed.
       </p>
 
       <p class="label">methods</p>
@@ -103,7 +110,7 @@
       <h2 class="entry-title">Evaluating AI Sentiment Consistency and Market Relevance</h2>
       <p class="byline"><b>Jaden Cutinha</b> · Computer Science, Princeton University, Class of 2028</p>
 
-      <img src="https://www.image2url.com/r2/default/images/1779894524716-3782669e-af20-4ad3-b547-3fbb78b06d9d.png" alt="AI Sentiment Consistency research poster" class="poster" loading="lazy" />
+      <img src="assets/images/sentiment_research.jpg" alt="AI Sentiment Consistency research poster" class="poster" loading="lazy" />
 
       <p class="label">research question</p>
       <p class="body">
@@ -168,7 +175,7 @@
 
 <div class="lightbox" id="lightbox"><img id="lightbox-img" src="" alt="Research poster" /></div>
 
-<script src="assets/js/editorial.js"></script>
+<script src="assets/js/editorial.js?v=2"></script>
 <script>
 (function () {
   var lb = document.getElementById('lightbox'), img = document.getElementById('lightbox-img');

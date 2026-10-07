@@ -6,10 +6,17 @@
 <meta name="color-scheme" content="dark" />
 <title>CV | Jaden Cutinha</title>
 <meta name="description" content="Full curriculum vitae of Jaden Cutinha, covering education, experience, projects, research, honors, and technical skills." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="CV | Jaden Cutinha" />
+<meta property="og:description" content="Full curriculum vitae of Jaden Cutinha, covering education, experience, projects, research, honors, and technical skills." />
+<meta property="og:url" content="https://jadencutinha.github.io/cv.html" />
+<meta property="og:image" content="https://jadencutinha.github.io/assets/images/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/editorial.css" />
+<link rel="stylesheet" href="assets/css/editorial.css?v=3" />
 </head>
 <body class="sub">
 
@@ -31,15 +38,14 @@
   <div class="page-head">
     <p class="eyebrow">curriculum vitae</p>
     <h1>Full CV</h1>
-    <p class="lead">A complete record of academic training, professional experience, research, and distinctions. <br />jc3311@princeton.edu · 425-318-2881 · Bothell, WA · Princeton, NJ</p>
+    <p class="lead">A complete record of academic training, professional experience, research, and distinctions. <br />jc3311@princeton.edu · Bothell, WA · Princeton, NJ</p>
   </div>
 
   <div class="cv-actions">
-    <button class="btn btn-primary" onclick="window.print()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      Print / Save as PDF
-    </button>
-    <a href="mailto:jc3311@princeton.edu?subject=CV Request" class="btn">Request CV via Email</a>
+    <a href="Jaden_Cutinha_Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Resume (PDF)
+    </a>
   </div>
 
   <div class="cv-doc">
@@ -82,9 +88,9 @@
         <div class="cv-row"><p class="cv-role">Tech Developer Intern</p><p class="cv-date">Jun 2026 - Jul 2026</p></div>
         <p class="cv-org">Sponsors for Educational Opportunity (SEO) · New York, NY</p>
         <ul class="cv-bul">
-          <li>Completed 300+ hours of rigorous training in data structures, algorithms, and full stack software engineering, building fluency across the software development lifecycle from design through deployment.</li>
-          <li>Collaborated within SCRUM engineering teams to design, test, and deploy applications integrating Python and Flask backends with MySQL databases, JavaScript interfaces, and external API services.</li>
-          <li>Led backend development of a portfolio optimization platform using FastAPI, async SQLAlchemy, and cvxpy for Markowitz mean variance optimization, recognized for the best architectural design across all groups.</li>
+          <li>Implemented a convex-optimization microservice in Python on CVXPY and FastAPI with typed, validated REST endpoints over asynchronous SQLAlchemy.</li>
+          <li>Added a Redis cache layer that returns repeated requests without recomputation.</li>
+          <li>Wrote 250+ pytest unit and integration tests in CI/CD with structured logging and health-check endpoints, and worked on an Agile Scrum team with peer code review.</li>
         </ul>
       </div>
 
@@ -103,7 +109,7 @@
         <p class="cv-org">The Princeton Laboratory for Artificial Intelligence · Princeton, NJ</p>
         <ul class="cv-bul">
           <li>Constructed and empirically validated sentiment based indicators as leading signals for asset price movements, demonstrating their incremental predictive power relative to traditional macroeconomic and fundamental factors.</li>
-          <li>Designed a systematic framework integrating textual sentiment with market and economic data to model investor behavior, generating statistically significant insights on return predictability and market inefficiencies.</li>
+          <li>Fit regression-based econometric models with significance testing and held-out validation to evaluate predictors of returns.</li>
         </ul>
       </div>
 
@@ -132,17 +138,6 @@
       <p class="label">projects</p>
 
       <div class="cv-item">
-        <div class="cv-row"><p class="cv-role">Halo, Optimal Portfolio Construction Platform</p><p class="cv-date">2026</p></div>
-        <p class="cv-org">Python · FastAPI · cvxpy · React · TypeScript · <a href="https://optimal-portfolio-nine.vercel.app/" target="_blank" rel="noopener">Live</a> · <a href="https://github.com/jadencutinha/optimal-portfolio" target="_blank" rel="noopener">Source</a></p>
-        <ul class="cv-bul">
-          <li>Built a full stack web application solving Markowitz mean variance portfolio optimization through convex programming in cvxpy, supporting eight objectives spanning minimum variance, maximum Sharpe via the Charnes and Cooper transformation, target return, target risk, risk parity, maximum diversification, CVaR, and net of cost, under long only and per asset weight constraints.</li>
-          <li>Engineered a FastAPI backend with async SQLAlchemy and Redis caching serving real end of day market data through a pluggable data provider layer, and a React and TypeScript frontend using TanStack Query and Recharts to visualize optimization results as they compute.</li>
-          <li>Implemented a walk forward backtesting engine free of lookahead bias, charging transaction costs and turnover constraints against the portfolio and benchmarking against index, equal weight, and 60/40 allocations. The optimized portfolio reached roughly 0.48 Sharpe over five years against roughly 0.20 for every benchmark.</li>
-          <li>Offered four covariance estimators including Ledoit-Wolf shrinkage, EWMA, and PCA factor models, with Black-Litterman return estimation, and gated every merge on eighty percent backend test coverage in continuous integration.</li>
-        </ul>
-      </div>
-
-      <div class="cv-item">
         <div class="cv-row"><p class="cv-role">Murmur, Distributed Key/Value Store</p><p class="cv-date">2026</p></div>
         <p class="cv-org">Rust · gRPC · Raft · <a href="https://github.com/jadencutinha/murmur" target="_blank" rel="noopener">Source</a></p>
         <ul class="cv-bul">
@@ -163,11 +158,24 @@
       </div>
 
       <div class="cv-item">
-        <div class="cv-row"><p class="cv-role">Tree of Thoughts Ablation Study</p><p class="cv-date">Spring 2025</p></div>
-        <p class="cv-org">Python · OpenAI API · Two person team</p>
+        <div class="cv-row"><p class="cv-role">Halo, Optimal Portfolio Construction Platform</p><p class="cv-date">2026</p></div>
+        <p class="cv-org">Python · FastAPI · cvxpy · React · TypeScript · <a href="https://optimal-portfolio-nine.vercel.app/" target="_blank" rel="noopener">Live</a> · <a href="https://github.com/jadencutinha/optimal-portfolio" target="_blank" rel="noopener">Source</a></p>
         <ul class="cv-bul">
-          <li>Conducted an ablation study on the Tree of Thoughts reasoning framework, systematically varying thought generation strategies and state evaluation methods across the Game of 24, Creative Writing, and Mini Crossword benchmarks.</li>
-          <li>Led implementation of the search and state evaluation pipeline, isolating the effect of branching factor and evaluation sample count on task accuracy and inference cost across multiple language model backends.</li>
+          <li>Built a full stack web application solving Markowitz mean variance portfolio optimization through convex programming in cvxpy, supporting eight objectives spanning minimum variance, maximum Sharpe via the Charnes and Cooper transformation, target return, target risk, risk parity, maximum diversification, CVaR, and net of cost, under long only and per asset weight constraints.</li>
+          <li>Engineered a FastAPI backend with async SQLAlchemy and Redis caching serving real end of day market data through a pluggable data provider layer, and a React and TypeScript frontend using TanStack Query and Recharts to visualize optimization results as they compute.</li>
+          <li>Implemented a walk forward backtesting engine free of lookahead bias, charging transaction costs and turnover constraints against the portfolio and benchmarking against index, equal weight, and 60/40 allocations. The optimized portfolio reached roughly 0.48 Sharpe over five years against roughly 0.20 for every benchmark.</li>
+          <li>Offered four covariance estimators including Ledoit-Wolf shrinkage, EWMA, and PCA factor models, with Black-Litterman return estimation, and gated every merge on eighty percent backend test coverage in continuous integration.</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-row"><p class="cv-role">Skillpath, Training Request Portal</p><p class="cv-date">2026</p></div>
+        <p class="cv-org">Python · FastAPI · Power Platform · <a href="https://github.com/jadencutinha/skillpath" target="_blank" rel="noopener">Source</a></p>
+        <ul class="cv-bul">
+          <li>Built a FastAPI /estimate service that returns cost per hour, a budget tier, and a second-approver flag, with input validation, optional API-key auth, automated tests, GitHub Actions CI on every push, and a Render deployment config.</li>
+          <li>Designed the Dataverse data model with one-to-many Course and Request tables, a cost-snapshot column that preserves price at request time, a business rule requiring justification above $1,000, and Employee, Manager, and Admin roles.</li>
+          <li>Specified a Power Automate approval flow with a 7-day timeout, routing of high-cost requests to a second approver, a re-check that never overwrites a decision already made, and error handling that alerts the admin.</li>
+          <li>Hand-wrote an OpenAPI 2.0 custom connector (FastAPI generates 3.0), and wrote DAX measures (approval rate, approved spend, average days to decision, month-over-month change) for a star-schema Power BI model.</li>
         </ul>
       </div>
     </section>
@@ -180,7 +188,7 @@
         <div class="cv-row"><p class="cv-role">Dissecting Tree of Thoughts, an Ablation Study of ToT Search Algorithms</p><p class="cv-date">Spring 2025</p></div>
         <p class="cv-org">Princeton University · COS 484 Natural Language Processing · Coauthored with Junze Xie, equal contribution</p>
         <ul class="cv-bul">
-          <li>Replaced the breadth first and depth first search in Tree of Thoughts reasoning with k beam A* search and Monte Carlo Tree Search, isolating the search algorithm as the sole independent variable across the Game of 24 and 5×5 mini crossword benchmarks on GPT-4o-mini.</li>
+          <li>Ablated the search algorithm in Tree of Thoughts reasoning, replacing breadth first and depth first search with k beam A* search and Monte Carlo Tree Search, and the LLM state evaluator, holding everything else fixed across the Game of 24 and 5×5 mini crossword benchmarks on GPT-4o-mini.</li>
           <li>A* achieved 19% accuracy on the Game of 24 against 8% for breadth first search at nearly identical API cost. Monte Carlo Tree Search reached 16% at the lowest API cost of all three methods.</li>
         </ul>
       </div>
@@ -200,10 +208,8 @@
       <p class="label">honors &amp; distinctions</p>
       <ul class="cv-bul">
         <li>HackPrinceton Finalist, Fintech Track (2026)</li>
-        <li>Princeton COSCON Computer Science Contest Top 5 Finalist (2026)</li>
-        <li>Princeton COSCON Computer Science Contest Top 5 Finalist (Nov 2025)</li>
+        <li>Princeton COSCON Computer Science Contest, Top 5 Finalist (2025, 2026) and Honorable Mention (2024)</li>
         <li>Cerebras AI Research Fellow (Oct 2024 - Apr 2025)</li>
-        <li>Princeton COSCON Computer Science Contest Honorable Mention (Nov 2024)</li>
         <li>Princeton Advanced AI Alignment Group, Member</li>
       </ul>
     </section>
@@ -244,6 +250,6 @@
   <span class="foot-copy">© 2026</span>
 </footer>
 
-<script src="assets/js/editorial.js"></script>
+<script src="assets/js/editorial.js?v=2"></script>
 </body>
 </html>

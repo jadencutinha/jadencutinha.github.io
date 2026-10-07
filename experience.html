@@ -6,10 +6,17 @@
 <meta name="color-scheme" content="dark" />
 <title>Experience | Jaden Cutinha</title>
 <meta name="description" content="Professional experience of Jaden Cutinha across AI research, software engineering, machine learning, and quantitative finance." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Experience | Jaden Cutinha" />
+<meta property="og:description" content="Professional experience of Jaden Cutinha across AI research, software engineering, machine learning, and quantitative finance." />
+<meta property="og:url" content="https://jadencutinha.github.io/experience.html" />
+<meta property="og:image" content="https://jadencutinha.github.io/assets/images/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/editorial.css" />
+<link rel="stylesheet" href="assets/css/editorial.css?v=3" />
 </head>
 <body class="sub">
 
@@ -72,8 +79,8 @@
         <h2 class="exp-role">Tech Developer Intern</h2>
         <p class="exp-company">Sponsors for Educational Opportunity (SEO)</p>
         <p class="exp-desc">
-          An intensive engineering track pairing several hundred hours of algorithms and systems instruction with
-          real team delivery under SCRUM. My team shipped <a href="projects.html#halo">Halo</a>, a portfolio
+          An intensive engineering track pairing algorithms and systems instruction with real team delivery under
+          Scrum. My team shipped <a href="projects.html#halo">Halo</a>, a portfolio
           optimization platform that solves Markowitz mean-variance problems as convex programs and validates them
           against a walk-forward backtest. I led the backend, owning the optimization engine, the risk models, the
           market-data layer, and the API contract the frontend consumes. The architecture was judged the strongest
@@ -81,16 +88,16 @@
         </p>
         <p class="exp-label">selected work</p>
         <ul class="exp-points">
-          <li>Completed 300+ hours of rigorous training in data structures, algorithms, and full-stack software engineering, building fluency across the software development lifecycle from design through deployment.</li>
-          <li>Collaborated within SCRUM engineering teams to design, test, and deploy applications integrating Python and Flask backends with MySQL databases, JavaScript interfaces, and external API services.</li>
-          <li>Led backend development of a portfolio optimization platform using FastAPI, async SQLAlchemy, and cvxpy for Markowitz mean-variance optimization, recognized for the best architectural design across all groups.</li>
+          <li>Implemented a convex-optimization microservice in Python on CVXPY and FastAPI with typed, validated REST endpoints over asynchronous SQLAlchemy.</li>
+          <li>Added a Redis cache layer that returns repeated requests without recomputation.</li>
+          <li>Wrote 250+ pytest unit and integration tests in CI/CD with structured logging and health-check endpoints, and worked on an Agile Scrum team with peer code review.</li>
         </ul>
         <p class="exp-featured">
           Halo is live at <a href="https://optimal-portfolio-nine.vercel.app/" target="_blank" rel="noopener">optimal-portfolio-nine.vercel.app</a>,
           with source on <a href="https://github.com/jadencutinha/optimal-portfolio" target="_blank" rel="noopener">GitHub</a>
           and a longer write-up on the <a href="projects.html#halo">projects page</a>.
         </p>
-        <p class="exp-stack"><b>stack</b> · python · fastapi · cvxpy · async sqlalchemy · flask · mysql · redis · react · typescript · scrum</p>
+        <p class="exp-stack"><b>stack</b> · python · fastapi · cvxpy · async sqlalchemy · redis · pytest · ci/cd · react · typescript · scrum</p>
       </div>
     </article>
 
@@ -138,7 +145,7 @@
         <p class="exp-label">selected work</p>
         <ul class="exp-points">
           <li>Constructed and empirically validated sentiment-based indicators as leading signals for asset-price movements, demonstrating their incremental predictive power relative to traditional macroeconomic and fundamental factors.</li>
-          <li>Designed a systematic framework integrating textual sentiment with market and economic data to model investor behavior, generating statistically significant insights on return predictability and market inefficiencies.</li>
+          <li>Fit regression-based econometric models with significance testing and held-out validation to evaluate predictors of returns.</li>
         </ul>
         <p class="exp-stack"><b>stack</b> · python · econometrics · nlp · llm apis · ols regression · sentiment analysis · time series · financial data</p>
       </div>
@@ -210,6 +217,6 @@
   <span class="foot-copy">© 2026</span>
 </footer>
 
-<script src="assets/js/editorial.js"></script>
+<script src="assets/js/editorial.js?v=2"></script>
 </body>
 </html>

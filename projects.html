@@ -6,10 +6,17 @@
 <meta name="color-scheme" content="dark" />
 <title>Projects | Jaden Cutinha</title>
 <meta name="description" content="Projects by Jaden Cutinha. Murmur is a distributed Raft key/value store in Rust, Sable an LSM-tree storage engine in Rust, and Halo a convex portfolio optimizer." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Projects | Jaden Cutinha" />
+<meta property="og:description" content="Projects by Jaden Cutinha. Murmur is a distributed Raft key/value store in Rust, Sable an LSM-tree storage engine in Rust, and Halo a convex portfolio optimizer." />
+<meta property="og:url" content="https://jadencutinha.github.io/projects.html" />
+<meta property="og:image" content="https://jadencutinha.github.io/assets/images/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/editorial.css" />
+<link rel="stylesheet" href="assets/css/editorial.css?v=3" />
 </head>
 <body class="sub">
 
@@ -165,6 +172,47 @@
         treated crash-safety as the one thing I would not compromise on.
       </p>
 
+      <p class="label">how data moves through it</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 760 232" role="img" aria-label="Sable write path and read path. Writes go to a write-ahead log and a memtable, flush to level 0 SSTables, and are compacted into leveled SSTables. Reads merge the memtable and SSTables, using Bloom filters to skip files.">
+          <defs><marker id="arr-sable" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="d-head" d="M0 0 L8 4 L0 8 z"/></marker></defs>
+          <text class="d-s" x="10" y="14">write path</text>
+          <rect class="d-box" x="10" y="24" width="112" height="54" rx="4"/>
+          <text class="d-t" x="22" y="56">put / delete</text>
+          <rect class="d-box" x="150" y="24" width="150" height="54" rx="4"/>
+          <text class="d-t" x="164" y="46">write-ahead log</text>
+          <text class="d-s" x="164" y="63">checksummed, on disk</text>
+          <rect class="d-box" x="340" y="24" width="150" height="54" rx="4"/>
+          <text class="d-t" x="354" y="46">memtable</text>
+          <text class="d-s" x="354" y="63">sorted, in memory</text>
+          <rect class="d-box d-hl" x="540" y="24" width="210" height="54" rx="4"/>
+          <text class="d-t" x="554" y="46">sstables, level 0</text>
+          <text class="d-s" x="554" y="63">compressed blocks · crc</text>
+          <path class="d-arrow" d="M122 51 H148" marker-end="url(#arr-sable)"/>
+          <path class="d-arrow" d="M300 51 H338" marker-end="url(#arr-sable)"/>
+          <path class="d-arrow" d="M490 51 H538" marker-end="url(#arr-sable)"/>
+          <text class="d-s" x="514" y="42" text-anchor="middle">flush</text>
+          <path class="d-arrow" d="M645 78 V160" marker-end="url(#arr-sable)"/>
+          <text class="d-s" x="655" y="124">compaction</text>
+
+          <text class="d-s" x="10" y="152">read path</text>
+          <rect class="d-box" x="10" y="162" width="112" height="54" rx="4"/>
+          <text class="d-t" x="22" y="194">get</text>
+          <rect class="d-box" x="150" y="162" width="150" height="54" rx="4"/>
+          <text class="d-t" x="164" y="184">merged read</text>
+          <text class="d-s" x="164" y="201">memtable + sstables</text>
+          <rect class="d-box" x="340" y="162" width="150" height="54" rx="4"/>
+          <text class="d-t" x="354" y="184">bloom filters</text>
+          <text class="d-s" x="354" y="201">skip files on a miss</text>
+          <rect class="d-box d-hl" x="540" y="162" width="210" height="54" rx="4"/>
+          <text class="d-t" x="554" y="184">leveled sstables</text>
+          <text class="d-s" x="554" y="201">merged in the background</text>
+          <path class="d-arrow" d="M122 189 H148" marker-end="url(#arr-sable)"/>
+          <path class="d-arrow" d="M300 189 H338" marker-end="url(#arr-sable)"/>
+          <path class="d-arrow" d="M490 189 H538" marker-end="url(#arr-sable)"/>
+        </svg>
+      </figure>
+
       <p class="label">the write path, and why it survives a crash</p>
       <p class="body">
         Every write goes two places before Sable admits it succeeded. It lands in a write-ahead log on disk, checksummed so
@@ -210,7 +258,7 @@
 
     <!-- ── Halo ── -->
     <article class="entry" id="halo">
-      <p class="metatags"><span class="hl">Flagship Project</span> · SEO Tech Developer Program · 2026 · Backend Lead</p>
+      <p class="metatags"><span class="hl">Portfolio Optimization</span> · SEO Tech Developer Program · 2026 · Backend Lead</p>
       <h2 class="entry-title">Halo, Optimal Portfolio Construction via Convex Optimization</h2>
       <p class="byline">A full-stack platform that turns Markowitz mean-variance theory into a working solver, a backtester, and a product.</p>
 
@@ -290,6 +338,37 @@
       </p>
 
       <p class="label">architecture</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 760 240" role="img" aria-label="Halo architecture. A React and TypeScript frontend talks to a FastAPI backend over REST and WebSocket. The backend drives the cvxpy optimizer, the walk-forward backtester, a Redis-cached market data layer, and Supabase Postgres.">
+          <defs><marker id="arr-halo" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="d-head" d="M0 0 L8 4 L0 8 z"/></marker></defs>
+          <rect class="d-box" x="10" y="93" width="178" height="54" rx="4"/>
+          <text class="d-t" x="22" y="115">react + typescript</text>
+          <text class="d-s" x="22" y="132">tanstack query · recharts</text>
+          <rect class="d-box d-hl" x="262" y="93" width="176" height="54" rx="4"/>
+          <text class="d-t" x="276" y="115">fastapi</text>
+          <text class="d-s" x="276" y="132">supabase jwt auth</text>
+          <path class="d-arrow" d="M188 120 H260" marker-end="url(#arr-halo)"/>
+          <text class="d-s" x="224" y="111" text-anchor="middle">rest · ws</text>
+
+          <rect class="d-box" x="510" y="14" width="240" height="44" rx="4"/>
+          <text class="d-t" x="524" y="33">cvxpy optimizer</text>
+          <text class="d-s" x="524" y="48">8 objectives · 4 covariance models</text>
+          <rect class="d-box" x="510" y="70" width="240" height="44" rx="4"/>
+          <text class="d-t" x="524" y="89">walk-forward backtester</text>
+          <text class="d-s" x="524" y="104">no lookahead · costs charged</text>
+          <rect class="d-box" x="510" y="126" width="240" height="44" rx="4"/>
+          <text class="d-t" x="524" y="145">market data</text>
+          <text class="d-s" x="524" y="160">redis cache · pluggable provider</text>
+          <rect class="d-box" x="510" y="182" width="240" height="44" rx="4"/>
+          <text class="d-t" x="524" y="201">supabase postgres</text>
+          <text class="d-s" x="524" y="216">async sqlalchemy</text>
+          <path class="d-arrow" d="M438 120 H474 M474 36 V204"/>
+          <path class="d-arrow" d="M474 36 H508" marker-end="url(#arr-halo)"/>
+          <path class="d-arrow" d="M474 92 H508" marker-end="url(#arr-halo)"/>
+          <path class="d-arrow" d="M474 148 H508" marker-end="url(#arr-halo)"/>
+          <path class="d-arrow" d="M474 204 H508" marker-end="url(#arr-halo)"/>
+        </svg>
+      </figure>
       <p class="body">
         The backend is FastAPI on async SQLAlchemy over Supabase Postgres, with Redis in front of the market-data layer
         so repeated optimizations over the same universe do not re-fetch the same price history. Data comes through a
@@ -337,12 +416,12 @@
     <!-- ── Other work ── -->
     <article class="entry">
       <h2 class="entry-title" style="font-size:1.5rem;">Other Work</h2>
-      <p class="byline">An ablation study on how language models reason, and a Web3 platform built over a summer.</p>
+      <p class="byline">An ablation study on how language models reason, a Web3 platform built over a summer, and a training request portal on Microsoft Power Platform.</p>
       <div class="mini-grid">
         <a href="research.html#tot" class="mini">
           <p class="mini-venue">Princeton · COS 484 · NLP</p>
           <h3>Tree of Thoughts Search Ablation</h3>
-          <p>A two-person ablation study swapping the breadth-first and depth-first search inside Tree of Thoughts reasoning for k-beam A* search and Monte Carlo Tree Search, holding generation and evaluation fixed. A* reached 19% on the Game of 24 against 8% for breadth-first search at nearly identical API cost.</p>
+          <p>A two-person ablation study swapping the breadth-first and depth-first search inside Tree of Thoughts reasoning for k-beam A* search and Monte Carlo Tree Search, and ablating the LLM state evaluator, with everything else held fixed. A* reached 19% on the Game of 24 against 8% for breadth-first search at nearly identical API cost.</p>
           <span class="mini-link">Read the full study →</span>
         </a>
         <a href="experience.html" class="mini">
@@ -350,6 +429,12 @@
           <h3>Web3 Event Discovery Platform</h3>
           <p>A multi-page event discovery and management platform with wallet authentication, on-chain transaction execution, and verifiable receipt generation, built with a clean split between the interface and the services behind it so live smart-contract integration could drop in without a rewrite.</p>
           <span class="mini-link">See the role →</span>
+        </a>
+        <a href="https://github.com/jadencutinha/skillpath" target="_blank" rel="noopener" class="mini" id="skillpath">
+          <p class="mini-venue">Power Platform · FastAPI · 2026</p>
+          <h3>Skillpath, a Training Request Portal</h3>
+          <p>A portal where employees request courses, managers approve or reject them, admins manage the catalog, and a Power BI dashboard reports on requests and spending. I built and tested the FastAPI estimate service behind it, and designed the Dataverse data model, the Power Automate approval flow, and the DAX measures as documented specifications.</p>
+          <span class="mini-link">View the source →</span>
         </a>
       </div>
     </article>
@@ -371,7 +456,7 @@
   <span class="foot-copy">© 2026</span>
 </footer>
 
-<script src="assets/js/editorial.js"></script>
+<script src="assets/js/editorial.js?v=2"></script>
 <script>
 (function () {
   var root = document.getElementById('raft-demo');

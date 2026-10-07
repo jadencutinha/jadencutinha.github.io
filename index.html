@@ -5,11 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="color-scheme" content="dark" />
 <title>Jaden Cutinha | Princeton University</title>
-<meta name="description" content="Jaden Cutinha is a Computer Science student at Princeton University with minors in Statistics & Machine Learning and Quantitative Economics. He builds optimization systems and researches AI, NLP, and financial econometrics." />
+<meta name="description" content="Jaden Cutinha is a Computer Science student at Princeton University with minors in Statistics & Machine Learning and Quantitative Economics. He builds data platforms, backend systems, and distributed systems." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Jaden Cutinha | Princeton University" />
+<meta property="og:description" content="Jaden Cutinha is a Computer Science student at Princeton University with minors in Statistics & Machine Learning and Quantitative Economics. He builds data platforms, backend systems, and distributed systems." />
+<meta property="og:url" content="https://jadencutinha.github.io/" />
+<meta property="og:image" content="https://jadencutinha.github.io/assets/images/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/editorial.css" />
+<link rel="stylesheet" href="assets/css/editorial.css?v=3" />
 </head>
 <body>
 
@@ -21,16 +28,43 @@
     <h1>Jaden Cutinha</h1>
     <p class="intro">
       Computer science at Princeton, with minors in Statistics &amp; Machine Learning
-      and Quantitative Economics. I build optimization systems, study how language
-      models reason, and research where machine learning meets <em>markets</em>.
+      and Quantitative Economics. I build data platforms, backend systems, and
+      <em>distributed systems</em>.
     </p>
     <nav class="links" aria-label="Profiles">
       <a href="https://github.com/jadencutinha" target="_blank" rel="noopener">github</a>
       <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank" rel="noopener">linkedin</a>
-      <a href="cv.html">resume</a>
+      <a href="Jaden_Cutinha_Resume.pdf" target="_blank" rel="noopener">resume</a>
       <a href="mailto:jc3311@princeton.edu">email</a>
     </nav>
   </header>
+
+  <section class="featured" aria-label="Selected work">
+    <p class="featured-label">selected work</p>
+    <ul>
+      <li><a href="projects.html#murmur">
+        <span class="f-num">01</span>
+        <span class="f-name">Murmur</span>
+        <span class="f-desc">Raft-replicated key/value store, with the consensus layer written by hand.</span>
+        <span class="f-tags">rust · raft · grpc</span>
+        <span class="f-arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li><a href="projects.html#sable">
+        <span class="f-num">02</span>
+        <span class="f-name">Sable</span>
+        <span class="f-desc">Crash-safe LSM-tree storage engine, benchmarked against RocksDB.</span>
+        <span class="f-tags">rust · lsm-tree · mvcc</span>
+        <span class="f-arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li><a href="projects.html#halo">
+        <span class="f-num">03</span>
+        <span class="f-name">Halo</span>
+        <span class="f-desc">Portfolio optimizer with a convex solver and a walk-forward backtester.</span>
+        <span class="f-tags">python · cvxpy · fastapi</span>
+        <span class="f-arrow" aria-hidden="true">→</span>
+      </a></li>
+    </ul>
+  </section>
 
   <nav class="menu" aria-label="Sections">
     <div class="folder">
@@ -48,9 +82,9 @@
     <div class="folder">
       <button class="folder-trigger" type="button" aria-expanded="false">projects</button>
       <ul class="flyout">
-        <li><a href="projects.html#halo">Halo<span class="sub">, Markowitz portfolio optimizer</span></a></li>
         <li><a href="projects.html#murmur">Murmur<span class="sub">, Raft-replicated key/value store</span></a></li>
         <li><a href="projects.html#sable">Sable<span class="sub">, LSM-tree storage engine</span></a></li>
+        <li><a href="projects.html#halo">Halo<span class="sub">, Markowitz portfolio optimizer</span></a></li>
         <li><a href="projects.html">All engineering work <span class="sub">→</span></a></li>
       </ul>
     </div>
@@ -75,8 +109,6 @@
   </nav>
 </main>
 
-<p class="status" aria-hidden="true"><span class="dot"></span>currently <b>Private Equity Intern at Sage Investment Group</b></p>
-
-<script src="assets/js/editorial.js"></script>
+<script src="assets/js/editorial.js?v=2"></script>
 </body>
 </html>
