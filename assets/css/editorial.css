@@ -1,7 +1,8 @@
 /* ============================================================
    JADEN CUTINHA — Editorial system (dark)
    Warm near-black · cream text · one amber accent.
-   Signature: a living Markowitz efficient-frontier backdrop.
+   Signature: a living night sky whose constellations are the work,
+   anchored by a Markowitz efficient frontier.
    ============================================================ */
 
 :root {
@@ -59,6 +60,12 @@ body.sub #bg { opacity: 0.42; }
 body.sub #veil {
   background:
     radial-gradient(140% 60% at 12% 0%, rgba(18,17,14,0.9) 0%, rgba(18,17,14,0.55) 40%, rgba(18,17,14,0) 75%);
+}
+
+/* Film grain: breaks up the nebula's gradients and takes the vector edge off the sky. */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.93 0 0 0 0 0.9 0 0 0 0 0.86 1.5 0 0 0 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ── Home ── */
@@ -169,10 +176,10 @@ body.sub #veil {
   opacity: 0; transform: translateX(-6px);
   transition: opacity var(--mid) var(--ease), transform var(--mid) var(--ease);
 }
-.featured a:hover, .featured a:focus-visible { padding-left: 0.7rem; background: linear-gradient(90deg, rgba(216,176,106,0.06), rgba(216,176,106,0) 70%); outline: none; }
-.featured a:hover::before, .featured a:focus-visible::before { transform: scaleX(1); }
-.featured a:hover .f-desc, .featured a:focus-visible .f-desc { color: var(--soft); }
-.featured a:hover .f-arrow, .featured a:focus-visible .f-arrow { opacity: 1; transform: translateX(0); }
+.featured a:hover, .featured a:focus-visible, .featured a.is-lit { padding-left: 0.7rem; background: linear-gradient(90deg, rgba(216,176,106,0.06), rgba(216,176,106,0) 70%); outline: none; }
+.featured a:hover::before, .featured a:focus-visible::before, .featured a.is-lit::before { transform: scaleX(1); }
+.featured a:hover .f-desc, .featured a:focus-visible .f-desc, .featured a.is-lit .f-desc { color: var(--soft); }
+.featured a:hover .f-arrow, .featured a:focus-visible .f-arrow, .featured a.is-lit .f-arrow { opacity: 1; transform: translateX(0); }
 @media (max-width: 980px) { .featured .f-tags { display: none; } .featured a { grid-template-columns: 2.4rem 6.6rem 1fr 1.4rem; } }
 
 /* ── Top nav (subpages) ── */
@@ -457,7 +464,7 @@ body.sub #veil {
 
 /* Print — CV becomes a clean light document */
 @media print {
-  #bg, #veil, .topnav, .foot, .cv-actions { display: none !important; }
+  #bg, #veil, body::after, .topnav, .foot, .cv-actions { display: none !important; }
   body { background: #fff !important; color: #111 !important; }
   .page { padding: 0 1.5rem !important; }
   .page-head { padding: 1rem 0 1.5rem !important; }
