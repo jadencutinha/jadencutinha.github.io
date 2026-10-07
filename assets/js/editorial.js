@@ -18,7 +18,7 @@
   const ACC = '216, 176, 106';   // amber optimal marker
   const TINTS = [INK, ICE, ACC];
   const SOLID = TINTS.map(function (c) { return 'rgb(' + c + ')'; });
-  const MONO = '"JetBrains Mono", ui-monospace, Menlo, monospace';
+  const MONO = '"Times New Roman", Times, serif';
   const TAU = Math.PI * 2;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isHome = !document.body.classList.contains('sub');

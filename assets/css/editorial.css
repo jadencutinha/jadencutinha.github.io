@@ -17,9 +17,10 @@
   --accent:    #d8b06a;   /* amber / gold */
   --accent-dim: rgba(216,176,106,0.45);
 
-  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --sans:  'Inter', system-ui, -apple-system, sans-serif;
-  --mono:  'JetBrains Mono', ui-monospace, Menlo, monospace;
+  /* One typeface site-wide. The three names stay so each rule keeps its role. */
+  --serif: 'Times New Roman', Times, serif;
+  --sans:  'Times New Roman', Times, serif;
+  --mono:  'Times New Roman', Times, serif;
 
   --w-normal: 400;
   --w-med:    500;
@@ -89,12 +90,10 @@ body::after {
 .intro {
   margin-top: 1.05rem;
   max-width: 46ch;
-  font-family: 'Times New Roman', Times, serif;
   font-size: 1.02rem;
   line-height: 1.58;
   color: var(--soft);
 }
-.intro em { font: inherit; color: inherit; }
 
 .links { display: flex; flex-wrap: wrap; gap: 0.35rem 0.95rem; margin-top: 1.5rem; }
 .links a {
