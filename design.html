@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>Product &amp; Design | Jaden Cutinha</title>
+<meta name="description" content="Product and design case studies by Jaden Cutinha. Halo, an investing product for people new to it, Provenance, an AI claims reviewer built around trust, and a public-data conversion tracker." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Product &amp; Design | Jaden Cutinha" />
+<meta property="og:description" content="Product and design case studies by Jaden Cutinha. Halo, an investing product for people new to it, Provenance, an AI claims reviewer built around trust, and a public-data conversion tracker." />
+<meta property="og:url" content="https://jadencutinha.github.io/design.html" />
+<meta property="og:image" content="https://jadencutinha.github.io/assets/images/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="assets/css/editorial.css?v=8" />
+</head>
+<body class="sub">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<div id="veil" aria-hidden="true"></div>
+
+<header class="topnav">
+  <a class="brand" href="index.html">Jaden Cutinha</a>
+  <nav class="navlinks" aria-label="Sections">
+    <a href="experience.html">experience</a>
+    <a href="projects.html">projects</a>
+    <a href="design.html" class="current">design</a>
+    <a href="research.html">research</a>
+    <a href="honors.html">honors</a>
+    <a href="cv.html">cv</a>
+  </nav>
+</header>
+
+<main class="page">
+  <div class="page-head">
+    <p class="eyebrow">design</p>
+    <h1>Product &amp; Design</h1>
+    <p class="lead">Three products I shaped from the problem down to the interface. Each one starts with a person who has a decision to make, and each one had to earn that person's trust before it could be useful. Two of them put a language model in front of the user, and both draw the same line around what the model is allowed to decide.</p>
+  </div>
+
+  <div class="doc">
+
+    <ul class="case-index" aria-label="Case studies">
+      <li><a href="#halo">
+        <span class="c-num">01</span>
+        <span class="c-name">Halo</span>
+        <span class="c-desc">Making portfolio theory usable by someone who has never invested.</span>
+        <span class="c-kind">product · interaction</span>
+      </a></li>
+      <li><a href="#provenance">
+        <span class="c-num">02</span>
+        <span class="c-name">Provenance</span>
+        <span class="c-desc">An AI claims reviewer where every assertion opens the page it came from.</span>
+        <span class="c-kind">ai experience</span>
+      </a></li>
+      <li><a href="#tracker">
+        <span class="c-num">03</span>
+        <span class="c-name">Conversion Tracker</span>
+        <span class="c-desc">A market census designed so every number on it can be checked.</span>
+        <span class="c-kind">information design</span>
+      </a></li>
+      <li><a href="#ai">
+        <span class="c-num">04</span>
+        <span class="c-name">Working with AI</span>
+        <span class="c-desc">Where a model sits in my products, and where it sits in my process.</span>
+        <span class="c-kind">process</span>
+      </a></li>
+    </ul>
+
+    <!-- ── Halo ── -->
+    <article class="entry" id="halo">
+      <p class="metatags"><span class="hl">Product Design</span> · SEO Tech Developer Program · 2026 · Team of four</p>
+      <h2 class="entry-title">Halo, Portfolio Theory for People New to Investing</h2>
+      <p class="byline">A consumer investing product that had to serve a first-time saver and a quantitative user from the same home screen.</p>
+
+      <div class="links-row">
+        <a href="https://optimal-portfolio-nine.vercel.app/" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View Live Product
+        </a>
+        <a href="projects.html#halo" class="btn">Engineering write-up</a>
+      </div>
+
+      <figure class="shot">
+        <img src="assets/images/design/halo-home.jpg" alt="Halo home screen with three entry points labelled Analyze, Learn, and Invest" loading="lazy" />
+        <figcaption>The home screen. Three verbs, one line of explanation each, and a status line under every one so a returning user sees where they left off.</figcaption>
+      </figure>
+
+      <div class="facts">
+        <div class="fact"><p class="fact-label">my role</p><p class="fact-text">Backend lead, and I built most of the interface, including the home screen, the optimizer workspace, the assistant, and the navigation between tools.</p></div>
+        <div class="fact"><p class="fact-label">for whom</p><p class="fact-text">Someone opening an investing tool for the first time, and someone who already knows what a Sharpe ratio is and wants the controls.</p></div>
+        <div class="fact"><p class="fact-label">the constraint</p><p class="fact-text">The engine underneath solves eight kinds of optimization problem. None of that vocabulary can be the price of entry.</p></div>
+      </div>
+
+      <p class="label">the problem</p>
+      <p class="body">
+        Most retail investing tools give a beginner a pie chart and no way to ask where it came from. The tools that
+        do show their work assume you already speak the language, with objectives, covariance models, and constraints
+        on the first screen. Halo had a real solver behind it, so the design question was never what the product
+        could compute. It was how much of that a newcomer should have to understand before getting a first answer,
+        and how to let the answer explain itself afterward.
+      </p>
+
+      <p class="label">design decisions</p>
+      <div class="features">
+        <div class="feature">
+          <h4>Three verbs instead of a feature list</h4>
+          <p>The product does more than a dozen things. The home screen offers three, Analyze, Learn, and Invest, and everything else lives one level down inside the verb it belongs to.</p>
+        </div>
+        <div class="feature">
+          <h4>Say the goal, then see the settings</h4>
+          <p>A newcomer describes what they want in a sentence or picks a goal, a time horizon, and the drop they can stomach. The technical configuration that produced the answer is shown afterward, as something to read, not something to fill in.</p>
+        </div>
+        <div class="feature">
+          <h4>One tool in focus at a time</h4>
+          <p>The Pro toolkit is a deck you drag through, with a single centered card that can be opened. It trades density for a clear answer to "what do I do next" on a screen crowded with possible tools.</p>
+        </div>
+        <div class="feature">
+          <h4>Learning as a route, not a library</h4>
+          <p>The course is drawn as a path through sectors, each with a level, a time estimate, and the thing you become by finishing it. The first sector is marked as the place to start if you are new.</p>
+        </div>
+      </div>
+
+      <div class="shot-pair">
+        <figure class="shot">
+          <img src="assets/images/design/halo-toolkit.jpg" alt="Halo Pro toolkit shown as a deck of cards with the Optimizer card in focus" loading="lazy" />
+          <figcaption>The Pro toolkit. Each card carries a verb above its name (build, explore, ask, project) so the deck reads as intentions.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/images/design/halo-learn.jpg" alt="Halo course map showing the Foundations sector with progress ring and a path to the next sector" loading="lazy" />
+          <figcaption>The course map. Progress is a ring around the sector, and the outcome line states what finishing it gives you.</figcaption>
+        </figure>
+      </div>
+
+      <p class="label">the ai feature</p>
+      <p class="body">
+        Halo's assistant takes a goal in plain words, something like wanting steady growth for retirement while
+        hating big drops, and returns a portfolio. The decision that shaped it was what the model is not allowed to
+        do. It never chooses the weights. It reads the goal and fills in a configuration (which objective, which
+        risk model, how concentrated any one holding may be), and the same convex solver that powers the manual
+        optimizer computes the allocation. The model then explains the result in two or three short paragraphs and
+        is instructed to end on one honest caveat.
+      </p>
+      <p class="body">
+        That split is a design choice as much as an engineering one. An allocation invented by a language model
+        cannot be checked, and one produced by a solver from a visible configuration can. The settings the model
+        picked are shown beside the answer, so a user who disagrees can open the optimizer and change them by hand.
+        Starter prompts cover the blank-page problem, and a plain greeting gets a plain reply instead of an
+        unrequested portfolio.
+      </p>
+
+      <p class="label">what I would do next</p>
+      <p class="note">
+        The interface commits hard to its visual theme, and I would test whether that helps a first-time user or
+        just pleases the people who built it. The first thing I would put in front of real newcomers is the
+        hand-off from the assistant's answer into the manual optimizer, because that is the moment the product
+        asks someone to move from being told to deciding.
+      </p>
+
+      <p class="label">stack</p>
+      <div class="stack-grid">
+        <div class="stack-group"><p class="stack-label">interface</p><p class="stack-items">react · typescript · recharts · tanstack query</p></div>
+        <div class="stack-group"><p class="stack-label">assistant</p><p class="stack-items">llm tool calling · cvxpy solver · fastapi</p></div>
+        <div class="stack-group"><p class="stack-label">product</p><p class="stack-items">three plans · guided tour · verifiable certificate</p></div>
+      </div>
+    </article>
+
+    <!-- ── Provenance ── -->
+    <article class="entry" id="provenance">
+      <p class="metatags"><span class="hl">AI Experience Design</span> · Solo · 2026 · Palantir Foundry and AIP</p>
+      <h2 class="entry-title">Provenance, an AI Claims Reviewer Built Around Trust</h2>
+      <p class="byline">A reviewer's workspace where a language model extracts claims from drug labels and every claim opens the exact page it came from.</p>
+
+      <div class="links-row">
+        <a href="https://github.com/jadencutinha/provenance" target="_blank" rel="noopener" class="btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          Source Code
+        </a>
+      </div>
+
+      <figure class="shot">
+        <img src="assets/images/design/provenance-landing.jpg" alt="Provenance landing screen with the line Every claim, traced to its source" loading="lazy" />
+        <figcaption>The entry screen states the whole promise in six words before the reviewer sees any data.</figcaption>
+      </figure>
+
+      <div class="facts">
+        <div class="fact"><p class="fact-label">my role</p><p class="fact-text">Everything. Problem framing, the claim model, the extraction prompt, the reviewer interface, and the demo.</p></div>
+        <div class="fact"><p class="fact-label">for whom</p><p class="fact-text">A reviewer who has to trust an assertion before acting on it, such as a drug-safety reviewer or a regulatory analyst.</p></div>
+        <div class="fact"><p class="fact-label">the corpus</p><p class="fact-text">Five public FDA drug labels from DailyMed, 240 pages in total, used as real unstructured input.</p></div>
+      </div>
+
+      <p class="label">the problem</p>
+      <p class="body">
+        In drug safety and regulation, a decision often rests on one sentence buried somewhere in hundreds of pages
+        of PDF. Before a reviewer can act on a claim, they have to find where it came from, and that hunt repeats
+        for every claim. A language model can pull the claims out quickly. What it cannot do on its own is make a
+        careful person believe them. So the product is not the extraction. The product is the link from a claim
+        back to its source, and the interface exists to make that link one click and impossible to break.
+      </p>
+
+      <p class="label">the principle</p>
+      <p class="body">
+        <strong>The model extracts, it never locates.</strong> The model is trusted to identify a claim and copy
+        its text word for word. It is never asked where on the page that text sits. A separate deterministic step
+        matches the copied text against the page's own words and returns the coordinates. The highlight a reviewer
+        sees is therefore a property of the document, not the model's opinion of the document.
+      </p>
+
+      <div class="shot-pair">
+        <figure class="shot">
+          <img src="assets/images/design/provenance-anchor.jpg" alt="First page of the warfarin drug label with the sentence about major or fatal bleeding highlighted" loading="lazy" />
+          <figcaption>The anchoring step on a real label. The highlighted sentence was located by text match, with no coordinates from the model.</figcaption>
+        </figure>
+        <div>
+          <p class="label" style="margin-top:0">design decisions</p>
+          <div class="features" style="grid-template-columns:1fr">
+            <div class="feature">
+              <h4>The source is the default view</h4>
+              <p>Selecting a claim opens the page with the sentence highlighted and centered, under a trail that runs from the claim to the page to the document to DailyMed.</p>
+            </div>
+            <div class="feature">
+              <h4>Failure is a visible state</h4>
+              <p>A claim whose text cannot be found on its page is marked unverifiable and can be filtered for. The interface does not hide what the system could not prove.</p>
+            </div>
+            <div class="feature">
+              <h4>The reviewer decides</h4>
+              <p>Accept, reject, or flag. The decision is saved with the reviewer's name and a timestamp as data beside the claim, so judgment does not live in a spreadsheet.</p>
+            </div>
+            <div class="feature">
+              <h4>Structure pays for itself</h4>
+              <p>Because claims are objects, a drug by condition matrix can show a pattern across labels, such as several drugs carrying a pregnancy warning, that no single PDF reveals.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="label">how I checked it</p>
+      <p class="body">
+        I seeded twelve claims by hand across the five labels and ran them through the anchoring step. All twelve
+        were located on their pages. I then added a claim I had made up, and it was flagged unverifiable, which is
+        the behavior the whole interface depends on. Twelve claims is a small set and I treat it as a proof that
+        the mechanism works, not as a measure of extraction quality at scale.
+      </p>
+
+      <p class="label">what I would do next</p>
+      <p class="note">
+        The reviewer writes back through a general edit action that resends every field. A dedicated review action
+        that can only change the decision is the right production design, because the person judging a claim should
+        not be able to alter its text by accident. I would also sit beside a working reviewer before adding
+        anything, to learn whether one claim at a time is how they actually read a label.
+      </p>
+
+      <p class="label">stack</p>
+      <div class="stack-grid">
+        <div class="stack-group"><p class="stack-label">interface</p><p class="stack-items">react · typescript · react-pdf</p></div>
+        <div class="stack-group"><p class="stack-label">ai</p><p class="stack-items">aip logic · document intelligence · verbatim extraction</p></div>
+        <div class="stack-group"><p class="stack-label">data</p><p class="stack-items">foundry ontology · actions writeback · dailymed · openfda</p></div>
+      </div>
+    </article>
+
+    <!-- ── Conversion Tracker ── -->
+    <article class="entry" id="tracker">
+      <p class="metatags"><span class="hl">Information Design</span> · Sage Investment Group · 2026 · Solo prototype</p>
+      <h2 class="entry-title">Conversion Tracker, a Market Census You Can Check</h2>
+      <p class="byline">An interactive map, register, and benchmark of US hotel-to-apartment conversions, built from public sources for an investment team.</p>
+
+      <div class="links-row">
+        <a href="https://github.com/jadencutinha/sage-investment" target="_blank" rel="noopener" class="btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          Source Code
+        </a>
+      </div>
+
+      <figure class="shot">
+        <img src="assets/images/design/tracker-map.jpg" alt="Conversion tracker showing summary figures, filters, and a US map with markers sized by unit count" loading="lazy" />
+        <figcaption>Map and register. Marker area follows unit count, color separates one operator from the field, and a dashed ring means the unit count was never disclosed.</figcaption>
+      </figure>
+
+      <div class="facts">
+        <div class="fact"><p class="fact-label">my role</p><p class="fact-text">Everything. I gathered the data, set the rules for what could appear, and designed and built the page.</p></div>
+        <div class="fact"><p class="fact-label">for whom</p><p class="fact-text">An acquisitions team and the investors who read its materials, people who will ask where a number came from.</p></div>
+        <div class="fact"><p class="fact-label">the dataset</p><p class="fact-text">47 properties across 14 states and 10 operators, every one traced to a public page, article, or press release.</p></div>
+      </div>
+
+      <p class="label">the problem</p>
+      <p class="body">
+        A firm can call itself a market leader in a pitch deck, and a careful investor will discount the phrase. I
+        wanted to find out whether the claim could be made checkable instead, using nothing but public information.
+        That set the brief for the interface. The audience is skeptical by profession, so the design had to make
+        doubt cheap to resolve. A reader should be able to go from any figure to its source without leaving the page.
+      </p>
+
+      <p class="label">design decisions</p>
+      <div class="features">
+        <div class="feature">
+          <h4>Every row carries its source</h4>
+          <p>The register can be filtered, searched, and sorted on any column, and each row links to the public page it was built from. The evidence is part of the table.</p>
+        </div>
+        <div class="feature">
+          <h4>Unknown stays unknown</h4>
+          <p>A field nobody has disclosed is shown as a dash, and a project with no unit count gets a dashed marker. Nothing is estimated to make a chart look complete.</p>
+        </div>
+        <div class="feature">
+          <h4>Labels that stop a bad comparison</h4>
+          <p>A total development cost and a redevelopment budget are different numbers. Each cost bar states its basis, because the chart would otherwise invite exactly the wrong reading.</p>
+        </div>
+        <div class="feature">
+          <h4>A legible cluster</h4>
+          <p>A dozen sites around Puget Sound collapse into one blob at national scale. Markers are nudged apart and tethered to their true city, and the caption says so.</p>
+        </div>
+      </div>
+
+      <figure class="shot">
+        <img src="assets/images/design/tracker-benchmark.jpg" alt="Benchmark view comparing operators by project count and unit volume, with a written takeaway under each chart" loading="lazy" />
+        <figcaption>The benchmark view. Each chart ends in a sentence that states what it shows, and the second one argues against the first.</figcaption>
+      </figure>
+
+      <p class="label">writing the takeaway into the chart</p>
+      <p class="body">
+        Each chart closes with a plain sentence saying what it means, so a reader skimming for the conclusion gets
+        one. I kept the conclusions honest by letting them disagree. Project count shows one operator far ahead of
+        everyone else. Unit volume, right beside it, points out that two rival projects are each larger than any
+        single one of that operator's. A page that only flattered its subject would not survive the reader it was
+        built for.
+      </p>
+
+      <p class="label">what the design exposed</p>
+      <p class="note">
+        Holding to the rule that nothing is estimated left a hole in the cost chart, since the firm the page was
+        built for does not publish per-project costs and so could not be plotted. I left the gap visible and wrote
+        it into the page's limits. It turned out to be the most useful finding, a concrete list of what would have
+        to be disclosed for the comparison to be complete.
+      </p>
+
+      <p class="label">stack</p>
+      <div class="stack-grid">
+        <div class="stack-group"><p class="stack-label">interface</p><p class="stack-items">html · css · svg · light and dark themes</p></div>
+        <div class="stack-group"><p class="stack-label">map</p><p class="stack-items">albers projection · marker relaxation · no external requests</p></div>
+        <div class="stack-group"><p class="stack-label">data</p><p class="stack-items">python · public sources · cost basis per figure</p></div>
+      </div>
+    </article>
+
+    <!-- ── Working with AI ── -->
+    <article class="entry" id="ai">
+      <p class="metatags"><span class="hl">Process</span> · Across all three projects</p>
+      <h2 class="entry-title">Working with AI</h2>
+      <p class="byline">One rule covers both the products I design and the way I build them.</p>
+
+      <p class="label">in the product</p>
+      <p class="body">
+        Halo and Provenance are different products for different people, and they place the model in the same spot.
+        The model handles language, which is the part people find hard to do by form. A deterministic step that can
+        be inspected produces the thing the user will rely on. The interface then shows enough of that step for the
+        user to disagree with it.
+      </p>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 760 232" role="img" aria-label="Two flows. In Provenance a label page goes to a model that extracts a verbatim claim, then a deterministic text match locates it, then a reviewer accepts, rejects, or flags. In Halo a goal in plain words goes to a model that picks a configuration, then a convex solver computes the weights, then the model explains the result with a caveat.">
+          <defs><marker id="arr-ai" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="d-head" d="M0 0 L8 4 L0 8 z"/></marker></defs>
+          <text class="d-s" x="10" y="14">provenance</text>
+          <rect class="d-box" x="10" y="24" width="140" height="54" rx="4"/>
+          <text class="d-t" x="22" y="46">label page</text>
+          <text class="d-s" x="22" y="63">text and word boxes</text>
+          <rect class="d-box" x="190" y="24" width="160" height="54" rx="4"/>
+          <text class="d-t" x="202" y="46">model extracts</text>
+          <text class="d-s" x="202" y="63">verbatim, no coordinates</text>
+          <rect class="d-box d-hl" x="390" y="24" width="170" height="54" rx="4"/>
+          <text class="d-t" x="402" y="46">text match locates</text>
+          <text class="d-s" x="402" y="63">or marks unverifiable</text>
+          <rect class="d-box" x="600" y="24" width="150" height="54" rx="4"/>
+          <text class="d-t" x="612" y="46">reviewer decides</text>
+          <text class="d-s" x="612" y="63">accept · reject · flag</text>
+          <path class="d-arrow" d="M150 51 H188" marker-end="url(#arr-ai)"/>
+          <path class="d-arrow" d="M350 51 H388" marker-end="url(#arr-ai)"/>
+          <path class="d-arrow" d="M560 51 H598" marker-end="url(#arr-ai)"/>
+
+          <text class="d-s" x="10" y="152">halo</text>
+          <rect class="d-box" x="10" y="162" width="140" height="54" rx="4"/>
+          <text class="d-t" x="22" y="184">goal in plain words</text>
+          <text class="d-s" x="22" y="201">horizon, risk limit</text>
+          <rect class="d-box" x="190" y="162" width="160" height="54" rx="4"/>
+          <text class="d-t" x="202" y="184">model configures</text>
+          <text class="d-s" x="202" y="201">objective, risk model, caps</text>
+          <rect class="d-box d-hl" x="390" y="162" width="170" height="54" rx="4"/>
+          <text class="d-t" x="402" y="184">solver computes</text>
+          <text class="d-s" x="402" y="201">the weights, every time</text>
+          <rect class="d-box" x="600" y="162" width="150" height="54" rx="4"/>
+          <text class="d-t" x="612" y="184">model explains</text>
+          <text class="d-s" x="612" y="201">ends on one caveat</text>
+          <path class="d-arrow" d="M150 189 H188" marker-end="url(#arr-ai)"/>
+          <path class="d-arrow" d="M350 189 H388" marker-end="url(#arr-ai)"/>
+          <path class="d-arrow" d="M560 189 H598" marker-end="url(#arr-ai)"/>
+        </svg>
+      </figure>
+
+      <p class="label">in the process</p>
+      <p class="body">
+        I build with an AI coding assistant, and I hold it to the same rule. On Provenance I wrote the decisions
+        down before any code existed (the corpus, the scope of the first version, which interface to commit to and
+        when), then had the assistant write code and specifications against them while I worked the platform by
+        hand. It is fast at producing an implementation and has no stake in whether the product is right, so the
+        framing, the trade-offs, and the final check stay with me.
+      </p>
+      <p class="body">
+        The check is the part I do not delegate. Provenance's anchoring was tested with a claim I invented to see
+        whether it would be caught. Halo's solver sits behind a test suite that has to pass before anything ships.
+        The tracker refuses to show a number without a source. In each case the question is the same one I ask of
+        a model inside a product. What here can a person verify without taking anyone's word for it?
+      </p>
+    </article>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <span class="foot-name">Jaden Cutinha</span>
+  <nav class="foot-links">
+    <a href="experience.html">experience</a>
+    <a href="projects.html">projects</a>
+    <a href="design.html">design</a>
+    <a href="research.html">research</a>
+    <a href="honors.html">honors</a>
+    <a href="cv.html">cv</a>
+    <a href="https://linkedin.com/in/jaden-cutinha-505763243" target="_blank" rel="noopener">linkedin</a>
+    <a href="mailto:jc3311@princeton.edu">email</a>
+  </nav>
+  <span class="foot-copy">© 2026</span>
+</footer>
+
+<div class="lightbox" id="lightbox"><img id="lightbox-img" src="" alt="Enlarged screenshot" /></div>
+
+<script src="assets/js/editorial.js?v=5"></script>
+<script>
+(function () {
+  var lb = document.getElementById('lightbox'), img = document.getElementById('lightbox-img');
+  document.querySelectorAll('.shot img').forEach(function (p) {
+    p.addEventListener('click', function () { img.src = p.src; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); img.src = ''; });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lb.classList.remove('open'); img.src = ''; } });
+})();
+</script>
+</body>
+</html>

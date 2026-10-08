@@ -600,3 +600,106 @@
     if (!e.target.closest('.menu')) closeAll(null);
   });
 })();
+
+/* ── 3. Inner pages: scroll reveals, hero and numeral parallax, counters, image tilt ── */
+(function () {
+  if (!document.body.classList.contains('sub')) return;
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  const bar = document.createElement('div');
+  bar.className = 'progress'; bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+
+  const head = document.querySelector('.page-head');
+  const entries = Array.from(document.querySelectorAll('.entry'));
+  let queued = false;
+  function onScroll() {
+    queued = false;
+    const y = window.scrollY, max = root.scrollHeight - window.innerHeight;
+    root.style.setProperty('--read', max > 0 ? Math.min(1, y / max).toFixed(4) : '0');
+    if (reduce) return;
+    if (head) head.style.setProperty('--hero', Math.min(1, Math.max(0, y / Math.max(1, head.offsetHeight))).toFixed(3));
+    const vh = window.innerHeight;
+    entries.forEach(function (e) {
+      const r = e.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      e.style.setProperty('--py', (r.top * -0.09).toFixed(1));
+    });
+  }
+  function queue() { if (!queued) { queued = true; requestAnimationFrame(onScroll); } }
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue, { passive: true });
+  onScroll();
+
+  if (reduce || !('IntersectionObserver' in window)) return;
+  root.classList.add('motion');
+
+  // Headline: each word rises out of its own mask.
+  const h1 = head && head.querySelector('h1');
+  if (h1) {
+    const words = h1.textContent.trim().split(/\s+/);
+    h1.setAttribute('aria-label', h1.textContent.trim());
+    h1.textContent = '';
+    words.forEach(function (w, i) {
+      const mask = document.createElement('span'), inner = document.createElement('span');
+      mask.className = 'w'; mask.setAttribute('aria-hidden', 'true');
+      inner.textContent = w; inner.style.transitionDelay = (i * 90) + 'ms';
+      mask.appendChild(inner); h1.appendChild(mask);
+      if (i < words.length - 1) h1.appendChild(document.createTextNode(' '));
+    });
+  }
+  requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.add('ready'); }); });
+
+  // Counters: numbers in stat tiles run up to their value once, when first seen.
+  function countUp(el) {
+    Array.from(el.childNodes).forEach(function (n) {
+      if (n.nodeType !== 3) return;
+      const m = n.nodeValue.match(/^(\D*?)(\d+(?:\.\d+)?)(\D*)$/);
+      if (!m) return;
+      const end = parseFloat(m[2]), dec = (m[2].split('.')[1] || '').length, t0 = performance.now(), dur = 1300;
+      (function tick(now) {
+        const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        n.nodeValue = m[1] + (end * e).toFixed(dec) + m[3];
+        if (p < 1) requestAnimationFrame(tick); else n.nodeValue = m[1] + m[2] + m[3];
+      })(t0);
+    });
+  }
+
+  const io = new IntersectionObserver(function (list) {
+    list.forEach(function (it) {
+      if (!it.isIntersecting) return;
+      it.target.classList.add('in');
+      if (it.target.classList.contains('stat')) countUp(it.target.querySelector('.stat-val'));
+      io.unobserve(it.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+  // Grid children stagger, everything else reveals on its own.
+  const staggered = '.feature, .stat, .fact, .stack-group, .case-index li, .mini, .cv-skills > div, .exp-points li';
+  const single = '.entry > .metatags, .entry > .entry-title, .entry > .byline, .entry > .links-row, .entry > .label, ' +
+    '.entry > .body, .entry > .note, .entry > .diagram, .entry > .raft-demo, .shot, .poster, ' +
+    '.exp-meta, .exp-role, .exp-company, .exp-desc, .exp-label, .exp-featured, .exp-stack, ' +
+    '.honor, .honors-group > .label, .cv-sec > .label, .cv-item, .cv-sec > .cv-row, .cv-edu-degree, .cv-course, .cv-actions';
+  document.querySelectorAll(staggered).forEach(function (el) {
+    const i = Array.prototype.indexOf.call(el.parentNode.children, el);
+    el.style.transitionDelay = (Math.min(i, 7) * 70) + 'ms';
+    el.classList.add('rv'); io.observe(el);
+  });
+  document.querySelectorAll(single).forEach(function (el) { el.classList.add('rv'); io.observe(el); });
+
+  // Screenshots and posters lean toward the cursor.
+  if (fine) {
+    document.querySelectorAll('.shot img, .poster').forEach(function (img) {
+      const host = img.classList.contains('poster') ? img : img.parentNode;
+      img.addEventListener('pointerenter', function () { host.classList.add('tilt'); });
+      img.addEventListener('pointermove', function (e) {
+        const r = img.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        img.style.transform = 'perspective(1400px) rotateX(' + (-y * 3.2).toFixed(2) + 'deg) rotateY(' + (x * 3.2).toFixed(2) + 'deg)';
+      });
+      img.addEventListener('pointerleave', function () { img.style.transform = ''; host.classList.remove('tilt'); });
+    });
+  }
+})();
